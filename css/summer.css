@@ -1,0 +1,22 @@
+/* 
+* add.css
+*/
+/*.left_icon {
+    display: inline-block;
+    font-size: 32px;
+    margin-left: 32px;
+}*/
+.intro1{
+    float: left;
+}
+.bg-summer{
+    background:rgba(255, 255, 255, 0.7)!important;
+    width: 50%;
+    height: 70%;
+    margin-left: 5%;
+    margin-top: 14%;
+}
+.section3{
+    background:url(../img/bg2.jpg) no-repeat;
+    background-size: cover;
+}
