@@ -1,15 +1,64 @@
-.section2 { 
-	background: url(../img/bg-spring.png) no-repeat 100% 10%;
-    transition: all 1s;
+.section2 {
+	position: relative;
+	/*background: url(../img/bg-spring.png) no-repeat;
+	overflow: hidden;
+	background-size: cover;*/
 }
-.banner1-spring{
+.section2 .bg{
+	width:100%;
+	height:100%;
+}
+.section2 .content{
+	position: absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+.section2 .banner-spring ul li{
+
+}
+.section2 .banner-spring img{
+	vertical-align: bottom;
+}
+.section2 .banner1{
 	text-align: left;
-	position: relative;
-	top:-100px;
-	left:75px;
+	margin-top: 6%;
+	margin-left: 4%;
 }
-.banner2-spring {
-	position: relative;
-	left: -280px;
-	top:-280px;
+.section2 .banner2{
+	text-align: left;
+	margin-top: 3%;
+	margin-left: 18%;
+}
+
+#banner1-move{
+	visibility:hidden;
+	position:relative;
+	top:-300px;
+}
+#banner2-move{
+	visibility:hidden;
+	position:relative;
+	bottom: -300px;
+}
+.section2 .profile-spring{
+	text-align: right;
+	margin-top: -20%;
+	margin-right: 20%;
+}
+.section2 .profile-spring img{
+	width: 20%;
+	display: none;
+}
+.section2 .girl-spring{
+	display: none;
+	float: right;
+	position: absolute;
+	right:22%;
+	top:50%;
+	width: 100px;
+	height: 251px;
+	background: url(../img/girl-spring.png) no-repeat;
+	background-size: cover;
 }
