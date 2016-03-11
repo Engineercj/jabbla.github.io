@@ -1,0 +1,33 @@
+/* 
+* add.css
+*/
+#p1 {
+    position: relative;
+}
+.left_icon {
+    display: inline-block;
+    font-size: 32px;
+    margin-left: 32px;
+}
+/*.introli .left_icon .bio-icon-1 {
+    -webkit-animation: bio-icon-in2 .6s ease-out .7s 1 forwards;
+    -moz-animation: bio-icon-in2 .6s ease-out .7s 1 forwards;
+}*/
+.intro1 {
+    font-size: 32px;
+    display: inline;
+    margin-left: 16px;
+    position: relative;
+    height: 65px;
+}
+.bg3{
+    background:url(../img/bg3.jpg) no-repeat;
+}
+.bg3-opa {
+    background:rgba(255, 255, 255, 0.7)!important;
+    filter:Alpha(opacity=70); 
+    background:#fff;
+    width: 50%;
+    margin-left: 30%;
+    margin-top: 220px;
+}

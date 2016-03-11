@@ -1,0 +1,15 @@
+.section2 { 
+	background: url(../img/bg-spring.png) no-repeat 100% 10%;
+    transition: all 1s;
+}
+.banner1-spring{
+	text-align: left;
+	position: relative;
+	top:-100px;
+	left:75px;
+}
+.banner2-spring {
+	position: relative;
+	left: -280px;
+	top:-280px;
+}
