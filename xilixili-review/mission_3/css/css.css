@@ -46,8 +46,9 @@ div{
 	float: left;
 	padding-left:10px;
 }
-
-
+.team_link{
+	text-decoration: none;
+}
 .clearfix{
 	clear: both;
 }
