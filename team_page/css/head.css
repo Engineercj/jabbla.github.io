@@ -1,4 +1,21 @@
 .section1{
   background-image: url(../img/head_bac.jpg);
   background-size: cover;
+  position: relative;
+}
+.section1 .content{
+  width:600px;
+  height:600px;
+  box-sizing: border-box;
+  color:white;
+  line-height:30px;
+  text-align: justify;
+  padding:0 10px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius:2px;
+  top:50%;
+  left: 50%;
+  margin-left: -300px;
+  margin-top: -300px;
 }
