@@ -1,10 +1,7 @@
-.myphoto{
-    width: 90px;
-    height: 90px;
+.bg-summer>img{
     border-radius: 50%;
-    background-color: #f11;
-    position: absolute;
-    top: -7%;
+    position: relative;
+    top: -60px;
     left: -3%;
 }
 .intro1{
@@ -12,13 +9,22 @@
 }
 .bg-summer{
     position: relative;
-    background:rgba(255, 255, 255, 0.7)!important;
+    background:rgba(255, 255, 255, 0.85)!important;
     width: 50%;
-    height: 70%;
+    height: 60%;
     margin-left: 5%;
     margin-top: 14%;
+    text-align: left;
 }
 .section3{
     background:url(../img/bg2.jpg) no-repeat;
     background-size: cover;
+}
+.introduce{
+    font-size: 22px;
+    margin-top: -15%;
+}
+strong{
+    font-family: 楷体;
+    color: #886413;
 }

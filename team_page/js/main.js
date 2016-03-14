@@ -17,25 +17,19 @@ $(function(){
 					bottom: '0'
 				}, 1500, 'easeOutExpo');
 				$('.section2').find('.girl-spring').delay(2000).fadeIn(2000);
-				$('.section2').find('.profile-spring img').delay(2000).fadeIn(2000);
+				$('.section2').find('.profile-spring').delay(2000).fadeIn(2000);
 			}
 			if(index == 3){
+				$(".section3 .myphoto").delay(0).fadeIn(500);
 				$('.section3').find('p').delay(500).animate({
-					left: '0'
+					left: '9%'
 				}, 1500, 'easeOutExpo');
-				$(".section3 .myphoto").delay(500).fadeIn(500);
+				$('.section3').find('#sum-p2').delay(0).animate({
+					bottom: '0'
+				}, 1500, 'easeOutExpo');
 			}
 			if(index == 4){
 				$('.section4').find('#p1').delay(500).animate({
-					bottom: '-10'
-				}, 1500, 'easeOutExpo');
-				$('.section4').find('#p2').delay(1000).animate({
-					bottom: '-10'
-				}, 1500, 'easeOutExpo');
-				$('.section4').find('#p3').delay(1500).animate({
-					bottom: '-10'
-				}, 1500, 'easeOutExpo');
-				$('.section4').find('#p4').delay(2000).animate({
 					bottom: '-10'
 				}, 1500, 'easeOutExpo');
 			}
@@ -70,25 +64,19 @@ $(function(){
 					bottom: '-300'
 				}, 1500, 'easeOutExpo');
 				$('.section2').find('.girl-spring').delay(0).fadeOut(0);
-				$('.section2').find('.profile-spring img').delay(0).fadeOut(0);
+				$('.section2').find('.profile-spring').delay(0).fadeOut(0);
 			}
 			if(index == '3'){
-				$('.section3').find('p').delay(500).animate({
+				$(".section3 .myphoto").fadeOut(500);
+				$('.section3').find('p').delay(0).animate({
 					left: '-120%'
 				}, 1500, 'easeOutExpo');
-				$(".section3 .myphoto").fadeOut(500);
+				$('.section3').find('#sum-p2').delay(0).animate({
+					bottom: '-100px'
+				}, 1500, 'easeOutExpo');
 			}
 			if(index == '4'){
 				$('.section4').find('#p1').delay(500).animate({
-					bottom: '0'
-				}, 1500, 'easeOutExpo');
-				$('.section4').find('#p2').delay(1000).animate({
-					bottom: '0'
-				}, 1500, 'easeOutExpo');
-				$('.section4').find('#p3').delay(1500).animate({
-					bottom: '0'
-				}, 1500, 'easeOutExpo');
-				$('.section4').find('#p4').delay(2000).animate({
 					bottom: '0'
 				}, 1500, 'easeOutExpo');
 			}

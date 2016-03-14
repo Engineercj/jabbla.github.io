@@ -1,8 +1,5 @@
 .section2 {
 	position: relative;
-	/*background: url(../img/bg-spring.png) no-repeat;
-	overflow: hidden;
-	background-size: cover;*/
 }
 .section2 .bg{
 	width:100%;
@@ -43,20 +40,17 @@
 	bottom: -300px;
 }
 .section2 .profile-spring{
-	text-align: right;
-	margin-top: -20%;
-	margin-right: 20%;
-}
-.section2 .profile-spring img{
-	width: 20%;
 	display: none;
+	width: 15%;
+	position: absolute;
+	right: 15%;
+	top:-2%;
 }
+
 .section2 .girl-spring{
 	display: none;
 	float: right;
 	position: absolute;
 	right:22%;
-	top:43%;
-	width: 8%;
-	height: 40%;
+	bottom: 23%;
 }
