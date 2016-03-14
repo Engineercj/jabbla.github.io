@@ -1,15 +1,17 @@
-/* 
-* add.css
-*/
-/*.left_icon {
-    display: inline-block;
-    font-size: 32px;
-    margin-left: 32px;
-}*/
+.myphoto{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: #f11;
+    position: absolute;
+    top: -7%;
+    left: -3%;
+}
 .intro1{
     float: left;
 }
 .bg-summer{
+    position: relative;
     background:rgba(255, 255, 255, 0.7)!important;
     width: 50%;
     height: 70%;

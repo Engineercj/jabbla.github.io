@@ -23,6 +23,7 @@ $(function(){
 				$('.section3').find('p').delay(500).animate({
 					left: '0'
 				}, 1500, 'easeOutExpo');
+				$(".section3 .myphoto").delay(500).fadeIn(500);
 			}
 			if(index == 4){
 				$('.section4').find('#p1').delay(500).animate({
@@ -75,6 +76,7 @@ $(function(){
 				$('.section3').find('p').delay(500).animate({
 					left: '-120%'
 				}, 1500, 'easeOutExpo');
+				$(".section3 .myphoto").fadeOut(500);
 			}
 			if(index == '4'){
 				$('.section4').find('#p1').delay(500).animate({
