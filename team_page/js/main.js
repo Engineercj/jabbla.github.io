@@ -6,6 +6,12 @@ $(function(){
 		menu: '#menu',
 		'navigation': true,
 		afterLoad: function(anchorLink, index){
+			if (index == 1) {
+				$('.section1').find('.statement').css({visibility:"visible"});
+				$('.section1').find('.statement').delay(0).animate({
+					top:'0'
+				},1500,'easeOutExpo');
+			}
 			if(index == 2){
 				$('.section2').find('#banner1-move').css({visibility:"visible"});
 				$('.section2').find('#banner2-move').css({visibility:"visible"});
@@ -53,6 +59,12 @@ $(function(){
 			}
 		},
 		onLeave: function(index, direction){
+			if (index == 1) {
+				$('.section1').find('.statement').css({visibility:"hidden"});
+				$('.section1').find('.statement').delay(0).animate({
+					top:'-300px'
+				},1500,'easeOutExpo');
+			}
 			if(index == '2'){
 				$('.section2').find('#banner1-move').css({visibility:"hidden"});
 				$('.section2').find('#banner2-move').css({visibility:"hidden"});
