@@ -8,7 +8,7 @@ $(function(){
 		afterLoad: function(anchorLink, index){
 			if (index == 1) {
 				$('.section1').find('.statement').css({visibility:"visible"});
-				$('.section1').find('.statement').delay(0).animate({
+				$('.section1').find('.statement').delay(500).animate({
 					top:'0'
 				},1500,'easeOutExpo');
 			}
@@ -18,7 +18,7 @@ $(function(){
 				$('.section2').find('#banner1-move').delay(0).animate({
 					top: '0'
 				}, 1500, 'easeOutExpo');
-				
+
 				$('.section2').find('#banner2-move').delay(0).animate({
 					bottom: '0'
 				}, 1500, 'easeOutExpo');
@@ -62,7 +62,7 @@ $(function(){
 			if (index == 1) {
 				$('.section1').find('.statement').css({visibility:"hidden"});
 				$('.section1').find('.statement').delay(0).animate({
-					top:'-300px'
+					top:'300'
 				},1500,'easeOutExpo');
 			}
 			if(index == '2'){
@@ -71,7 +71,7 @@ $(function(){
 
 				$('.section2').find('#banner1-move').delay(0).animate({
 					top: '-300'
-				}, 1500, 'easeOutExpo');				
+				}, 1500, 'easeOutExpo');
 				$('.section2').find('#banner2-move').delay(0).animate({
 					bottom: '-300'
 				}, 1500, 'easeOutExpo');

@@ -22,7 +22,12 @@
 .statement{
   margin-top: 20%;
   margin-left: 50%;
-  visibility:hidden;
   position:relative;
-  top:-300px;
+  visibility:hidden;
+  top:-100px;}
+
+
+
+
+
 }
