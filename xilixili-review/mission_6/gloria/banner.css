@@ -1,5 +1,10 @@
 /* banner 区域 */
-
+#banner:afrer{
+  content: '';
+  width:0;
+  height:0;
+  clear: both;
+}
 #banner .banner_img{
   position:relative;
   width:641px;

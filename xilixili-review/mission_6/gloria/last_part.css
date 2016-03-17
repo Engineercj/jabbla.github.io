@@ -43,6 +43,21 @@
   font-family: "宋体";
   line-height: 16px;
 }
+.p:after{
+  content: '';
+  width:0;
+  height:0;
+  display: block;
+  clear: both;
+}
+.p:before{
+  content: '';
+  width:90px;
+  height:90px;
+  margin-right: -90px;
+  display: block;
+  float: right;
+}
 /* firefox兼容写法 */
 @-moz-document url-prefix(){
   .left_part .p{
@@ -77,9 +92,13 @@
 /* 最底部 右侧*/
 .right_part{
   width:459px;
-  padding-bottom: 100000px;
-  margin-bottom: -100000px;
-
+}
+.right_part:after{
+  content:'';
+  width:0;
+  height:0;
+  display: block;
+  clear: both;
 }
 .right_part .img_wrap{
   position: relative;
@@ -112,30 +131,36 @@
   font-family: "微软雅黑";
   letter-spacing:140%;
 }
-.right_part .hoo{
+.right_part .down_part{
   width:100%;
   margin-top: 30px;
   padding:20px;
   background-color: #ECEAD4;
   line-height: 20px;
 }
-.hoo_bottom{
+.down_part_bottom{
   margin-top: 20px;
   margin-bottom:-20px;
 }
-.hoo .line{
+.down_part_bottom:after{
+  content: '';
+  width:0;
+  display: block;
+  clear: both;
+}
+.down_part .line{
   display:block;
   width:100%;
   color: #5a5b5b;
   margin-top:20px;
 }
-.hoo .title{
+.down_part .title{
   float: left;
   font-size: 16px;
   font-family: "宋体";
 
 }
-.hoo .line i{
+.down_part .line i{
   display: inline-block;
   float: left;
   margin-top:10px;
@@ -143,16 +168,16 @@
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
 }
-.hoo .author{
+.down_part .author{
   float:right;
   font-size: 12px;
   font-family: "宋体";
   font-style: oblique;
 }
-.hoo .lines{
+.down_part .lines{
   margin-top:-20px;
 }
-.hoo .left{
+.down_part .left{
   width:260px;
   height:160px;
   background-color: #D05D5E;
@@ -167,7 +192,7 @@
   color:#ffffff;
   font-family: "微软雅黑";
 }
-.hoo .rblock{
+.down_part .rblock{
   float: right;
   line-height: normal;
   width:175px;
@@ -190,7 +215,7 @@
   font-family: "黑体";
   line-height: 6px;
 }
-.hoo .right{
+.down_part .right{
   position: relative;
   width:165px;
   height:160px;
