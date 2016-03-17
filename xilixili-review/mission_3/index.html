@@ -4,21 +4,30 @@
 	<meta charset="utf-8">
 	<title>task3-xilixili</title>
 	<style>
-	body{
-		margin:0px;
-		font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
-	}
-	div{
+	*{
+		margin: 0;
+		padding:0;
 		box-sizing: border-box;
 	}
-	.main-content,.left-team,.right-personal,.center-introduce{
+	body{
+		font-family: "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+	}
+	.main-content,.left-team,.center-introduce{
 		padding:20px;
 		border:1px solid #999;
 	}
 	.main-content {
+		min-width:800px;
 		background-color: #eee;
-
 	}
+	.main-content:after{
+		content:'';
+		width:0;
+		height: 0;
+		display: block;
+		clear: both;
+	}
+
 	.left-team {
 		width: 200px;
 		float: left;
@@ -27,7 +36,12 @@
 	.right-personal {
 		width: 120px;
 		float: right;
+		padding-left:20px;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-bottom: 20px;
 		background-color: #fff;
+		border:1px solid #999;
 	}
 	.center-introduce {
 		word-wrap: break-word;
@@ -58,10 +72,11 @@
 		clear: both;
 	}
 	.personal-logo {
-		margin: 10px 0;
+		display: block;
 		width: 80px;
 		height: 80px;
 		border:1px solid #999;
+		margin-top: 20px;
 	}
 	</style>
 </head>
@@ -86,7 +101,6 @@
 				<a class="team_link" href="https://jabbla.github.io/team_page">团队主页</a>
 			</p>
 		</div>
-		<div class="clearfix"></div>
 	</div>
 </body>
 </html>
