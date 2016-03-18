@@ -66,14 +66,13 @@
   position: relative;
   text-align: right;
   display:block;
-  line-height: 10px;
   font-size: 12px;
   color: #BCBCBC;
   font-family: "宋体";
-  overflow: hidden;
 }
 #be_vounlenteer .down_part .left_part  a span{
   float: right;
+  cursor: pointer;
 }
 #be_vounlenteer .down_part .left_part  a:after{
   content:'';
@@ -83,12 +82,19 @@
   clear: both;
 }
 #be_vounlenteer .down_part .left_part  a i{
+  display: inline-block;
+  width:10px;
+  height:10px;
+  overflow: hidden;
+  margin-right:10px;
+}
+#be_vounlenteer .down_part .left_part  a i:after{
   content:'';
-  float: right;
+  display: block;
   width:14px;
   height:14px;
-  margin-right: 3px;
-  margin-top:-8px;
+  margin-left:-3px;
+  margin-top:-11px;
   border: 1px solid #BCBCBC;
   transform: rotate(45deg);
 }

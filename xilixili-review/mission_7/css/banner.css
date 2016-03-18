@@ -33,6 +33,12 @@
   line-height:63px;
   background-color: #E74F4D;
   margin-top: 66px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+#banner .banner_img .start_btn:hover{
+  color:#E74F4D;
+  background-color: white;
 }
 #banner .down_options{
   width:100%;

@@ -18,6 +18,9 @@
   text-align: center;
   display: inline-block;
 }
+#header .nav li:hover a{
+  color: black;
+}
 #header .login_btn{
   font-size: 14px;
   font-family: "微软雅黑";
@@ -34,6 +37,8 @@
   font-size: 14px;
   font-family:"微软雅黑";
   color:#7C7A82;
+  transition: all 0.5s;
+
 }
 .active{
   border-bottom: 5px solid #E34E52;

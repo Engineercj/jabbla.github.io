@@ -80,6 +80,11 @@
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
+  transition:all 0.5s;
+}
+#new_world_info .part_1 .info .btn:hover{
+  color:white;
+  background-color: #E4676A;
 }
 #new_world_info .part_1 .info ul{
   position: absolute;
@@ -123,6 +128,11 @@
   margin-top: 25px;
   line-height: 43px;
   cursor: pointer;
+  transition: all 0.5s;
+}
+#new_world_info .part_2 .first_part .btn:hover{
+  color: #E8504E;
+  background-color: white;
 }
 #new_world_info .part_2 .first_part{
   color: white;
@@ -136,6 +146,10 @@
   color:black;
   background-color: white;
 
+}
+#new_world_info .part_2 .second_part .btn:hover{
+  color:white;
+  background-color: #E8504E;
 }
 #new_world_info .part_2 li.second_part .btn{
   color: #E8504E;

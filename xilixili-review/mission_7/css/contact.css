@@ -33,11 +33,11 @@
   height:100%;
   border: none;
 }
-#email{
+#contact #email{
   width:431px;
   padding-left: 10px;
 }
-#submit{
+#contact #submit{
   width:80px;
   background-color: #707278;
   font-size: 15px;
