@@ -14,11 +14,8 @@
         var timer1 = setTimeout(function(){
           $load.fadeOut();
           $main_content.fadeIn();
-          clearTimeout(timer1);
         },1500);
-        clearTimeout(totalTime);
-      }
-    },10000);
+    },20000);
     $('img').load(function(){
       $loadBar.removeClass();
       loadedNum++;
@@ -40,7 +37,6 @@
             timer = setTimeout(function(){
             $load.fadeOut();
             $main_content.fadeIn();
-            clearTimeout(timer);
             console.log('finish');
           },1500);
         }
