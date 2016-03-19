@@ -20,17 +20,17 @@
       $loadBar.removeClass("stage_2");
       $loadBar.addClass("stage_3");
     }
-    if(nowPercent>0.75 && nowPercent<1){
+    if(nowPercent>0.75 && nowPercent<=1){
       $loadBar.removeClass("stage_3");
       $loadBar.addClass("stage_4");
+      if(nowPercent==1){
+        var timer = setTimeout(function(){
+          $('#load').fadeOut();
+          $('#main-content').fadeIn();
+        },1500);
+      }
+      //console.log(nowPercent);
     }
-    if(nowPercent==1){
-      var timer = setTimeout(function(){
-        $('#load').fadeOut();
-        $('#main-content').fadeIn();
-      },1500);
-    }
-    console.log(nowPercent);
   });
 
 })();
