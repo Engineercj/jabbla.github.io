@@ -8,14 +8,17 @@
     var total = $('img').length ;
     var loadedNum = 0;
     var nowPercent = 0;
+    var timer;
     var totalTime = setTimeout(function(){
-      $loadBar.addClass("satge_4");
-      var timer1 = setTimeout(function(){
-        $load.fadeOut();
-        $main_content.fadeIn();
-        clearTimeout(timer1);
-      },1500);
-      clearTimeout(totalTime);
+      if(timer){
+        $loadBar.addClass("satge_4");
+        var timer1 = setTimeout(function(){
+          $load.fadeOut();
+          $main_content.fadeIn();
+          clearTimeout(timer1);
+        },1500);
+        clearTimeout(totalTime);
+      }
     },20000);
     $('img').load(function(){
       $loadBar.removeClass();
@@ -35,7 +38,7 @@
       if(nowPercent>0.75 && nowPercent<=1){
         $loadBar.addClass("stage_4");
         if(nowPercent===1){
-          var timer = setTimeout(function(){
+            timer = setTimeout(function(){
             $load.fadeOut();
             $main_content.fadeIn();
             clearTimeout(timer);
