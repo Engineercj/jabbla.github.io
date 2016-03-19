@@ -10,7 +10,6 @@
     var nowPercent = 0;
     var timer;
     var totalTime = setTimeout(function(){
-      if(timer){
         $loadBar.addClass("satge_4");
         var timer1 = setTimeout(function(){
           $load.fadeOut();
@@ -19,7 +18,7 @@
         },1500);
         clearTimeout(totalTime);
       }
-    },20000);
+    },10000);
     $('img').load(function(){
       $loadBar.removeClass();
       loadedNum++;
@@ -42,7 +41,6 @@
             $load.fadeOut();
             $main_content.fadeIn();
             clearTimeout(timer);
-            timer=null;
             console.log('finish');
           },1500);
         }
