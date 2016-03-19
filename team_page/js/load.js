@@ -23,7 +23,7 @@
     if(nowPercent>0.75 && nowPercent<=1){
       $loadBar.removeClass("stage_3");
       $loadBar.addClass("stage_4");
-      if(nowPercent==1){
+      if(nowPercent>=0.9){
         var timer = setTimeout(function(){
           $('#load').fadeOut();
           $('#main-content').fadeIn();
