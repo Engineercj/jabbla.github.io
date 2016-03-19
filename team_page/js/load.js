@@ -17,7 +17,7 @@
         },1500);
     },20000);
     $('img').load(function(){
-      $loadBar.removeClass();
+      //$loadBar.removeClass();
       loadedNum++;
       nowPercent = loadedNum / total;
       if(nowPercent<=0.25){
