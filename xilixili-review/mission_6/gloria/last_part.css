@@ -164,6 +164,7 @@
   display: inline-block;
   float: left;
   margin-top:10px;
+  margin-right: 10px;
   border-bottom: 5px solid #12456B;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
@@ -232,6 +233,9 @@
   position: absolute;
   top: 0;
   left:0;
+}
+.right .i1{
+  float: right;
 }
 .logo{
   font-size: 12px;
