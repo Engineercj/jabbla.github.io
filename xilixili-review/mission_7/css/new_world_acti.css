@@ -55,11 +55,14 @@
 #new_world_acti .search_page form select{
   width:236px;
   height:36px;
-  vertical-align: middle;
   padding-left: 10px;
   font-size: 12px;
   color: #A9A6A6;
   margin-right: 28px;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  appearance:none;
+
 }
 #new_world_acti .search_page form select:hover{
   border:1px solid #BE4F49;
