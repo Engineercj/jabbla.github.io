@@ -15,7 +15,7 @@
           $load.fadeOut();
           $main_content.fadeIn();
         },1500);
-    },20000);
+    },10000);
     $('img').load(function(){
       //$loadBar.removeClass();
       loadedNum++;
