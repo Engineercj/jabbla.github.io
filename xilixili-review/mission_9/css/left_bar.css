@@ -1,0 +1,116 @@
+.user_area{
+  width:100%;
+  height:150px;
+  padding-top: 18px;
+  padding-bottom: 22px;
+}
+.user_area .user_info{
+  line-height: 57px;
+  margin-left: 45px;
+}
+.user_area .user_info::after{
+  content: '';
+  width:0;
+  height:0;
+  display: block;
+  clear: both;
+}
+.user_area .user_info .user_photo{
+  float: left;
+}
+.user_area .user_info span{
+  display: inline-block;
+  margin-left: 18px;
+  font-size: 16px;
+  color:white;
+  font-family: "黑体";
+}
+.user_area .user_relat{
+  width:100%;
+  height:36px;
+  margin-top: 24px;
+  padding-left:33px;
+  padding-right: 54px;
+  overflow: hidden;
+}
+.user_area .user_relat p{
+  width:86px;
+  height:100%;
+  float:left;
+  text-align: center;
+  font-size: 12px;
+  color:#6D8095;
+  font-family: "黑体";
+  border-right: 2px solid #313545;
+}
+.user_area .user_relat p.hide{
+  border: none;
+}
+.user_area .user_relat p span{
+  font-size: 16px;
+}
+.option_list{
+  width:100%;
+  padding-top: 22px;
+}
+.option_list .item_1{
+  width:100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font-size: 12px;
+  font-family: "黑体";
+  color:#6D8095;
+  text-indent: 13px;
+  cursor: pointer;
+  padding-left: 45px;
+}
+.option_list .item_1.unfold {
+  background-color: #393E4E;
+  color: white;
+}
+.option_list .item_1 img{
+  float: left;
+}
+.option_list .item_1 .item_2{
+  position: relative;
+  width:100%;
+  font-size: 12px;
+  color:#6D8095;
+  font-family: "黑体";
+  cursor: pointer;
+  background: url(../img/folder.png) 40px 10px no-repeat;
+  padding-left: 40px;
+  padding-top: 9px;
+  text-indent: 15px;
+}
+.option_list .item_1 .item_2.unfold{
+  color: white;
+  background: url(../img/folder_unfold.png) 40px 10px no-repeat;
+}
+.option_list .item_1 .item_2::before{
+  content: '';
+  width:7px;
+  height:12px;
+
+  position: absolute;
+  display: inline-block;
+  background: url(../img/arrow.png);
+  background-size: cover;
+  left:24px;
+}
+.option_list .item_1 .item_2.unfold::before{
+  width:12px;
+  height:7px;
+  margin-left:-4px;
+  background: url(../img/arrow_unfold.png);
+}
+.option_list .item_1 .item_2 .item_3{
+  color: #6D8095;
+  padding-top: 9px;
+  padding-left:16px;
+  background: url(../img/document.png) 16px 9px no-repeat;
+}
+.option_list .item_1 .item_2 .item_3.selected{
+  color: white;
+  background: url(../img/document_selected.png) 16px 9px no-repeat;
+}

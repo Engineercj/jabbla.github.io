@@ -1,0 +1,40 @@
+#head_nav{
+  padding-left: 50px;
+  padding-right: 94px;
+  line-height: 57px;
+}
+#head_nav .logo{
+  margin-top:10px;
+}
+#head_nav .text_area{
+  width:100%;
+  height:28px;
+  padding-left: 40px;
+  border-radius: 14px;
+  border: none;
+}
+#head_nav .search_box{
+  position: relative;
+  width:313px;
+  height:100%;
+  background: url(../img/search_icon.png) 18px center no-repeat;
+  margin-right: 20px;
+}
+#head_nav .search_box:after{
+  content: '';
+  display: block;
+  position: absolute;
+  top:21px;
+  left:18px;
+  width:17px;
+  height:17px;
+  background: url(../img/search_icon.png);
+  background-size: cover;
+}
+#head_nav .login{
+  font-size: 12px;
+  font-family: "黑体";
+  color: white;
+  background: url(../img/login.png) left center no-repeat;
+  padding-left: 20px;
+}

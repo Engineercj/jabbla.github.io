@@ -1,0 +1,9 @@
+#right_area .container{
+  width:892px;
+  margin: 0 auto;
+}
+#right_area .top_bar{
+  width:100%;
+  height:31px;
+  background-color: white;
+}
