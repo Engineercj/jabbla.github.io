@@ -42,6 +42,7 @@
             $load.fadeOut();
             $main_content.fadeIn();
             clearTimeout(timer);
+            timer=null;
             console.log('finish');
           },1500);
         }
