@@ -9,13 +9,14 @@
     var loadedNum = 0;
     var nowPercent = 0;
     var totalTime = setTimeout(function(){
-      $loadBar.removeClass();
       $loadBar.addClass("satge_4");
       var timer1 = setTimeout(function(){
         $load.fadeOut();
         $main_content.fadeIn();
+        clearTimeout(timer1);
       },1500);
-    },10000);
+      clearTimeout(totalTime);
+    },20000);
     $('img').load(function(){
       $loadBar.removeClass();
       loadedNum++;
@@ -37,6 +38,8 @@
           var timer = setTimeout(function(){
             $load.fadeOut();
             $main_content.fadeIn();
+            clearTimeout(timer);
+            console.log('finish');
           },1500);
         }
         //console.log(nowPercent);
