@@ -6,4 +6,108 @@
   width:100%;
   height:31px;
   background-color: white;
+  color:#AAAAA9;
+  font-size:13px;
+  font-family: "黑体";
+  padding-left: 30px;
+  line-height: 31px;
+}
+#right_area .container .search_box{
+  position: relative;
+  width:100%;
+  height:86px;
+  background-color: white;
+  border: 1px solid #DCDEE0;
+  margin-top: 19px;
+  padding-top: 15px;
+  padding-left:29px;
+  color:#AAAAA9;
+  font-size: 12px;
+  font-family: "黑体";
+}
+#right_area .container .search_box select{
+  margin-left: 17px;
+  color:#323232;
+  font-size: 12px;
+  font-family: "黑体";
+  padding-left: 10px;
+  padding-right:15px;
+  background: url(../img/down_arrow.png) right center no-repeat;
+  border: 1px solid #DCDEE0;
+  appearance:none;
+  height:26px;
+  margin-bottom: 5px;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+}
+#right_area .container .search_box .select_item{
+
+  height:100%;
+}
+#right_area .container .search_box .select_item select{
+  width:71px;
+  background: url(../img/down_blue_arrow.png) right center no-repeat;
+}
+#right_area .container .search_box .buyer{
+  width:200px;
+  height:100%;
+  margin-left: 36px;
+}
+#right_area .container .search_box .buyer .wrapper{
+  display: inline-block;
+}
+#right_area .container .search_box .buyer select{
+  width:121px;
+
+
+  padding-left: 6px;
+}
+#right_area .container .search_box .buyer a{
+  display: inline-block;
+  margin-top: 8px;
+}
+#right_area .container .search_box input{
+  border: 1px solid #DCDEE0;
+  margin-left: 17px;
+  color:#323232;
+  font-size: 12px;
+  font-family: "黑体";
+  padding-left: 10px;
+  padding-right:15px;
+}
+#right_area .container .search_box .set_selects{
+  height:100%;
+  margin-left: 32px;
+}
+#right_area .container .search_box button{
+  position: absolute;
+  width:51px;
+  height:26px;
+  top:50%;
+  margin-left: 15px;
+  transform: translateY(-50%);
+  background-color: #388AC1;
+  color: white;
+  font-size: 12px;
+  font-family: "黑体";
+  border: none;
+}
+#right_area .container .search_box .set_selects input{
+  width:121px;
+  height:26px;
+}
+#right_area .container .search_box .set_selects .date{
+  margin-right: 15px;
+}
+#right_area .container .search_box .set_selects .total_time{
+  width:71px;
+  margin-right: 15px;
+}
+#right_area .container .search_box .set_selects .total_people{
+  width:71px;
+  margin-right: 15px;
+}
+#right_area .container .search_box .set_selects .total_deal{
+  width:121px;
+  margin-right: 15px;
 }

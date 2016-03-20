@@ -73,8 +73,37 @@
         </div>
       </div>
       <div id="right_area" class="fr">
-        <div class="top_bar"></div>
-        <div class="container"></div>
+        <div class="top_bar">
+          <a>c站</a> / <a>个人报表</a> / <a>文件一</a> / <a>文档一</a>
+        </div>
+        <div class="container">
+          <div class="search_box">
+            <form>
+              <div class="select_item fl">
+                <span>查询项</span>
+                <select name="first">
+                  <option>第一项</option>
+                </select>
+              </div>
+              <div class="buyer fl">
+                <div class="wrapper fl">
+                  买方<select name="buyer"><option>小A</option></select></br>
+                  卖方<select name="saler"><option>小C</option></select>
+                </div>
+                <a>
+                  <img src="img/change.png">
+                </a>
+              </div>
+              <div class="set_selects fl">
+                日期<input type="text" class="date" name="date" value="2016-04-01">
+                总耗时<select class="total_time" name="total_time"><option>8天</option></select></br>
+                人数<select class="total_people" name="total_people"><option>10人</option></select>
+                成交项<select class="total_deal" name="total_deal"><option>10项</option></select>
+              </div>
+              <button type="submit">搜索</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </body>
