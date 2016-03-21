@@ -323,6 +323,7 @@
   font-family: "微软雅黑";
   cursor: pointer;
 }
+
 #right_area .container .statistics .part_1 .wrapper a.active{
   background-color: white;
   border: 1px solid #CBCCCC;
@@ -334,15 +335,27 @@
   width:100%;
   margin-left: -1px;
 }
+#right_area .container .statistics .part_1 .www{
+  width:403px;
+  height:220px;
+  margin: 0 auto;
+  overflow: hidden;
+  margin-top:48px;
+  position: relative;
+}
 #right_area .container .statistics .part_1 .wrapper .table{
-  margin-top: 56px;
-  margin-left: 53px;
+  width:100%;
+  height:100%;
 }
 #right_area .container .statistics .part_1 .wrapper .table table{
   border-width: 1px;
   border-color: #CBCCCC;
   border-collapse: collapse;
-
+  width:100%;
+  height:100%;
+}
+#right_area .container .statistics .part_1 .wrapper .table tr{
+  height:16.66%;
 }
 #right_area .container .statistics .part_1 .wrapper .table td{
   border-width: 1px;
@@ -351,18 +364,22 @@
   font-size: 12px;
   color:#535353;
   font-family: "宋体";
-  width:102px;
-  height:33px;
+  width:25%;
   text-align: center;
   line-height:33px;
 }
 #right_area .container .statistics .part_1 .wrapper .table td.active{
   background-color: #F4F5F7;
 }
+
+#right_area .container .statistics .part_1 a{
+  text-decoration: none;
+}
 #right_area .container .statistics .part_2{
   width:351px;
   margin-left: 8px;
 }
+
 #right_area .container .statistics .part_2 .content{
   padding-left:35px;
   padding-right: 35px;
@@ -628,6 +645,9 @@
   background-color: #DCDCDC;
   overflow: hidden;
 
+}
+#right_area .container .part_4 .content table tr.selected td{
+  background-color: #F4F6F7;
 }
 #right_area .container .part_4 .content table tr.rand_1 .line{
   display: inline-block;

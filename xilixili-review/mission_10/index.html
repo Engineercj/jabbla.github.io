@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no"/>
+    <title></title>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body{
+        margin:0;
+        padding:0;
+      }
+      @media screen and (max-width:639px){
+        .container{
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-between;
+          align-items: center;
+          padding:20px;
+        }
+        .container .box_3{
+          order: 1;
+        }
+      }
+      @media screen and (min-width:640px){
+        .container{
+          display: flex;
+          flex-flow: row-reverse;
+          justify-content: space-between;
+          align-items: center;
+          padding:20px;
+        }
+      }
+      .container div{
+        width:150px;
+        border: 1px solid red;
+        margin-bottom: 20px;
+      }
+      .container .box_1{
+        height:120px;
+      }
+      .container .box_2{
+        height:100px;
+      }
+      .container .box_3{
+        height:40px;
+      }
+      .container div.box_4{
+        height:200px;
+        border: 1px solid blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="box_4"></div>
+      <div class="box_3"></div>
+      <div class="box_2"></div>
+      <div class="box_1"></div>
+    </div>
+  </body>
+</html>
