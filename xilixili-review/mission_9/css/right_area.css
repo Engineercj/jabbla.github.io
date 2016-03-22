@@ -344,9 +344,34 @@
   position: relative;
 }
 #right_area .container .statistics .part_1 .wrapper .table{
+  position: absolute;
+  top:0;
+  left:0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
   width:100%;
   height:100%;
+  background-color: white;
 }
+#right_area .container .statistics .part_1 .wrapper #item1{
+  opacity: 1;
+}
+
+#right_area .container .statistics .part_1 .wrapper #item2:target{
+  opacity: 1;
+}
+#right_area .container .statistics .part_1 .wrapper #item3:target{
+  opacity: 1;
+}
+#right_area .container .statistics .part_1 .wrapper #item4:target{
+  opacity: 1;
+}
+#right_area .container .statistics .part_1 .wrapper #item5:target{
+  opacity: 1;
+}
+
+
+
 #right_area .container .statistics .part_1 .wrapper .table table{
   border-width: 1px;
   border-color: #CBCCCC;
