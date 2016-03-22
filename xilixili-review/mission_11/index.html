@@ -17,32 +17,357 @@
         width:100%;
         height:100%;
       }
+      ul,li{
+        list-style: none;
+      }
       #container{
         display: flex;
         flex-flow: column nowrap;
-        background-color: black;
+        background-color: #F5F5F5;
+        font-family: "黑体";
+        min-width: 463px;
       }
       #header{
         height:57px;
         background-color: #91D4DA;
-        font-size:14px;
+
         color: white;
-        font-family: "宋体";
+
         text-align: center;
         line-height: 57px;
       }
+      #header h1{
+        width:100%;
+        font-size:23px;
+        text-align: center;
+        font-weight: normal;
+      }
+      #header a{
+        display: block;
+        position: absolute;
+        left:0;
+        top: center;
+        font-size:23px;
+        padding-left: 36px;
+        background: url(back.png) left center no-repeat;
+      }
       #nav{
-        height:57px;
+        height:50px;
         background-color: white;
+        line-height: 50px;
+      }
+      #nav ul{
+        height:100%;
+
+      }
+      #nav ul li{
+        float: left;
+        list-style: none;
+        width:20%;
+        height:100%;
+        text-align: center;
+      }
+      #nav ul li.active{
+        border-bottom: 4px solid #8ED8D7;
+      }
+      #banner{
+        height:273px;
+      }
+      #banner img{
+        width:100%;
+        height:100%;
+      }
+      #tag_block{
+        height:359px;
+        background-color: white;
+        width:100%;
+        padding-left:14px;
+        padding-right: 14px;
+        padding-top: 23px;
+        overflow: hidden;
+      }
+      #tag_block .tag_choose{
+        width:100%;
+        border-bottom:2px solid #DEDEDE;
+      }
+      #tag_block .tag_choose::after{
+        content:'';
+        width:0;
+        height:0;
+        display: block;
+        clear: both;
+      }
+      #tag_block .tag_choose li{
+        font-size: 16px;
+        width:20%;
+        height:126px;
+        float: left;
+        text-align: center;
+        line-height:180px;
+        background: url(tag_icon.png) center top no-repeat;
+      }
+      #tag_block .cgy_list{
+        width:100%;
+        margin-top: 20px;
+      }
+      #tag_block .cgy_list::after{
+        content:'';
+        width:0;
+        height:0;
+        display: block;
+        clear: both;
+      }
+      #tag_block .cgy_list li{
+        float: left;
+        width:33.3%;
+        height:170px;
+        text-align: center;
+        border-right: 2px solid #DFDFDF;
+
+      }
+      #tag_block .cgy_list li:nth-child(1){
+        background: url(cgy_1.png) center top no-repeat;
+      }
+      #tag_block .cgy_list li:nth-child(2){
+        background: url(cgy_2.png) center top no-repeat;
+      }
+      #tag_block .cgy_list li:nth-child(3){
+        background: url(cgy_3.png) center top no-repeat;
+      }
+      #tag_block .cgy_list li.hide{
+        border: none;
+      }
+      #tag_block .cgy_list li h3{
+        margin-top: 106px;
+        font-size: 23px;
+        font-weight: normal;
+      }
+      #tag_block .cgy_list li h4{
+        font-size: 17px;
+        color:#595959;
+        font-weight: normal;
+      }
+      .block{
+        display: flex;
+        flex-flow: column nowrap;
+        height:331px;
+        background-color: white;
+        margin-top:17px;
+        padding-left:14px;
+        padding-right: 14px;
+        padding-top: 20px;
+        padding-bottom: 13px;
+        justify-content: space-around;
+      }
+      .block dl{
+        height:112px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+      }
+      .block dl .right{
+        height:100%;
+        width:331px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content:space-around;
+        flex:1 0 auto;
+      }
+      .block dl .right dd{
+        width:159px;
+        height:48px;
+        background-color: #F8F8F8;
+        text-align: center;
+        line-height: 48px;
+      }
+      .block dl dt{
+        width: 121px;
+        height:100%;
+        border: 1px solid #FFB731;
+        background: url(block_dt.png);
+        background-size: cover;
+        flex:1 0 auto;
+      }
+      .block h3{
+        width:100%;
+        height:40px;
+        border-bottom: 1px solid #E0E0E0;
+        font-size: 23px;
+        color: #676767;
+      }
+      #block_2{
+        height:331px;
+        background-color: white;
+        margin-top:17px;
+      }
+      #article{
+        display: flex;
+        flex-flow: column nowrap;
+        width:100%;
+        height:511px;
+        background-color: #F8F8F8;
+        margin-top:16px;
+
+      }
+      #article .article{
+        height:123px;
+        width:100%;
+        padding:10px 0 13px 14px;
+        background-color: white;
+        display:flex;
+        margin-bottom: 3px;
+
+      }
+      #article .article .content{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+      }
+      #article  .footer{
+        color:#C6C6C6;
+      }
+      #article  h4{
+        font-size: 22px;
+        color:#636363
+      }
+      #article .article img{
+        height:100%;
+        width:142px;
+      }
+      #last_article{
+        padding:10px 14px 13px 14px;
+        background-color: white;
+      }
+      #last_article h4{
+        height:49px;
+        line-height: 49px;
+      }
+      #last_article .img_list{
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
       }
     </style>
   </head>
   <body>
     <div id="container">
       <div id="header">
-        这是标题
+        <a>
+          返回
+        </a>
+        <h1>这是标题</h1>
       </div>
-      <div id="nav"></div>
+      <div id="nav">
+        <ul>
+          <li>导航</li>
+          <li class="active">导航</li>
+          <li>导航</li>
+          <li>导航</li>
+          <li>导航</li>
+        </ul>
+      </div>
+      <div id="banner">
+        <img src="3.gif">
+      </div>
+      <div id="tag_block">
+        <ul class="tag_choose">
+          <li>标签</li>
+          <li>标签</li>
+          <li>标签</li>
+          <li>标签</li>
+          <li>标签</li>
+        </ul>
+        <ul class="cgy_list">
+          <li>
+            <h3>分栏一</h3>
+            <h4>分栏小标题</h4>
+          </li>
+          <li>
+            <h3>分栏二</h3>
+            <h4>分栏小标题</h4>
+          </li>
+          <li class="hide">
+            <h3>分栏三</h3>
+            <h4>分栏小标题</h4>
+          </li>
+        </ul>
+      </div>
+      <div id="block_1" class="block">
+        <h3>模块一</h3>
+        <dl class="part_1">
+          <dt></dt>
+          <div class="right">
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+          </div>
+        </dl>
+        <dl class="part_2">
+          <dt></dt>
+          <div class="right">
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+          </div>
+        </dl>
+      </div>
+      <div id="block_2" class="block">
+        <h3>模块二</h3>
+        <dl class="part_1">
+          <dt></dt>
+          <div class="right">
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+          </div>
+        </dl>
+        <dl class="part_2">
+          <dt></dt>
+          <div class="right">
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+            <dd>这是文案</dd>
+          </div>
+        </dl>
+      </div>
+      <div id="article">
+        <div class="article" id="article_2">
+          <img src="article_bac.png">
+          <div class="content">
+            <h4>这是字号为22的文章标题</h4>
+            <div class="footer">
+              <span class="source">文章来源</span>
+              <span class="time">6分钟前</span>
+            </div>
+          </div>
+        </div>
+        <div class="article" id="article_2">
+          <img src="article_bac.png">
+          <div class="content">
+            <h4>这是字号为22的另一个文章标题</h4>
+            <div class="footer">
+              <span class="source">文章来源</span>
+              <span class="time">7分钟前</span>
+            </div>
+          </div>
+        </div>
+        <div id="last_article">
+          <h4>这个也是文章标题字号是22的文章标题</h4>
+          <ul class="img_list">
+            <li><img src="article_bac.png"></li>
+            <li><img src="article_bac.png"></li>
+            <li><img src="article_bac.png"></li>
+          </ul>
+          <div class="footer">
+            <span class="source">文章来源</span>
+            <span class="time">7分钟前</span>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
