@@ -1,4 +1,5 @@
 #head_nav{
+  width:100%;
   padding-left: 50px;
   padding-right: 94px;
   line-height: 57px;
@@ -7,7 +8,7 @@
   margin-top:10px;
 }
 #head_nav .text_area{
-  width:100%;
+  width:312px;
   height:28px;
   padding-left: 40px;
   border-radius: 14px;
@@ -15,10 +16,9 @@
 }
 #head_nav .search_box{
   position: relative;
-  width:313px;
+  float: right;
   height:100%;
   background: url(../img/search_icon.png) 18px center no-repeat;
-  margin-right: 20px;
 }
 #head_nav .search_box:after{
   content: '';
@@ -32,9 +32,10 @@
   background-size: cover;
 }
 #head_nav .login{
+  margin-left: 21px;
+  padding-left: 17px;
   font-size: 12px;
   font-family: "黑体";
   color: white;
   background: url(../img/login.png) left center no-repeat;
-  padding-left: 20px;
 }
