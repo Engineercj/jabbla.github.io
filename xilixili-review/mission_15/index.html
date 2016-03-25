@@ -1,0 +1,128 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <ul id="source">
+    <li>北京空气质量：<b>90</b></li>
+    <li>上海空气质量：<b>70</b></li>
+    <li>天津空气质量：<b>80</b></li>
+    <li>广州空气质量：<b>50</b></li>
+    <li>深圳空气质量：<b>40</b></li>
+    <li>福州空气质量：<b>32</b></li>
+    <li>成都空气质量：<b>90</b></li>
+  </ul>
+
+  <ul id="resort">
+    <!--
+    <li>第一名：北京空气质量：<b>90</b></li>
+    <li>第二名：北京空气质量：<b>90</b></li>
+    <li>第三名：北京空气质量：<b>90</b></li>
+     -->
+
+  </ul>
+
+  <button id="sort-btn">排序</button>
+
+<script type="text/javascript">
+
+/**
+ * getData方法
+ * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
+ * 返回一个数组，格式见函数中示例
+ */
+function getData() {
+  /*
+  coding here
+  */
+
+  /*
+  data = [
+    ["北京", 90],
+    ["北京", 90]
+    ……
+  ]
+  */
+  var oUl = document.getElementById('source');
+  var aLi = oUl.getElementsByTagName('li');
+  /*创建数据容器*/
+  var data = [];
+  /*获取对象*/
+  for(var i=0; i<aLi.length; i++){
+    var temp = {head:'空气质量指数',figure:0};
+    /*获取数值*/
+    var num = parseInt(aLi[i].getElementsByTagName('b')[0].innerHTML);
+    var innnerHTML= aLi[i].innerHTML;
+    var head = innnerHTML.slice(0,-9);
+    temp.figure = num;
+    temp.head = head;
+    data.push(temp);
+  }
+
+  return data;
+
+}
+/**
+ * sortAqiData
+ * 按空气质量对data进行从小到大的排序
+ * 返回一个排序后的数组
+ */
+function sortAqiData(data) {
+  bubbleSort(data);
+  return data;
+}
+function bubbleSort(array){
+    /*给每个未确定的位置做循环*/
+    for(var unfix=array.length-1; unfix>0; unfix--){
+      /*给进度做个记录，比到未确定位置*/
+      for(var i=0; i<unfix;i++){
+        if(array[i].figure>array[i+1].figure){
+          var temp = array[i];
+          array.splice(i,1,array[i+1]);
+          array.splice(i+1,1,temp);
+        }
+      }
+    }
+  }
+/**
+ * render
+ * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
+ * 格式见ul中的注释的部分
+ */
+function render(data) {
+  var oUl = document.getElementById('resort');
+  var innerHTML = oUl.innerHTML;
+  for(var i=0; i<data.length; i++){
+    innerHTML+='<li>'+data[i].head+'<b>'+data[i].figure+'</b>'+'</li>';
+  }
+  oUl.innerHTML = innerHTML;
+}
+
+function btnHandle() {
+  var aqiData = getData();
+  aqiData = sortAqiData(aqiData);
+  render(aqiData);
+}
+
+
+function init() {
+
+  // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
+  var oBtn = document.getElementById('sort-btn');
+  oBtn.onclick = function(){
+    btnHandle();
+  }
+}
+
+init();
+(function(){
+  var test = "cat,bat,sat,fat";
+  var pattern = /.at/;
+  var result = test.match(pattern);
+})();
+</script>
+</body>
+</html>

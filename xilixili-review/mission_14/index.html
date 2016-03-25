@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  </head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+    <!--
+    <li>第一名：福州（样例），10</li>
+  	<li>第二名：福州（样例），10</li> -->
+  </ul>
+
+<script type="text/javascript">
+
+var aqiData = [
+  ["北京", 90],
+  ["上海", 50],
+  ["杭州", 80],
+  ["厦门", 75],
+  ["郑州", 85],
+  ["福州", 10],
+  ["乌鲁木齐",80],
+  ["长春",70],
+  ["广州", 50],
+  ["成都", 90],
+  ["西安", 100]
+];
+function ranDom(start,end){
+  switch(arguments.length){
+    case 1: return Math.random()*(start+1);
+    case 2: return Math.random()*(end-start)+start+Math.random();
+  }
+}
+(function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+  var oUl = document.getElementById('aqi-list');
+  var result =  aqiData.filter(function(item,index,array){
+    return (item[1]>60);
+  });
+  var innerHTML = oUl.innerHTML;
+  function fastSort(arr,head,tail){
+    var random = Math.floor(ranDom(head,tail));
+    var arrayTemp = [];
+    var randomIndex = 0;
+    /* 建一个临时数组,将小于random的项放在random前面,大于的项放在后面 */
+    for(var i=head;i<=tail;i++){
+      if(arr[i][1]<arr[random][1]){
+        arrayTemp.unshift(arr[i]);
+        randomIndex++;
+      }else if(arr[i][1]>arr[random][1]){
+        arrayTemp.push(arr[i]);
+      }else if(arr[i][1]===arr[random][1]){
+        arrayTemp.splice(randomIndex,0,arr[i]);
+        randomIndex++;
+      }
+    }
+    /* 将临时数组覆盖在对应在总数组的相应范围 */
+    for(var j=head,u=0;j<=tail;j++,u++){
+      arr.splice(j,1,arrayTemp[u]);
+    }
+    if(arrayTemp.length<=2){
+      return;
+    }
+    /* 分别在random左右范围区域进行上述动作,递归*/
+    fastSort(arr,head,head+randomIndex-1);
+    fastSort(arr,head+randomIndex,tail);
+  }
+  fastSort(result,0,result.length-1);
+  console.log(result);
+  result.reverse();
+  for(var i=0;i<result.length;i++){
+    innerHTML = innerHTML + '<li>'+'第'+(i+1)+'名'+' '+result[i][0]+'</li>';
+  }
+  oUl.innerHTML =innerHTML;
+})();
+/*快速排序，版本2*/
+(function(){
+  var array = [2,3,7,1,11,67,99,3,455,766,34,68324,888,76,17,90];
+  function fastSort(array,head,tail){
+    //考虑到给每个分区操作的时候都是在原有的数组中进行操作的，所以这里head,tail来确定分片的位置
+    /*生成随机项*/
+    var randomnum = Math.floor(ranDom(head,tail));
+    var random = array[randomnum];
+    /*将小于random的项放置在其左边  策略就是通过一个临时的数组来储存分好区的结果，再到原数组中替换*/
+    var arrayTemp = [];
+    var unshiftHead = 0;
+    for(var i = head;i <= tail;i++){
+      if(array[i]<random){
+        arrayTemp.unshift(array[i]);
+        unshiftHead++;
+      }else if(array[i]>random){
+        arrayTemp.push(array[i]);
+      }
+      /*当它等于的时候放哪，这里我想选择放到队列的前面，也就是从unshift后的第一个位置放置*/
+      if(array[i]===random){
+        arrayTemp.splice(unshiftHead,0,array[i]);
+      }
+    }
+    /*将对应项覆盖原来的记录*/
+    for(var j = head , u=0;j <= tail;j++,u++){
+      array.splice(j,1,arrayTemp[u]);
+    }
+    /*寻找中间项所在的index*/
+    var nowIndex = array.indexOf(random);
+
+    /*设置出口，当要放进去的片段只有2项的时候就可以收工了*/
+    if(arrayTemp.length <= 2){
+      return;
+    }
+    /*递归，同时应用其左右两个区域*/
+    fastSort(array,head,nowIndex);
+    fastSort(array,nowIndex+1,tail);
+  }
+  fastSort(array,0,array.length-1);
+})();
+/*插入排序，版本2*/
+(function(){
+  var array = [2,3,7,1,11,67,99,3,455,766,34,68324,888,76,17,90];
+  function insertSort(array){
+    /*start根据已排列好的项数决定*/
+    var start=1;
+    /*按顺序，每一项检查已排列好的序列*/
+    for(var i=start; i<array.length; start++,i++){
+      /*跟已排好序的序列做对比，并插入到合适的位置*/
+      for(var j=0; j<start; j++){
+        /*小于或者等于时（我们是升序）插入到该项前面*/
+        if(array[i]<=array[j]){
+          console.log(array[i]+' '+array[j]);
+          array.splice(j,0,array[i]);
+          /*删除原有项*/
+          array.splice(i+1,1);
+          break;
+        }
+      }
+
+    }
+  }
+  insertSort(array);
+})();
+/*冒泡排序 版本2*/
+(function(){
+  var array = [2,3,7,1,11,67,99,3,455,766,34,68324,888,76,17,90];
+  function bubbleSort(array){
+    /*给每个未确定的位置做循环*/
+    for(var unfix=array.length-1; unfix>0; unfix--){
+      /*给进度做个记录，比到未确定位置*/
+      for(var i=0; i<unfix;i++){
+        if(array[i]>array[i+1]){
+          var temp = array[i];
+          array.splice(i,1,array[i+1]);
+          array.splice(i+1,1,temp);
+        }
+      }
+    }
+  }
+  bubbleSort(array);
+})();
+/*选择排序 版本2*/
+(function(){
+  var array = [2,3,7,1,11,67,99,3,455,766,34,68324,888,76,17,90];
+  function selectSort(array){
+    /*给每个插入后的未确定的范围循环，初始是从0开始*/
+    for(var unfixed=0; unfixed<array.length; unfixed++){
+      /*设置当前范围的最小值和其索引*/
+      var min = array[unfixed];
+      var minIndex = unfixed;
+      /*在该范围内选出最小值*/
+      for(var j=unfixed+1; j<array.length; j++){
+        if(min>array[j]){
+          min = array[j];
+          minIndex = j;
+        }
+      }
+      /*将最小值插入到unfixed，并且把它所在的原有项替换成*/
+      array.splice(unfixed,0,min);
+      array.splice(minIndex+1,1);
+    }
+  }
+  selectSort(array);
+})();
+</script>
+</body>
+</html>
