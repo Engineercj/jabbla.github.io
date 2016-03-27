@@ -2,56 +2,157 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,user-scalable=no"/>
     <title></title>
     <style>
-      *{
-        box-sizing: border-box;
-      }
-      .container{
-        width:400px;
-        height:500px;
-        background: white;
-        color:black;
-      }
-      table{
+    *{
+      margin: 0;
+      padding:0;
+      box-sizing: border-box;
+    }
+      ul {
         width:400px;
         height:400px;
-        border-width: 2px;
-        border-collapse: collapse;
+        margin-left: 100px;
+        list-style: none;
+        overflow: hidden;
+      }
+      ul .row{
+        width:100%;
+        border:1px solid black;
+        height:40px;
+        margin-right: -1px;
+      }
+      ul .row ::after{
+        content: '';
+        width:0;
+        height:0;
+        clear: both;
+      }
+      ul .row li{
+        border-right: 1px solid black;
+        width:11%;
+        float: left;
+        height:100%;
+        text-align: center;
+        line-height: 40px;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <table border="1">
-        <tr>
-          <td>td</td><td>td</td><td>td</td><td>td</td>
-        </tr>
-        <tr>
-          <td>td</td><td>td</td><td>td</td><td>td</td>
-        </tr>
-        <tr>
-          <td>td</td><td>td</td><td>td</td><td>td</td>
-        </tr>
-        <tr>
-          <td>td</td><td>td</td><td>td</td><td>td</td>
-        </tr>
-      </table>
-    </div>
-  <script>
-  var temp = 2;
+    <ul id="single">
 
-  console.log(Array.prototype);
-    /*var pattern = /.at/g;
-    var test1 = 'vat,cat';
-    var test2 = 'yat,uat';
-    var match = pattern.exec(test1);
-    console.log(match[0]);
-    console.log(pattern.lastIndex);
-    var match1 = pattern.exec(test2);
-    console.log(match1[0]);
-    console.log(pattern.lastIndex);*/
-  </script>
+    </ul>
+    <script>
+      function random(v1,v2){
+        switch (arguments.length) {
+          case 1:return Math.ceil(Math.random()*(v1+1));
+          case 2:return parseInt(Math.random()*(v2-v1)+v1+Math.random());
+        }
+      }
+      /*根据used数组和要确定的num，输出可用的列和行*/
+      function select(block,usedArray,blockUsed,num){
+        /*全部的列和行*/
+        var temp = new Array(9);
+        for(var i=0; i<temp.length; i++){
+          temp[i] = {};
+          temp[i].row = new Array(3);
+          temp[i].col = new Array(3);
+          /*根据块的序号确定块所在行的范围*/
+          for(var j=0;j<temp[i].row.length;j++){
+            temp[i].row[j] = j + parseInt(i/3)*3;
+          }
+          /*根据块的序号确定块所在列的范围*/
+          var mod = (i<3)? (i*10-parseInt(i*10/3)*3) : (i-parseInt(i/3)*3);
+          for(var j=0;j<temp[i].col.length;j++){
+            temp[i].col[j] = j + mod*3;
+          }
+        }
+        var rowAvailiable = temp[block].row.filter(function(item,index,array){
+          var boolean = usedArray[num-1].row.every(function(item1,index1,array1){
+            return (item1!==item)
+          });
+          var booleanB = blockUsed[block].row.every(function(item2,index2,array2){
+            return (item2!==item)
+          });
+          return (boolean&&booleanB);
+        });
+        var colAvailiable = temp[block].col.filter(function(item,index,array){
+          var boolean = usedArray[num-1].col.every(function(item1,index1,array1){
+            return (item1!==item)
+          });
+          var booleanB = blockUsed[block].col.every(function(item2,index2,array2){
+            return (item2!==item)
+          });
+          return (boolean&&booleanB);
+        });
+        console.log(rowAvailiable);
+        /*返回包含列和行的对象*/
+        var go = {};
+
+        go.row = rowAvailiable;
+        go.col = colAvailiable;
+
+        return go;
+      }
+      /*更新数字的列行记录，和块的行列记录*/
+      function pushToArrays(usedArray,blockUsed,block,number,select,selectRow,selectCol){
+        usedArray[number-1].row.push(select.row[selectRow]);
+        usedArray[number-1].col.push(select.col[selectCol]);
+        blockUsed[block].row.push(select.row[selectRow]);
+        blockUsed[block].col.push(select.col[selectCol]);
+      }
+      function popArrays(usedArray,blockUsed,block,number,flag){
+        usedArray[number-1][flag].pop();
+        blockUsed[block][flag].pop();
+      }
+      /*根据所在块和将数字放入指定位置*/
+      function put(block,number,boardArray,usedArray,blockUsed){
+        /*取得select集合*/
+        var oSelect = select(block,usedArray,blockUsed,number);
+        if(oSelect===undefined)
+        console.log(oSelect);
+        /*给选项循环，直到下一层的select集合不是undefined*/
+
+      }
+      function single(){
+        var array = new Array(9),
+            oUl = document.getElementById('single');
+        for(var i=0;i<9;i++){
+          array[i] = new Array(9);
+        }
+        for(var o=0;o<9;o++){
+          var oLi = document.createElement('li');
+          oLi.className = "row";
+          oUl.appendChild(oLi);
+          for(var j=0;j<9;j++){
+            oLi.appendChild(document.createElement('li'));
+          }
+        }
+
+        /*创建数字已用的列和行的数组,和棋盘数组*/
+        var numUsed = new Array(9),
+            blockUsed = new Array(9),
+            board = new Array(9);
+        for(var i=0;i<9;i++){
+          numUsed[i] = {};
+          numUsed[i].row = new Array();
+          numUsed[i].col = new Array();
+          blockUsed[i] = {};
+          blockUsed[i].row = new Array();
+
+          blockUsed[i].col = new Array();
+
+          board[i] = new Array(9);
+        }
+        /*给数字做循环*/
+        for(var i=1,block=0; i<10;i++){
+          blockUsed[i].row.head = 0;
+          blockUsed[i].col.head = 0;
+          put(block,i,board,numUsed,blockUsed);
+        }
+        /*将数组表现*/
+      }
+      single();
+    </script>
   </body>
 </html>
