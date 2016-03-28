@@ -1,0 +1,36 @@
+.top-bar{
+    width: 100%;
+    height:50px;
+    background-color: #5bc0de;
+    line-height: 50px;
+    color: white;
+}
+.top-bar ul{
+    height:100%;
+}
+.top-bar li{
+    transition: background-color 0.5s ease-in-out;
+    cursor: pointer;
+}
+.top-bar li:hover{
+    background-color: #0f0f0f;
+}
+.top-bar .Articles{
+    margin-left: 10px;
+}
+.top-bar .Articles,.About{
+    width: 25%;
+    text-align: center;
+}
+.home{
+    width:25%;
+    text-align: center;
+}
+.log-reg a{
+    font-size: 12px;
+    cursor: pointer;
+}
+.log-reg{
+    height: 100%;
+    padding-right:20px;
+}
