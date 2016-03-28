@@ -1,0 +1,120 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+  <style>
+    .aqi-chart-wrap{
+      position: relative;
+      box-sizing: border-box;
+      border-left:2px solid green;
+      border-bottom:2px solid green;
+      margin-top: 100px;
+      margin-bottom: 100px;
+      padding-left:50px;
+      height:500px;
+      overflow: hidden;
+    }
+    .big-wrap{
+      position: relative;
+    }
+    .big-wrap::before{
+      position: absolute;
+      content:'空气污染指数';
+      width:150px;
+      height:50px;
+      color: black;
+      left:0;
+      top:-50px;
+      z-index: 100;
+      font-size: 21px;
+      background-color: white;
+      line-height:50px;
+      font-family: "黑体";
+
+    }
+    .big-wrap::after{
+      position: absolute;
+      content:attr(data-type);
+      width:150px;
+      height:50px;
+      color: black;
+      right:-150px;
+      bottom: -25px;
+      font-size: 21px;
+      padding-left: 10px;
+      background-color: white;
+      line-height: 50px;
+      font-family: "黑体";
+
+    }
+    .aqi-chart-wrap span{
+      height:400px;
+      position: absolute;
+      bottom: -400px;
+      margin-left: 20px;
+      transition: all 0.5s ease-in-out;
+      display: inline-block;
+      background-color: black;
+      cursor: pointer;
+      border-radius:2px 2px 0 0 ;
+    }
+    .aqi-chart-wrap span:hover{
+      transform: scale(1.2);
+    }
+    .aqi-chart-wrap span:hover::after{
+      display: block;
+    }
+    .aqi-chart-wrap span::after{
+
+      position: absolute;
+      display: none;
+      top:-100px;
+      left:-100px;
+      content:attr(data-detail);
+      font-size: 10px;
+      width:100px;
+      height:100px;
+      color:white;
+      background-color: rgba(0,0,0, 1);
+    }
+    .small-wrap{
+      position: relative;
+      margin:0 auto;
+      height:100%;
+    }
+  </style>
+  </head>
+<body>
+  <fieldset id="form-gra-time">
+    <legend>请选择日期粒度：</legend>
+    <label>日<input name="gra-time" value="day" type="radio" checked="checked"></label>
+    <label>周<input name="gra-time" value="week" type="radio"></label>
+    <label>月<input name="gra-time" value="month" type="radio"></label>
+  </fieldset>
+
+  <fieldset>
+    <legend>请选择查看的城市：</legend>
+    <select id="city-select">
+      <option>北京</option>
+      <option>上海</option>
+      <option>广州</option>
+      <option>深圳</option>
+      <option>成都</option>
+      <option>西安</option>
+      <option>福州</option>
+      <option>厦门</option>
+      <option>沈阳</option>
+    </select>
+  </fieldset>
+  <div class="big-wrap">
+    <div class="aqi-chart-wrap" data-type="">
+      <div class="small-wrap">
+
+      </div>
+      <!--<span></span>-->
+    </div>
+  </div>
+  <script src="task.js"></script>
+</body>
+</html>
