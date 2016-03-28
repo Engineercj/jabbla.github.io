@@ -32,18 +32,19 @@ body {
     float: right;
 }
 #main {
-    max-width:850px;
-    min-width:850px ;
+    width:850px;
     height:100%;
     margin: 0 auto;
     background-color: #ECF0F1;
 }
 .side-bar{
+    float: left;
     width:25%;
     background-color: white;
     padding-bottom: 20px;
 }
 .content-area{
+    float: left;
     width: 75%;
     padding-left:10px;
 }

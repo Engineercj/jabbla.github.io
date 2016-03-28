@@ -10,7 +10,25 @@
     <link rel="stylesheet" href="css/content.css">
     <link rel="stylesheet" href="css/top-bar.css">
     <style>
-      @media screen and (width)
+      @media screen and (max-width:400px){
+        #main{
+          min-width: 376px;;
+          width:100%;
+        }
+        .top-bar{
+          width: 100%;;
+        }
+        .side-bar{
+          display: none;
+        }
+        .content-area{
+          width: 100%;
+          padding: 0;
+        }
+        .content-area .content{
+          height:300px
+        }
+      }
     </style>
   </head>
   <body>
@@ -28,7 +46,7 @@
       </ul>
 
     </div>
-    <div class="side-bar fl">
+    <div class="side-bar">
       <div class="avater">
         <img src="head.jpg">
         <p class="desc">
@@ -37,7 +55,7 @@
         </p>
       </div>
     </div>
-    <div class="content-area fl">
+    <div class="content-area">
       <div class="content">
         <h3>当我们说line-height时候,都会谈论到神马</h3>
         <p class="article-detail">

@@ -45,9 +45,10 @@
 .content .snap{
     padding-top:10px;
     font-size:15px;
-    height:80px;
+    height:40%;
     line-height:30px;
     color: #3A4145;
+    word-wrap: break-word;
 }
 .content .read-btn{
     display: block;
