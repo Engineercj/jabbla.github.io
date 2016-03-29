@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mission_18</title>
+    <style>
+        ul{
+            list-style: none;
+        }
+        #queue li{
+            float: left;
+            margin-left: 10px;
+            background-color: red;
+            text-align: center;
+            height:50px;
+            line-height: 50px;
+        }
+        #queue::after{
+            content: '';
+            width:0;
+            height:0;
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="num-area">
+    <button id="left-in">左侧导入</button>
+    <button id="right-in">右侧导入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+    <ul id="queue"></ul>
+<script src="task.js"></script>
+</body>
+</html>
