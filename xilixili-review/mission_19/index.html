@@ -2,21 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>mission_18</title>
+    <title>mission_19</title>
     <style>
         ul{
+            position: relative;
+            height:500px;
             list-style: none;
+            overflow: hidden;
         }
 
         #queue li{
-            float: left;
-            margin-left: 10px;
-            padding:0 10px;
+            position:absolute;
+            bottom:-500px;
+            width:20px;
+            height:100%;
             background-color: red;
             text-align: center;
-            height:100%;
             line-height: 50px;
             margin-bottom: 10px;
+            transition: left 0.5s ease-in-out;
+        }
+        .move-left{
+            left:-30px;
+        }
+        .move-right{
+            left:30px;
         }
         #queue::after{
             content: '';
@@ -33,6 +43,7 @@
     <button id="right-in">右侧导入</button>
     <button id="left-out">左侧出</button>
     <button id="right-out">右侧出</button>
+    <button id="sort">冒泡排序可视化</button>
         <ul id="queue"></ul>
 <script src="task.js"></script>
 </body>

@@ -39,13 +39,11 @@ function rightIn(){
 function rightOut(){
     queArray.pop(oNumarea.value);
     renderQue();
-    test();
 }
 //初始化左侧出添加事件处理函数
 function leftOut(){
     queArray.shift(oNumarea.value);
     renderQue();
-    test();
 }
 
 //所有的按钮初始状态切换
@@ -54,6 +52,7 @@ function btnToogle(boolean){
     for(var i=0;i<aBtn.length;i++){
         aBtn[i].disabled = boolean;
     }
+
 }
 //文本框onblur处理函数
 function textOnblur(){
@@ -83,10 +82,8 @@ function test(){
 
     state = (numsState&&rangeState);
     btnToogle(!state);
-    if(!numsState){
-        oLeftout.disabled = false;
-        oRightout.disabled = false;
-    }
+    oLeftout.disabled = false;
+    oRightout.disabled = false;
     return state;
 }
 //给按钮们添加事件
@@ -100,6 +97,5 @@ function addEvent(){
 }
 function init(){
     addEvent();
-    console.log(queArray);
 }
 init();
