@@ -131,29 +131,31 @@ function sortView(){
             aLi[process[flag][1]].style.left = aLi[process[flag][1]].nowLeft -30+'px';
             aLi[process[flag][1]].nowLeft -= 30;
             setTimeout(function(){
-                /*//如后面的交换都没次元素则上色
+                //如后面的交换都没次元素则上色
                 var count = 0,
                     length = 0;
                 for(str1 in process){
-                    if(str1.valueOf()>flag.valueOf()){
-                        if(process[str1].indexOf(process[flag][0])===undefined){
+                    if(parseInt(str1)>parseInt(flag)){
+                        if(process[str1].indexOf(process[flag][0])===-1){
                             count++;
-                        }else{
-                            console.log(str1+'你丫是谁'+flag);
                         }
                         length++;
                     }
                 }
                 if(count==length){
-                    aLi[process[flag][0]].style.backgroundColor = 'black';
+                    aLi[process[flag][0]].style.backgroundColor = 'green';
                     aLi[process[flag][0]].style.color = 'white';
-                    console.log(flag+'上色');
                 }
-                else{*/
-                    console.log(flag);
+                else{
                     aLi[process[flag][0]].style.backgroundColor = 'red';
                     aLi[process[flag][0]].style.color = 'black';
-               /* }*/
+                }
+                if(parseInt(flag)===(start-1)){
+                    for(var i=0;i<aLi.length;i++){
+                        aLi[i].style.backgroundColor = 'green';
+                        aLi[i].style.color = 'white';
+                    }
+                }
 
             },500)
 
@@ -162,7 +164,6 @@ function sortView(){
     for(str in process){
         doSetTime(str);
     }
-    console.log(process);
 }
 //给按钮们添加事件
 function addEvent(){
