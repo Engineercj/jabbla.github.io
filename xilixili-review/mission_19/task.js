@@ -1,7 +1,7 @@
 /**
  * Created by zxr on 2016/3/29.
  */
-var queArray = [30,20,15,85,80,97],
+var queArray = [30,20,15,85,80,97,90,35,76,78,45,46,28,34],
     state,
     oLeftin = document.getElementById('left-in'),
     oRightin = document.getElementById('right-in'),
@@ -97,11 +97,9 @@ function test(){
 function sortView(){
     var oQueue = document.getElementById('queue'),
         aLi = oQueue.getElementsByTagName('li'),
-        toIndex = new Array(aLi.length),
-        aTimer =  new Array(aLi.length);
+        toIndex = new Array(aLi.length);
     for(var u=0;u<toIndex.length;u++){
         toIndex[u] = u;
-        aTimer[u] = {};
     }
     var process = {},
         start = 0;
@@ -115,12 +113,6 @@ function sortView(){
                 process[start] = new Array();
                 process[start][0] = toIndex[j];
                 process[start][1] = toIndex[j+1];
-                /*console.log(toIndex[j]+' '+toIndex[j+1]);
-                console.log(Lis[toIndex[j]].offsetLeft);
-                Lis[toIndex[j]].style.left = Lis[toIndex[j]].nowLeft+30+'px';
-                Lis[toIndex[j]].nowLeft += 30;
-                Lis[toIndex[j+1]].style.left = Lis[toIndex[j+1]].nowLeft-30+'px';
-                Lis[toIndex[j+1]].nowLeft -= 30;*/
                 toIndex[j+1] = toIndex[j];
                 toIndex[j] = temp1;
                 start++;
@@ -129,21 +121,48 @@ function sortView(){
         }
 
     }
+    //给每个过程设置延时定时器
     function doSetTime(flag){
         setTimeout(function(){
-            aLi[process[flag][0]].backgroundColor = 'black';
-            aLi[process[flag][0]].color = 'white';
+            aLi[process[flag][0]].style.backgroundColor = 'black';
+            aLi[process[flag][0]].style.color = 'white';
             aLi[process[flag][0]].style.left = aLi[process[flag][0]].nowLeft +30+'px';
             aLi[process[flag][0]].nowLeft += 30;
             aLi[process[flag][1]].style.left = aLi[process[flag][1]].nowLeft -30+'px';
             aLi[process[flag][1]].nowLeft -= 30;
-            aLi[process[flag][0]].backgroundColor = 'red';
-            aLi[process[flag][0]].color = 'black';
+            setTimeout(function(){
+                /*//如后面的交换都没次元素则上色
+                var count = 0,
+                    length = 0;
+                for(str1 in process){
+                    if(str1.valueOf()>flag.valueOf()){
+                        if(process[str1].indexOf(process[flag][0])===undefined){
+                            count++;
+                        }else{
+                            console.log(str1+'你丫是谁'+flag);
+                        }
+                        length++;
+                    }
+                }
+                if(count==length){
+                    aLi[process[flag][0]].style.backgroundColor = 'black';
+                    aLi[process[flag][0]].style.color = 'white';
+                    console.log(flag+'上色');
+                }
+                else{*/
+                    console.log(flag);
+                    aLi[process[flag][0]].style.backgroundColor = 'red';
+                    aLi[process[flag][0]].style.color = 'black';
+               /* }*/
+
+            },500)
+
         },flag*1000);
     }
     for(str in process){
         doSetTime(str);
     }
+    console.log(process);
 }
 //给按钮们添加事件
 function addEvent(){
@@ -157,6 +176,5 @@ function addEvent(){
 }
 function init(){
     addEvent();
-
 }
 init();
