@@ -1,12 +1,14 @@
 /**
- * Created by zxr on 2016/3/29.
+ * Created by zxr on 2016/3/31.
  */
+
 var queArray = [],
     state,
     oLeftin = document.getElementById('left-in'),
     oRightin = document.getElementById('right-in'),
     oLeftout = document.getElementById('left-out'),
-    oNumarea = document.getElementById('num-area'),
+    oTextarea = document.getElementById('text-area'),
+    oSearch = document.getElementById('search'),
     oRightout = document.getElementById('right-out');
 //根据queArray[]渲染DOM
 function renderQue(){
@@ -19,16 +21,18 @@ function renderQue(){
 }
 //初始化左侧入添加事件处理函数
 function leftIn(){
-
-    queArray.unshift(oNumarea.value);
+    var array = shiftToArray(oTextarea.value);
+   // var queArray = array.reverse().concat(queArray);
+    queArray = array.reverse().concat(queArray);
+    console.log(queArray);
     test();
     renderQue();
 
 }
 //初始化右侧入添加事件处理函数
 function rightIn(){
-
-    queArray.push(oNumarea.value);
+    var array = shiftToArray(oTextarea.value);
+    queArray = queArray.concat(array);
     test();
     renderQue();
 
@@ -54,42 +58,41 @@ function btnToogle(boolean){
     }
 
 }
-//文本框onblur处理函数
-function textOnblur(){
-    if(!test()){
-        return;
-    }
-}
-//检测输入文本的范围
-function numRangeConfig(){
-        switch(this.value<=100&&this.value>=10){
-            case true : return true;break;
-            case false: alert('确保您输入的范围在10~100');return false;break;
-        }
-}
 
-//检测队列中数字的数量
-function numNumsConfig(){
-    if(!(queArray.length<=60)){
-        alert('队列已满，请出');
-    }
-    return (queArray.length<=60);
-}
 //检测集成
 function test(){
-    var numsState = numNumsConfig(),
-        rangeState = numRangeConfig.call(oNumarea);
-
-    state = (numsState&&rangeState);
-    btnToogle(!state);
-    oLeftout.disabled = false;
-    oRightout.disabled = false;
-    if(queArray.length===0){
-        oLeftout.disabled = true
-        oRightout.disabled = true;
+    if(queArray.length==0){
+        state = false;
+    }else{
+        state = true;
     }
-
+    btnToogle(!state);
+    oLeftin.disabled = false;
+    oRightin.disabled = false;
     return state;
+}
+//text-area数据处理函数
+function shiftToArray(str){
+    var array = str.split(/ +|\.+|,+|，+|`+|·+|\n+|、+/);
+    return array;
+}
+//查询按钮事件处理函数
+function search(){
+    var oQueue = document.getElementById('queue'),
+        oText = document.getElementById('search-text'),
+        aLi = oQueue.getElementsByTagName('li'),
+        patternStr = oText.value,
+        pattern = new RegExp(patternStr);
+    for(var i=0;i<aLi.length;i++){
+        aLi[i].style.backgroundColor = 'red';
+        aLi[i].style.color = 'black';
+    }
+    queArray.forEach(function(item,index,array){
+        if(item.search(pattern)>=0){
+            aLi[index].style.backgroundColor = 'green';
+            aLi[index].style.color = 'white';
+        }
+    });
 }
 //给按钮们添加事件
 function addEvent(){
@@ -97,8 +100,9 @@ function addEvent(){
     oRightin.onclick = rightIn;
     oRightout.onclick = rightOut;
     oLeftout.onclick = leftOut;
-    oNumarea.onblur = textOnblur;
+    oSearch.onclick = search;
     btnToogle(true);
+    test();
 }
 function init(){
     addEvent();

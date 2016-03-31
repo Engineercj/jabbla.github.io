@@ -39,66 +39,10 @@
     </style>
   </head>
   <body>
-  # DOM
-  ## 节点层次
-  ### **1. Document类型**
-  **关于Document的自身属性**
-  ```javascript
-  document.title //文档标题，不和<title>绑定
-    document.url//文档的完整 URL
-    document.domain//页面的域名
-    document.referrer//保存着连接到当前页面的那个URL
-    ```
-    **标志子节点**
-    ```javascript
-    document.documentElement//指向HTML元素
-    document.doctype//指向<!dotype>标签
-    document.body//指向<body>标签
-    document.childNodes//指向NodeList
-    ```
-    **查找元素**
-    ```javascript
-    document.getElementById()
-    document.getElementsByClassName()
-    document.getElementsByTagName()
-    HTMLCollection.item(num)= HTMLCollection[]
-    HTMLCollection.namedItem() = HTMLCollection[]
-    ```
-    **替换，添加，删除子节点**
-    ```javascript
-    document.removeChild()
-    document.appendChild()
-    document.replaceChild()
-    ```
-    **创建元素**
-    ```javascript
-    document.createElement("")
-    ```
-    **文档写入**
-    ```javascript
-    document.write(''),document.writeln('')
-    ```
-
-    ### **2. Element类型**
-    **元素特性**
-    ```javascript
-    element.id
-    element.className
-    element.title
-    element.lang
-    element.dir
-    ```
-    **取得特性和设置特性**
-    ```javascript
-    element.getAttribute()
-    element.setAttribute()
-    ```
-    **取得属性节点的list**
-    ```javascript
-    element.attributes[]
-    ```
-
-    ### 动态脚本和动态样式
-    > 其实就是生成DOM标签
+  <script>
+    var test = 'cat,cat';
+    test.replace(/a/g,'o');
+    console.log(test.replace(/a/g,'o'));
+  </script>
    </body>
 </html>
