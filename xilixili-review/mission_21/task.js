@@ -41,6 +41,9 @@ function tagInput(){
         if(str===''){
             return
         }
+        queArray = queArray.filter(function(item,index,array){
+            return (item!==str);
+        });
         queArray.push(str);
         if(queArray.length>10){
             queArray.shift()
