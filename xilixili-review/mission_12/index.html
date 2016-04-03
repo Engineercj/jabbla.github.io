@@ -53,13 +53,13 @@
       clear: both;
       width:400px;
       height:200px;
+      overflow: hidden;
     }
     #banner ul{
       position: relative;
-      top: 0;
-      left:0;
-      width:1600px;
+      width:100%;
       height:100%;
+      transition: left 0.5s ease-in-out;
     }
     #banner ul:after{
       content: '';
@@ -68,14 +68,15 @@
       height:0;
       clear: both;
     }
-    #banner ul li{
+    .item{
       position: absolute;
       width:400px;
       height:100%;
       top:0;
-      opacity:0;
+      left:0;
       transition:opacity 0.5s ease-in-out;
     }
+
     #banner .btn_set{
       position: absolute;
       right:0;
@@ -94,37 +95,35 @@
       margin-left: 5px;
       color: white;
     }
-    #banner ul li:nth-child(1){
-      opacity: 1;
-    }
     #item1{
       background:url(1.jpg);
       background-size: cover;
     }
-    #item1:target{
-      opacity: 1
+    #item1:target~li{
+      opacity: 0;
     }
     #item2{
       background:url(2.jpg);
       background-size: cover;
     }
-    #item2:target{
-      opacity: 1;
+    #item2:target~li{
+      opacity: 0;
     }
     #item3{
       background:url(3.jpg);
       background-size: cover;
     }
-    #item3:target{
-      opacity: 1;
+    #item3:target~li{
+      opacity: 0;
     }
     #item4{
       background:url(4.jpg);
       background-size: cover;
     }
-    #item4:target{
-      opacity: 1;
+    #item4:target~li{
+      opacity: 0;
     }
+
     </style>
   </head>
   <body>
@@ -182,10 +181,10 @@
         <a href="#item4">4</a>
       </div>
       <ul class="move">
-        <li id="item1"></li>
-        <li id="item2"></li>
-        <li id="item3"></li>
-        <li id="item4"></li>
+        <li class="item" id="item1"></li>
+        <li class="item" id="item2"></li>
+        <li class="item" id="item3"></li>
+        <li class="item" id="item4"></li>
       </ul>
     </div>
   </body>

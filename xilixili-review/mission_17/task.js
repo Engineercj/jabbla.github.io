@@ -41,6 +41,7 @@ var aqiSourceData = {
   "厦门": randomBuildData(100),
   "沈阳": randomBuildData(500)
 };
+
 // 用于渲染图表的数据
 var chartData = {
 
@@ -186,6 +187,7 @@ function initAqiChartData() {
     // 处理好的数据存到 chartData 中
     chartData[str] = temp;
   }
+  console.log(chartData);
 }
 /**
  * 图表初始呈现函数
