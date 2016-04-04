@@ -6,7 +6,7 @@
 //中序遍历
 var count = 0,
     find = 0,
-    preNode = [];
+    preNodes = [];
 
 
 function firstCenter(value,node){
@@ -23,7 +23,7 @@ function firstCenter(value,node){
                 if(value===node.childNodes[u].nodeValue.trim()){
                     find++;
                     node.style.backgroundColor = 'blue';
-                    preNode.push(node);
+                    preNodes.push(node);
                     return;
                 }
             }
@@ -74,7 +74,7 @@ function firstLeft(value,node){
                 if(value===node.childNodes[u].nodeValue.trim()){
                     find++;
                     node.style.backgroundColor = 'blue';
-                    preNode.push(node);
+                    preNodes.push(node);
                     return;
                 }
             }
@@ -113,7 +113,7 @@ function firstRight(value,node){
                 if(value===node.childNodes[u].nodeValue.trim()){
                     find++;
                     node.style.backgroundColor = 'blue';
-                    preNode.push(node);
+                    preNodes.push(node);
                     return;
                 }
             }
@@ -138,10 +138,13 @@ function addEvent(){
         oLeft.disabled = true;
         count = 0;
         find = 0;
-        if(preNode.length!==0){
-            preNode.forEach(function(item,index,array){
+        if(preNodes.length!==0){
+            preNodes.forEach(function(item,index,array){
                 item.style.backgroundColor = 'white';
             });
+            for(var i=0,length = preNodes.length;i<length;i++){
+                preNodes.pop();
+            }
         }
         firstCenter(oSearch.value,oHead);
         setTimeout(function(){
@@ -155,10 +158,13 @@ function addEvent(){
         oRight.disabled = true;
         count = 0;
         find = 0;
-        if(preNode.length!==0){
-            preNode.forEach(function(item,index,array){
+        if(preNodes.length!==0){
+            preNodes.forEach(function(item,index,array){
                 item.style.backgroundColor = 'white';
             });
+            for(var i=0,length = preNodes.length;i<length;i++){
+                preNodes.pop();
+            }
         }
         firstLeft(oSearch.value,oHead);
         setTimeout(function(){
@@ -172,10 +178,13 @@ function addEvent(){
         oCenter.disabled = true;
         count = 0;
         find = 0;
-        if(preNode.length!==0){
-            preNode.forEach(function(item,index,array){
+        if(preNodes.length!==0){
+            preNodes.forEach(function(item,index,array){
                 item.style.backgroundColor = 'white';
             });
+            for(var i=0,length = preNodes.length;i<length;i++){
+                preNodes.pop();
+            }
         }
         firstRight(oSearch.value,oHead);
         setTimeout(function(){
