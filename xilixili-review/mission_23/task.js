@@ -6,7 +6,7 @@
 //中序遍历
 var count = 0,
     find = 0,
-    preNode;
+    preNode = [];
 
 
 function firstCenter(value,node){
@@ -23,7 +23,7 @@ function firstCenter(value,node){
                 if(value===node.childNodes[u].nodeValue.trim()){
                     find++;
                     node.style.backgroundColor = 'blue';
-                    preNode = node;
+                    preNode.push(node);
                     return;
                 }
             }
@@ -74,7 +74,7 @@ function firstLeft(value,node){
                 if(value===node.childNodes[u].nodeValue.trim()){
                     find++;
                     node.style.backgroundColor = 'blue';
-                    preNode = node;
+                    preNode.push(node);
                     return;
                 }
             }
@@ -113,7 +113,7 @@ function firstRight(value,node){
                 if(value===node.childNodes[u].nodeValue.trim()){
                     find++;
                     node.style.backgroundColor = 'blue';
-                    preNode = node;
+                    preNode.push(node);
                     return;
                 }
             }
@@ -138,10 +138,11 @@ function addEvent(){
         oLeft.disabled = true;
         count = 0;
         find = 0;
-        if(preNode!==undefined){
-            preNode.style.backgroundColor = 'white';
+        if(preNode.length!==0){
+            preNode.forEach(function(item,index,array){
+                item.style.backgroundColor = 'white';
+            });
         }
-
         firstCenter(oSearch.value,oHead);
         setTimeout(function(){
             oRight.disabled = false;
@@ -154,8 +155,10 @@ function addEvent(){
         oRight.disabled = true;
         count = 0;
         find = 0;
-        if(preNode!==undefined){
-            preNode.style.backgroundColor = 'white';
+        if(preNode.length!==0){
+            preNode.forEach(function(item,index,array){
+                item.style.backgroundColor = 'white';
+            });
         }
         firstLeft(oSearch.value,oHead);
         setTimeout(function(){
@@ -169,8 +172,10 @@ function addEvent(){
         oCenter.disabled = true;
         count = 0;
         find = 0;
-        if(preNode!==undefined){
-            preNode.style.backgroundColor = 'white';
+        if(preNode.length!==0){
+            preNode.forEach(function(item,index,array){
+                item.style.backgroundColor = 'white';
+            });
         }
         firstRight(oSearch.value,oHead);
         setTimeout(function(){
