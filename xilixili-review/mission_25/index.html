@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mission_25</title>
+    <link rel="stylesheet" href="./Font-Awesome-3.2.1/css/font-awesome.min.css">
+    <style>
+        body,html{
+            width:100%;
+            height:100%;
+            padding: 0 10px;
+            font-size: 20px;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .btn-set{
+            height:50px;
+            border: 2px solid black;
+            background-color: white;
+            transition:all 1s ease-in-out;
+            padding:5px 5px;;
+        }
+        .fold >ul{
+            display: none;
+        }
+        .unfold>ul{
+            display: block;
+        }
+        .container{
+            margin-left: 10px;
+        }
+        .toogle-btn{
+            cursor: pointer;
+        }
+        .container .file{
+            display: block;
+            cursor: pointer;
+        }
+        .container ul{
+            margin-left: 30px;
+        }
+        button,input{
+            height:100%;
+        }
+        input{
+            padding:10px;
+        }
+        [class^="icon-"], [class*=" icon-"]{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<div class="btn-set">
+    <input type="text" id="search">
+    <button id="first-center">查询文件</button>
+    <button id="delete">删除选中</button>
+    <input type="text" id="add-text">
+    <button id="add">添加选中</button>
+</div>
+
+<ul class="container">
+    <li class="fold icon-folder-close-alt">
+        <a class="toogle-btn">手机</a>
+        <ul>
+            <li>
+                <a class="toogle-btn">大屏手机</a>
+                <ul>
+                    <li>
+                        <a class="toogle-btn">锤子</a>
+                        <ul>
+                            <a class="file icon-file-alt">坚果</a>
+                            <a class="file icon-file-alt">T1</a>
+                            <a class="file icon-file-alt">T2</a>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="toogle-btn">小米</a>
+                        <ul>
+                            <a class="file icon-file-alt">米4</a>
+                            <a class="file icon-file-alt">米3</a>
+                            <a class="file icon-file-alt">米2</a>
+                        </ul>
+                    </li>
+                </ul>
+
+            </li>
+            <li>
+                <a class="toogle-btn">中屏手机</a>
+                <ul>
+                    <li>
+                        <a class="toogle-btn">HTC</a>
+                        <ul>
+                            <a class="file icon-file-alt">ONE X</a>
+                            <a class="file icon-file-alt">ONE 8</a>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="toogle-btn">华为</a>
+                        <ul>
+                            <a class="file icon-file-alt">什么玩意1</a>
+                            <a class="file icon-file-alt">什么玩意2</a>
+                        </ul>
+                    </li>
+                </ul>
+
+            </li>
+            <a class="file icon-file-alt">iphone</a>
+            <a class="file icon-file-alt">Nokia</a>
+        </ul>
+    </li>
+    <li class="fold icon-folder-close-alt">
+        <a class="toogle-btn">电脑</a>
+        <ul>
+            <li>
+                <a class="toogle-btn">联想</a>
+                <ul>
+                    <a class="file icon-file-alt">Y470</a>
+                    <a class="file icon-file-alt">Y410P</a>
+                </ul>
+            </li>
+            <li>
+                <a class="toogle-btn">macbook</a>
+                <ul>
+                    <a class="file icon-file-alt">pro7</a>
+                    <a class="file icon-file-alt">pro6</a>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li class="fold icon-folder-close-alt">
+        <a class="toogle-btn">手表</a>
+        <ul>
+            <li>
+                <a class="toogle-btn">步步高</a>
+                <ul>
+                    <a class="file icon-file-alt">什么玩意1</a>
+                    <a class="file icon-file-alt">什么玩意2</a>
+                </ul>
+            </li>
+            <li>
+                <a class="toogle-btn">卡西欧</a>
+                <ul>
+                    <a class="file icon-file-alt">K1</a>
+                    <a class="file icon-file-alt">K2</a>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<script src="task.js"></script>
+</body>
+</html>
