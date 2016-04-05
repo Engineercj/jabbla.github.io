@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mission_24</title>
+    <style>
+        body,html{
+            width:100%;
+            height:100%;
+            padding: 0 10px;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        div{
+            border: 2px solid black;
+            background-color: white;
+            transition:all 1s ease-in-out;
+            padding:10px 0;;
+        }
+        .outter{
+            position: absolute;
+            width:95%;
+            height:200px;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+        }
+        .outter-1{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            width:45%;
+        }
+        .outter-2{
+            width:40%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+
+
+        }
+        .outter-3{
+            width:20%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+        }
+        button{
+            width:100px;
+            height:50px;
+        }
+        input{
+            width:300px;
+            height:50px;
+            padding-left: 10px;
+        }
+        .btn-set{
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="btn-set">
+    <input type="text" id="search">
+    <button id="first-center">中序查询</button>
+    <button id="first-left">前序查询</button>
+    <button id="first-right">后序查询</button>
+    <button id="delete">删除选中</button>
+    <input type="text" id="add-text">
+    <button id="add">添加选中</button>
+</div>
+
+<div class="outter container">
+    <div class="outter-1 left">
+        apple
+        <div class="outter-2 left">
+            bannana
+            <div class="outter-3 left">我靠</div>
+            <div class="outter-3 left">ipc</div>
+            <div class="outter-3 left">pc</div>
+        </div>
+
+        <div class="outter-2 left">
+            opopo
+            <div class="outter-3 left">air</div>
+            <div class="outter-3 left">ipad</div>
+            <div class="outter-3 left">ear</div>
+        </div>
+    </div>
+    <div class="outter-1 left">
+        ipod
+        <div class="outter-2 left">
+            itouch
+            <div class="outter-3 left">ipad</div>
+            <div class="outter-3 left">iphone</div>
+            <div class="outter-3 left">air</div>
+        </div>
+
+        <div class="outter-2 left">
+            macbook
+            <div class="outter-3 left">lenovo</div>
+            <div class="outter-3 left">dell</div>
+            <div class="outter-3 left">air</div>
+        </div>
+    </div>
+</div>
+<script src="task.js"></script>
+</body>
+</html>
