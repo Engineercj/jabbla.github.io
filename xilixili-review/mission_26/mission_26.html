@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>行星与飞船（一）</title>
+</head>
+<style>
+    body,html{
+        width: 100%;
+        height:100%;;
+    }
+    #Universe{
+        width:100%;
+        height: 100%;;
+        background-color: black;;
+    }
+    #Planet{
+        position: absolute;
+        width:300px;
+        height:300px;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        background-color: yellow;
+        color: red;
+        text-align: center;
+        line-height: 400px;
+    }
+    .command{
+        color:white;
+    }
+    .craft{
+        width: 50px;
+        height:250px;
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform:translateX(-50%);
+        background-color: transparent;
+    }
+    .craft::after{
+        content:'';
+        width:100px;
+        height:50px;
+        display: block;
+        border-radius: 25px 25px 25px 25px;
+        background-color: red;
+        position: absolute;
+        bottom: 0;
+        left: 0;;
+
+    }
+    .startFly{
+        animation-name: fly;
+        animation-duration:20s;
+        animation-iteration-count: infinite;
+        animation-timing-function:linear;
+        transform-origin:top center;
+    }
+    @keyframes fly {
+        0%{
+            transform:translateX(-50%) rotate(0deg);
+        }
+        100%{
+            transform:translateX(-50%) rotate(360deg);
+        }
+    }
+</style>
+<body>
+<div id="Universe">
+    <div id="Planet">
+        你猜我是什么星
+    </div>
+
+
+
+</div>
+<script src="task.js"></script>
+</body>
+</html>
