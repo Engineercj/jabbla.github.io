@@ -148,7 +148,8 @@ var Universe = {
             var craftDom = document.createElement('div'),
                 commandDom = document.createElement('div'),
                 planetDom = document.getElementById('Planet'),
-                UniverseDom = document.getElementById('Universe');
+                UniverseDom = document.getElementById('Universe'),
+                oSignalsender = document.getElementById('signal-sender');
 
             //将飞船DOM插入到DOM树中
             craftDom.setAttribute('data-energy',craft.powerSystem.currentPower/craft.powerSystem.maxPower*100+'%');
@@ -174,7 +175,7 @@ var Universe = {
             commandDom.className = 'command';
             commandDom.id = 'Command'+craft.id;
             commandDom.innerHTML = '对'+craft.id+'号飞船下达指令:<button class="start" type="button">开始飞行</button> <button class="stop" type="button">停止飞行</button> <button class="del" type="button">销毁</button>'
-            UniverseDom.appendChild(commandDom);
+            oSignalsender.appendChild(commandDom);
             return craft;
         }else{
             Craft.prototype.count--;
@@ -197,7 +198,6 @@ function consoleLog(str){
 
     UniverseDom.onclick = function(e){
         var target = e.target;
-        
         (function(flag){
             if(!confirm("确定要以指挥官的角色发送"+flag+"指令吗?")){
                 return;
