@@ -30,7 +30,7 @@ function Craft(){
             this.state = 'start';
             $temp.css({'animation-play-state':'running'});
             //消耗能量动画
-            $energy.css({'transition':'left '+percent*33+'s linear','left':'100px'});
+            $energy.css({'transition':'left '+percent*33+'s linear','left':'60px'});
             consoleLog(this.self.id+'号飞船起飞');
         },
         stopFly: function(){
@@ -74,7 +74,7 @@ function Craft(){
                 }else if(thisCraft.powerSystem.currentPower<=0){
                     thisCraft.powerSystem.currentPower = 0;
                 }
-                craftDom.setAttribute('data-energy',parseInt(thisCraft.powerSystem.currentPower/thisCraft.powerSystem.maxPower*100)+'%'+'      '+thisCraft.id);
+                craftDom.setAttribute('data-energy',parseInt(thisCraft.powerSystem.currentPower/thisCraft.powerSystem.maxPower*100)+'%'+''+thisCraft.id);
                 if(thisCraft.powerSystem.currentPower<=0){
                     thisCraft.dynamicSystem.stopFly();
                     consoleLog(thisCraft.id+'号飞船能量不足');
@@ -120,6 +120,7 @@ var Universe = {
                 Universe.Planet.Mediator(signal);
             }
         },
+        tracks:[['low',130],['medium',200],['high',250]],
         Mediator:function(signal){
             var signalSend;
             if(Math.random()>0.3){
@@ -152,7 +153,7 @@ var Universe = {
                 oSignalsender = document.getElementById('signal-sender');
 
             //将飞船DOM插入到DOM树中
-            craftDom.setAttribute('data-energy',craft.powerSystem.currentPower/craft.powerSystem.maxPower*100+'%'+'      '+craft.id);
+            craftDom.setAttribute('data-energy',craft.powerSystem.currentPower/craft.powerSystem.maxPower*100+'%'+''+craft.id);
             craftDom.innerHTML = '<div class="wraper"><span class="energy"></span></div>';
             craftDom.className = 'craft';
             craftDom.id = 'Craft_'+craft.id;
@@ -162,7 +163,10 @@ var Universe = {
             //随机生成一个飞机放置角度
             var deg = Math.random()*360,
                 $craftDom = $(craftDom);
-
+            //随机将飞船放入一个轨道
+            var Rindex = parseInt(Math.random()*3);
+            craftDom.className += ' '+Universe.Planet.tracks[Rindex][0];
+            $craftDom.css({height:+Universe.Planet.tracks[Rindex][1]+'px'});
             craft.startDeg = deg;
             $craftDom.css({'transform':'rotate('+craft.startDeg+'deg)'});
             //初始化飞船动画

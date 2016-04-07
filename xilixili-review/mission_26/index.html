@@ -22,8 +22,8 @@
     }
     #Planet{
         position: absolute;
-        width:300px;
-        height:300px;
+        width:150px;
+        height:150px;
         top:50%;
         left:50%;
         transform: translate(-50%,-50%);
@@ -31,7 +31,7 @@
         background-color: yellow;
         color: red;
         text-align: center;
-        line-height: 400px;
+        line-height: 150px;
     }
     #control-info{
         width:300px;
@@ -71,8 +71,8 @@
         width:100%;
     }
     .craft{
-        width: 50px;
-        height:250px;
+        width: 2px;
+        height:130px;
         position: absolute;
         top:50%;
         left:50%;
@@ -80,8 +80,8 @@
         transform-origin:top center;
     }
     .craft .wraper{
-        width:100px;
-        height:50px;
+        width:60px;
+        height:30px;
         display: block;
         position: absolute;
         border-radius: 25px 25px 25px 25px;
@@ -91,8 +91,8 @@
         overflow: hidden;
     }
     .craft .energy{
-        width:100px;
-        height:50px;
+        width:100%;
+        height:100%;
         display: block;
         position: absolute;
         background-color: blue;;
@@ -101,22 +101,49 @@
     }
     .craft::before{
         content:'';
-        width:100px;
-        height:50px;
+        width:60px;
+        height:30px;
         display: block;
         border-radius: 25px 25px 25px 25px;
         background-color: red;
         position: absolute;
         bottom: 0;
         left: 0;
-
     }
-   .craft::after{
+   .craft.low::after{
         content: attr(data-energy);
         font-size: 14px;
         width: 100%;
         height:100%;
-        line-height: 450px;
+        line-height: 230px;
+        display: block;
+        color:white;
+        text-align: center;
+        position: absolute;
+        bottom:0;
+        left:0;
+        background-color: transparent;
+    }
+    .craft.high::after{
+        content: attr(data-energy);
+        font-size: 14px;
+        width: 100%;
+        height:100%;
+        line-height: 470px;
+        display: block;
+        color:white;
+        text-align: center;
+        position: absolute;
+        bottom:0;
+        left:0;
+        background-color: transparent;
+    }
+    .craft.medium::after{
+        content: attr(data-energy);
+        font-size: 14px;
+        width: 100%;
+        height:100%;
+        line-height: 370px;
         display: block;
         color:white;
         text-align: center;
