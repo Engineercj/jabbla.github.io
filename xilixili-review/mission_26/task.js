@@ -194,9 +194,9 @@ function consoleLog(str){
 }
 (function(){
     //给Universe添加事件托管
-    var UniverseDom = document.getElementById('Universe');
+    var oSignalsender = document.getElementById('signal-sender');
 
-    UniverseDom.onclick = function(e){
+    oSignalsender.onclick = function(e){
         var target = e.target;
         (function(flag){
             if(!confirm("确定要以指挥官的角色发送"+flag+"指令吗?")){
