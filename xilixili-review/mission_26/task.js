@@ -31,7 +31,7 @@ function Craft(){
             $temp.css({'animation-play-state':'running'});
             //消耗能量动画
             $energy.css({'transition':'left '+percent*33+'s linear','left':'100px'});
-            consoleLog(this.self.id+'号飞船起飞了');
+            consoleLog(this.self.id+'号飞船起飞');
         },
         stopFly: function(){
             var temp = document.getElementById('Craft_'+this.self.id),
@@ -44,7 +44,7 @@ function Craft(){
             $temp.css({'animation-play-state':'paused'});
             //充能动画
             $energy.css({'transition':'left '+(1-percent)*50+'s linear','left':'0px'});
-            consoleLog(this.self.id+'号飞船停止飞行了');
+            consoleLog(this.self.id+'号飞船停止飞行');
         },
         speed:20
     };
@@ -77,9 +77,9 @@ function Craft(){
                 craftDom.setAttribute('data-energy',parseInt(thisCraft.powerSystem.currentPower/thisCraft.powerSystem.maxPower*100)+'%'+'      '+thisCraft.id);
                 if(thisCraft.powerSystem.currentPower<=0){
                     thisCraft.dynamicSystem.stopFly();
-                    consoleLog(thisCraft.id+'号飞船，没油了');
+                    consoleLog(thisCraft.id+'号飞船能量不足');
                     consoleLog(thisCraft.id+'号飞船正在用太阳能充能');
-                    alert(thisCraft.id+'号飞船，没油了');
+                    alert(thisCraft.id+'号飞船能量不足');
 
                 }
             },1000);
@@ -179,8 +179,8 @@ var Universe = {
             return craft;
         }else{
             Craft.prototype.count--;
-            alert("宇宙飞船数量已经满了");
-            consoleLog("宇宙飞船数量已经满了");
+            alert("宇宙飞船数量已满");
+            consoleLog("宇宙飞船数量已满");
         }
     },
     PopCraft:function(){
