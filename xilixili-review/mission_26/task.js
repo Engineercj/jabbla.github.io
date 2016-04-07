@@ -31,7 +31,7 @@ function Craft(){
             $temp.css({'animation-play-state':'running'});
             //消耗能量动画
             $energy.css({'transition':'left '+percent*33+'s linear','left':'60px'});
-            consoleLog(this.self.id+'号飞船起飞');
+            consoleLog(this.self.id+'号飞船起飞','success');
         },
         stopFly: function(){
             var temp = document.getElementById('Craft_'+this.self.id),
@@ -44,7 +44,7 @@ function Craft(){
             $temp.css({'animation-play-state':'paused'});
             //充能动画
             $energy.css({'transition':'left '+(1-percent)*50+'s linear','left':'0px'});
-            consoleLog(this.self.id+'号飞船停止飞行');
+            consoleLog(this.self.id+'号飞船停止飞行','warn');
         },
         speed:20
     };
@@ -77,8 +77,8 @@ function Craft(){
                 craftDom.setAttribute('data-energy',parseInt(thisCraft.powerSystem.currentPower/thisCraft.powerSystem.maxPower*100)+'%'+''+thisCraft.id);
                 if(thisCraft.powerSystem.currentPower<=0){
                     thisCraft.dynamicSystem.stopFly();
-                    consoleLog(thisCraft.id+'号飞船能量不足');
-                    consoleLog(thisCraft.id+'号飞船正在用太阳能充能');
+                    consoleLog(thisCraft.id+'号飞船能量不足','warn');
+                    consoleLog(thisCraft.id+'号飞船正在用太阳能充能','success');
                     alert(thisCraft.id+'号飞船能量不足');
 
                 }
@@ -89,7 +89,7 @@ function Craft(){
         self: this,
         receive:function(signal){
             if(signal.id===this.self.id){
-                consoleLog(this.self.id+'号飞船接收到'+signal.command+'信号');
+                consoleLog(this.self.id+'号飞船接收到'+signal.command+'信号','success');
                 if(signal.command==='start'){
                     this.self.dynamicSystem.startFly();
                 }else if(signal.command==='stop'){
@@ -101,7 +101,7 @@ function Craft(){
         }
     };
     this.selfDestruct = function(){
-        consoleLog(this.id+'号飞船启动自毁');
+        consoleLog(this.id+'号飞船启动自毁','success');
        var craftDom = document.getElementById('Craft_'+this.id),
             commandDom = document.getElementById('Command'+this.id);
 
@@ -116,7 +116,7 @@ var Universe = {
     Planet:{
         commander: {
             sendSignal:function(signal){
-                consoleLog('指挥官发出了'+signal.command+'信号(过程中会有30%的丢包概率,做好重发准备)');
+                consoleLog('指挥官发出了'+signal.command+'信号(过程中会有30%的丢包概率,做好重发准备)','send');
                 Universe.Planet.Mediator(signal);
             }
         },
@@ -145,7 +145,7 @@ var Universe = {
         var craft = new Craft();
 
         if(this.Crafts.length<4){
-            consoleLog(craft.id+'号飞船已被创建');
+            consoleLog(craft.id+'号飞船已被创建','success');
             var craftDom = document.createElement('div'),
                 commandDom = document.createElement('div'),
                 planetDom = document.getElementById('Planet'),
@@ -184,7 +184,7 @@ var Universe = {
         }else{
             Craft.prototype.count--;
             alert("宇宙飞船数量已满");
-            consoleLog("宇宙飞船数量已满");
+            consoleLog("宇宙飞船数量已满",'warn');
         }
     },
     PopCraft:function(){
@@ -192,9 +192,11 @@ var Universe = {
     }
 };
 //向控制台输出信息函数
-function consoleLog(str){
+function consoleLog(str,flag){
+    //判断消息的性质
     var oInfo = document.getElementById('info-list');
-    oInfo.innerHTML += '<li>'+str+'</li>';
+    oInfo.innerHTML += '<li class = "'+flag+'">'+str+'</li>';
+    oInfo.scrollTop += 40;
 }
 (function(){
     //给Universe添加事件托管
@@ -209,4 +211,5 @@ function consoleLog(str){
             Universe.Planet.commander.sendSignal({id:parseInt(target.parentNode.id.charAt(7)),command:flag});
         })(target.className);
     }
+    
 })();
