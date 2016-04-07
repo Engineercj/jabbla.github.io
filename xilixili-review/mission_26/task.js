@@ -74,7 +74,7 @@ function Craft(){
                 }else if(thisCraft.powerSystem.currentPower<=0){
                     thisCraft.powerSystem.currentPower = 0;
                 }
-                craftDom.setAttribute('data-energy',parseInt(thisCraft.powerSystem.currentPower/thisCraft.powerSystem.maxPower*100)+'%');
+                craftDom.setAttribute('data-energy',parseInt(thisCraft.powerSystem.currentPower/thisCraft.powerSystem.maxPower*100)+'%'+'      '+thisCraft.id);
                 if(thisCraft.powerSystem.currentPower<=0){
                     thisCraft.dynamicSystem.stopFly();
                     consoleLog(thisCraft.id+'号飞船，没油了');
@@ -152,7 +152,7 @@ var Universe = {
                 oSignalsender = document.getElementById('signal-sender');
 
             //将飞船DOM插入到DOM树中
-            craftDom.setAttribute('data-energy',craft.powerSystem.currentPower/craft.powerSystem.maxPower*100+'%');
+            craftDom.setAttribute('data-energy',craft.powerSystem.currentPower/craft.powerSystem.maxPower*100+'%'+'      '+craft.id);
             craftDom.innerHTML = '<div class="wraper"><span class="energy"></span></div>';
             craftDom.className = 'craft';
             craftDom.id = 'Craft_'+craft.id;
