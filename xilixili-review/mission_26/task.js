@@ -11,13 +11,17 @@ function Craft(){
         moveInit:function(){
             var temp = document.getElementById('Craft_'+this.self.id),
                 energy = temp.getElementsByClassName('energy')[0],
+                //获取动画池
                 oKeyframes = document.getElementById('keyframes'),
+                //定义飞船动画，确定起始位置
                 craftMove = '@keyframes fly'+this.self.id+ '{ 0%{transform:rotate('+this.self.startDeg+'deg);} 100%{transform:rotate('+(360+this.self.startDeg)+'deg);} }',
                 $temp = $(temp);
-
+            //将该飞船动画加入动画池
             oKeyframes.innerHTML = oKeyframes.innerHTML+craftMove;
+            //元素应用动画
             $temp.css({'animation-name':'fly'+this.self.id,'animation-duration': '10s','animation-timing-function': 'linear','animation-iteration-count': 'infinite','animation-play-state':'paused'});
         },
+        //开始飞行
         startFly: function(){
             var temp = document.getElementById('Craft_'+this.self.id),
                 energy = temp.getElementsByClassName('energy')[0],
@@ -33,6 +37,7 @@ function Craft(){
             $energy.css({'transition':'left '+percent*33+'s linear','left':'60px'});
             consoleLog(this.self.id+'号飞船起飞','success');
         },
+        //停止飞行动作
         stopFly: function(){
             var temp = document.getElementById('Craft_'+this.self.id),
                 energy = temp.getElementsByClassName('energy')[0],
@@ -40,6 +45,8 @@ function Craft(){
                 $temp = $(temp),
                 $energy = $(energy);
 
+
+            //暂停飞行
             this.state = 'stop';
             $temp.css({'animation-play-state':'paused'});
             //充能动画
@@ -52,35 +59,41 @@ function Craft(){
         self:this,
         currentPower:20000,
         maxPower:20000,
-        postion:0,
+        //太阳能接收器
         solarPower:function(){
-            var thisCraft = this.self;
+            var thisCraft = this.self,
+                powerSystem = thisCraft.powerSystem;
+            //每隔1000毫秒，能量增加400
             this.self.chargeTimer = setInterval(function(){
-                if(thisCraft.powerSystem.currentPower<thisCraft.powerSystem.maxPower){
-                    thisCraft.powerSystem.currentPower += 400;
+                if(powerSystem.currentPower<powerSystem.maxPower){
+                    powerSystem.currentPower += 400;
                 }
             },1000);
         },
+        //能量监视器
         watchEnergy:function(){
             var thisCraft = this.self,
+                powerSystem = thisCraft.powerSystem,
+                dynamicSystem = thisCraft.dynamicSystem,
                 craftDom = document.getElementById('Craft_'+thisCraft.id);
-
+            //每隔1000毫秒做一次扫描
             this.self.watchTimer = setInterval(function(){
-                if(thisCraft.dynamicSystem.state==='start'){
-                    thisCraft.powerSystem.currentPower-=1000;
+                //如果动力系统的状态为start，能量每秒减1000
+                if(dynamicSystem.state==='start'){
+                    powerSystem.currentPower-=1000;
                 }
-                if(thisCraft.powerSystem.currentPower>=thisCraft.powerSystem.maxPower){
+                //格式化能量百分比显示
+                if(powerSystem.currentPower>=powerSystem.maxPower){
                     thisCraft.powerSystem.currentPower = thisCraft.powerSystem.maxPower;
-                }else if(thisCraft.powerSystem.currentPower<=0){
-                    thisCraft.powerSystem.currentPower = 0;
+                }else if(powerSystem.currentPower<=0){
+                    powerSystem.currentPower = 0;
                 }
-                craftDom.setAttribute('data-energy',parseInt(thisCraft.powerSystem.currentPower/thisCraft.powerSystem.maxPower*100)+'%'+''+thisCraft.id);
-                if(thisCraft.powerSystem.currentPower<=0){
-                    thisCraft.dynamicSystem.stopFly();
+                craftDom.setAttribute('data-energy',parseInt(powerSystem.currentPower/powerSystem.maxPower*100)+'%'+''+thisCraft.id);
+                if(powerSystem.currentPower<=0){
+                    dynamicSystem.stopFly();
                     consoleLog(thisCraft.id+'号飞船能量不足','warn');
                     consoleLog(thisCraft.id+'号飞船正在用太阳能充能','success');
                     alert(thisCraft.id+'号飞船能量不足');
-
                 }
             },1000);
         }
@@ -90,12 +103,10 @@ function Craft(){
         receive:function(signal){
             if(signal.id===this.self.id){
                 consoleLog(this.self.id+'号飞船接收到'+signal.command+'信号','success');
-                if(signal.command==='start'){
-                    this.self.dynamicSystem.startFly();
-                }else if(signal.command==='stop'){
-                    this.self.dynamicSystem.stopFly();
-                }else if(signal.command==='del'){
-                    this.self.selfDestruct();
+                switch(signal.command){
+                    case 'start': this.self.dynamicSystem.startFly();break;
+                    case 'stop': this.self.dynamicSystem.stopFly();break;
+                    case 'del': this.self.selfDestruct();break;
                 }
             }
         }
@@ -132,13 +143,7 @@ var Universe = {
         }
     },
     signalHeap:function(signal){
-        if(signal.command==='new'){
-            Universe.createCraft();
-        }else{
-            Universe.Crafts.forEach(function(item,index,array){
-                item.signalSystem.receive(signal);
-            });
-        }
+        signal.command==='new'? Universe.createCraft(): Universe.Crafts.forEach(function(item,index,array){item.signalSystem.receive(signal);});
     },
     Crafts:[],
     createCraft:function(){
@@ -149,7 +154,6 @@ var Universe = {
             var craftDom = document.createElement('div'),
                 commandDom = document.createElement('div'),
                 planetDom = document.getElementById('Planet'),
-                UniverseDom = document.getElementById('Universe'),
                 oSignalsender = document.getElementById('signal-sender');
 
             //将飞船DOM插入到DOM树中
@@ -163,12 +167,14 @@ var Universe = {
             //随机生成一个飞机放置角度
             var deg = Math.random()*360,
                 $craftDom = $(craftDom);
+
+            craft.startDeg = deg;
+            $craftDom.css({'transform':'rotate('+craft.startDeg+'deg)'});
             //随机将飞船放入一个轨道
             var Rindex = parseInt(Math.random()*3);
             craftDom.className += ' '+Universe.Planet.tracks[Rindex][0];
             $craftDom.css({height:+Universe.Planet.tracks[Rindex][1]+'px'});
-            craft.startDeg = deg;
-            $craftDom.css({'transform':'rotate('+craft.startDeg+'deg)'});
+
             //初始化飞船动画
             craft.dynamicSystem.moveInit();
 
@@ -193,15 +199,13 @@ var Universe = {
 };
 //向控制台输出信息函数
 function consoleLog(str,flag){
-    //判断消息的性质
     var oInfo = document.getElementById('info-list');
     oInfo.innerHTML += '<li class = "'+flag+'">'+str+'</li>';
     oInfo.scrollTop += 40;
 }
 (function(){
-    //给Universe添加事件托管
+    //给信息发射器增加事件托管
     var oSignalsender = document.getElementById('signal-sender');
-
     oSignalsender.onclick = function(e){
         var target = e.target;
         (function(flag){
