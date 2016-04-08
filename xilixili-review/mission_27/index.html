@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>行星与飞船（二）</title>
+</head>
+<style>
+    body,html{
+        width: 100%;
+        height:100%;;
+    }
+    *{
+        padding: 0;
+        margin:0;
+        box-sizing: border-box;
+    }
+    #Universe{
+        position: relative;
+        width:100%;
+        height: 100%;;
+        background-color: black;;
+    }
+    #Planet{
+        position: absolute;
+        width:150px;
+        height:150px;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        background-color: yellow;
+        color: red;
+        text-align: center;
+        line-height: 150px;
+    }
+    #control-info{
+        width:300px;
+        height:400px;
+        color:white;
+        position: absolute;
+        right:0;
+        top:0;
+        border: 2px solid white;
+    }
+    #control-info h1{
+        height:50px;
+        text-align: center;
+        border-bottom:2px solid white;
+    }
+    #signal-sender h2{
+        text-align: center;
+        color:white;
+    }
+    #signal-sender,#create{
+        width:400px;
+        font-size: 14px;;
+        line-height: 20px;
+        text-align: center;
+    }
+    #signal-sender div{
+        color:white;
+    }
+    #create .choose-dyna{
+        margin-bottom: 10px;
+    }
+    #create .choose-energy{
+        margin-bottom: 10px;
+    }
+    #info-list{
+        width:100%;
+        height:300px;
+        background-color:black;
+        line-height: 20px;
+        font-size:10px;
+        overflow: auto;
+    }
+    #info-list .send{
+        color:yellow;
+    }
+    #info-list .warn{
+        color:red;
+    }
+    #info-list .success{
+        color:green;
+    }
+    .command{
+        color:white;
+        text-align: left;
+        margin-top: 10px;
+    }
+    .craft{
+        width: 2px;
+        height:130px;
+        position: absolute;
+        top:50%;
+        left:50%;
+        background-color: transparent;
+        transform-origin:top center;
+    }
+    .craft .wraper{
+        width:60px;
+        height:30px;
+        display: block;
+        position: absolute;
+        border-radius: 25px 25px 25px 25px;
+        background-color: transparent;
+        bottom: 0;
+        left:0;
+        overflow: hidden;
+    }
+    .craft .energy{
+        width:100%;
+        height:100%;
+        display: block;
+        position: absolute;
+        background-color: blue;;
+        bottom: 0;
+        left:0;
+    }
+    .craft::before{
+        content:'';
+        width:60px;
+        height:30px;
+        display: block;
+        border-radius: 25px 25px 25px 25px;
+        background-color: red;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+   .craft.low::after{
+        content: attr(data-energy);
+        font-size: 14px;
+        width: 100%;
+        height:100%;
+        line-height: 230px;
+        display: block;
+        color:white;
+        text-align: center;
+        position: absolute;
+        bottom:0;
+        left:0;
+        background-color: transparent;
+    }
+    .craft.high::after{
+        content: attr(data-energy);
+        font-size: 14px;
+        width: 100%;
+        height:100%;
+        line-height: 470px;
+        display: block;
+        color:white;
+        text-align: center;
+        position: absolute;
+        bottom:0;
+        left:0;
+        background-color: transparent;
+    }
+    .craft.medium::after{
+        content: attr(data-energy);
+        font-size: 14px;
+        width: 100%;
+        height:100%;
+        line-height: 370px;
+        display: block;
+        color:white;
+        text-align: center;
+        position: absolute;
+        bottom:0;
+        left:0;
+        background-color: transparent;
+    }
+    #create{
+        position: absolute;
+        bottom:0;
+        left: 0;
+        color:white;
+    }
+</style>
+<style id="keyframes">
+</style>
+<body>
+<div id="Universe">
+    <div id="control-info">
+        <h1>控制台信息</h1>
+        <ul id="info-list"></ul>
+    </div>
+    <div id="Planet">
+        你猜我是什么星
+    </div>
+
+    <div id="signal-sender">
+        <h2>信号发射器</h2>
+    </div>
+    <div id="create">
+        <div class="choose-dyna">
+            动力系统选择：<input type="checkbox" class="forward">前进号(速率30px/s,能耗5%/s)
+            <input type="checkbox" class="running">奔腾号(速率50px/s,能耗7%/s)
+            <input type="checkbox" class="chase">超越号(速率80px/s,能耗9%/s)
+        </div>
+        <div class="choose-energy">
+            能源系统选择：<input type="checkbox" class="plenty">劲量型(补充能源速度2%/s)
+            <input type="checkbox" class="sun">光能型(补充能源速度3%/s)
+            <input type="checkbox" class="persistent">永久型(补充能源速度4%/s)
+        </div>
+        <button class="new">新创建宇宙飞船</button>
+    </div>
+
+</div>
+<script src="./jquery/dist/jquery.js"></script>
+<script src="task.js"></script>
+</body>
+</html>
