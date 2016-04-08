@@ -180,7 +180,7 @@ var Universe = {
                 var signalBinary = idBinary.concat(commandBinary);
                 consoleLog('指挥官通过Adapter发送信号'+signalBinary);
                 Universe.Planet.commander.sendedSignal.push(signal);
-                Universe.Mediator(signal.options,signalBinary);
+                Universe.BUS(signal.options,signalBinary);
             }else{
                 consoleLog('信号已丢失，正在重试');
                 var unSignal = Universe.Planet.commander.sendedSignal.pop();
@@ -190,8 +190,8 @@ var Universe = {
         },
         tracks:[['low',130],['medium',200],['high',250]]
     },
-    Mediator:function(options,signal){
-        consoleLog('Mediator'+signal);
+    BUS:function(options,signal){
+        consoleLog('BUS'+signal);
         var random = Math.random();
         if(random>0.1){
             setTimeout(function(){
