@@ -193,7 +193,7 @@ var Universe = {
     Mediator:function(options,signal){
         consoleLog('Mediator'+signal);
         var random = Math.random();
-        if(random>0.5){
+        if(random>0.1){
             setTimeout(function(){
                 Universe.signalHeap(options,signal);
             },300);
