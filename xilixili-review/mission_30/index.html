@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务三十：表单（二）多个表单项的动态校验</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .correct{
+        color:green;
+    }
+    .false{
+        color: red;;
+    }
+    input{
+        width:400px;
+        padding-left: 10px;
+        border: none;
+        border: 1px solid black;
+    }
+    label{
+
+    }
+    form{
+        width:500px;
+        margin: 0 auto;
+        text-align: right;
+        padding-top: 20px;;
+    }
+    p{
+        width:100%;
+        height:20px;
+        margin: 0;
+        padding: 0;
+        font-size:12px;
+        line-height: 20px;;
+    }
+    p::after{
+        content:'';
+        width:0;
+        height:0;
+        display: block;
+        clear: both;
+    }
+    .tip{
+        width:400px;
+        display: block;
+        float: right;
+        text-align: left;
+    }
+</style>
+<body>
+<form>
+    <label for="name">名称</label><input type="text" id="name" data-tip="必填，长度为4-16" data-fail="" data-suc="">
+    <p><span class="tip"></span></p>
+    <label for="password">密码</label><input type="password" id="password" data-tip="必填，长度为4-16" data-fail="" data-suc="">
+    <p><span class="tip"></span></p>
+    <label for="psd-config">密码确认</label><input type="password" id="psd-config" data-tip="必填，需跟上方密码一致" data-fail="" data-suc="">
+    <p><span class="tip"></span></p>
+    <label for="email">邮箱</label><input type="text" id="email" data-tip="必填，格式abc@xxx.xxx" data-fail="" data-suc="">
+    <p><span class="tip"></span></p>
+    <label for="phone-num">手机号</label><input type="text" id="phone-num" data-tip="必填" data-fail="" data-suc="">
+    <p><span class="tip"></span></p>
+    <button>提交</button>
+    <p id="info"></p>
+</form>
+
+<script src="task.js"></script>
+</body>
+</html>
