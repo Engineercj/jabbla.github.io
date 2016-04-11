@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务三十一：表单（三）联动</title>
+    <style>
+        .select{
+            height:50px;
+            position: relative;
+        }
+        #in-school-select,#out-school-input{
+            height:100%;
+            position: absolute;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<div class="checkbox">
+    <label for="in-school">在校生</label><input type="checkbox" id="in-school">
+    <label for="out-school">非在校生</label><input type="checkbox" id="out-school">
+</div>
+<div class="select">
+    <div id="in-school-select">
+        <select id="province"></select><select id="school"></select>
+    </div>
+    <div id="out-school-input">
+        <label for="company">就业单位</label><input type="text" id="company">
+    </div>
+</div>
+<script src="task.js"></script>
+</body>
+</html>
