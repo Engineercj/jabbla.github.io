@@ -26,6 +26,8 @@ function CodeText(width,height){
     oText.style.backgroundColor = 'black';
     oText.style.resize = 'none';
     oText.style.color = 'green';
+    oText.style.paddingLeft='10px';
+    console.log('你妹的');
     oText.style.border = 'none';
     oText.style.overflow = 'auto';
     oText.style.lineHeight = (height/10)+'px';
@@ -96,3 +98,4 @@ function CodeText(width,height){
         self.text.previousSc = self.text.scrollTop;
     }
 }
+console.log('asdadadasfafsaf');

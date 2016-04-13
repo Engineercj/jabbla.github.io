@@ -27,6 +27,7 @@ function CodeText(width,height){
     oText.style.resize = 'none';
     oText.style.color = 'green';
     oText.style.border = 'none';
+    oText.style.paddingLeft = '10px';
     oText.style.overflow = 'auto';
     oText.style.lineHeight = (height/10)+'px';
     oText.style.fontSize = '16px';
