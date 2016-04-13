@@ -286,8 +286,8 @@ function createBoard(obj){
         oDiv.style.position = 'absolute';
         oDiv.style.left = ((x)*obj.size+2)+'px';
         oDiv.style.top = ((y-1)*obj.size+2)+'px';
-        Div.position.x = (x)*obj.size;
-        Div.position.y = (y-1)*obj.size;
+        Div.position.x = (x)*obj.size+2;
+        Div.position.y = (y-1)*obj.size+2;
         Div.size = obj.size;
         Div.dom = oDiv;
         oWraper.appendChild(oDiv);
