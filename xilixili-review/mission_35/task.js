@@ -245,7 +245,7 @@ function createBoard(obj){
         oBoard.appendChild(row);
 
     }
-    oWraper.style.width = obj.size*11+'px';
+    oWraper.style.width = (obj.size*11+10)+'px';
     oWraper.id = 'wraper';
     oWraper.style.height = obj.size*11+'px';
     oWraper.style.position = 'relative';
@@ -284,7 +284,7 @@ function createBoard(obj){
         oDiv.appendChild(oHead);
 
         oDiv.style.position = 'absolute';
-        oDiv.style.left = ((x)*obj.size)+'px';
+        oDiv.style.left = ((x)*obj.size+2)+'px';
         oDiv.style.top = ((y-1)*obj.size+2)+'px';
         Div.position.x = (x)*obj.size;
         Div.position.y = (y-1)*obj.size;
