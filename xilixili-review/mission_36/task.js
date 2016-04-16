@@ -348,7 +348,8 @@ var Map = {
         //定义两个集合
         var Used = [],
             unUsed = [],
-            min ;
+            min ,
+            count = 0;
         //棋盘所有点,并计算好距离放入unUsed
         for(var i=0;i<10;i++){
             for(var j=0;j<10;j++){
@@ -378,9 +379,7 @@ var Map = {
         }
         return function(){
             var minimum;
-
-            /*console.log('target'+unUsed.indexOf(io));
-            console.log('minimum'+unUsed.indexOf(minimum));*/
+            count++;
             if(unUsed.length<=0){
                 Map.Used = Used;
                 return
@@ -389,17 +388,22 @@ var Map = {
             for(var t=0;t<unUsed.length;t++){
                 if(unUsed[t].distance!==undefined){
                     minimum = unUsed[t];
+
                     break;
                 }
             }
             //取出unUsed中距离源点最小的
-            for(var i=0;i<unUsed.length;i++){
+            for(var i=unUsed.length-1;i>=0;i--){
                 if(unUsed[i].distance){
                     if(minimum.distance>=unUsed[i].distance){
                         minimum = unUsed[i];
                         minimum.index = i;
                     }
                 }
+            }
+            if(minimum===undefined){
+                Map.Used = Used;
+                return;
             }
             unUsed.splice(minimum.index,1);
             Used.push(minimum);
@@ -415,6 +419,7 @@ var Map = {
                         unUsed[j].distance = minimum.distance+distance;
                         unUsed[j].source = minimum;
                     }
+
                 }
             }
             arguments.callee()
