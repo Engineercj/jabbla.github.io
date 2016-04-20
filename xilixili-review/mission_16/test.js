@@ -93,7 +93,7 @@ function init() {
       this.ready = -1;
       oAdd.disabled = true;
     }else{
-      oPa,innerHTML = '您输入的空气指数没问题~~';
+      oPa.innerHTML = '您输入的空气指数没问题~~';
       this.ready = 1;
       if(oCity.ready === 1){
         oAdd.disabled = false;
