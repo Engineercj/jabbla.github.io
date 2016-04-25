@@ -109,17 +109,16 @@ head.style.lineHeight = window.screen.height*0.05+'px';
             y = target.y;
         }
         //如果人物到了接近边缘的部分
-        if(this.x<=Map.perWidth&&this.x>0){
+        if(this.x<=Map.perWidth&&this.x>0&&change.whitch!=='y'){
             x = 0;
             change.whitch = 'x';
             change.vd = -1;
         }
-        if(this.y<=Map.perHeight&&this.y>0){
+        if(this.y<=Map.perHeight&&this.y>0&&change.whitch!=='x'){
             y = 0;
             change.whitch = 'y';
             change.vd = -1;
         }
-
         return {x:x,y:y,change:change};
     }
 //=======================图像绘制==========================//
@@ -152,6 +151,12 @@ head.style.lineHeight = window.screen.height*0.05+'px';
             }
         }
     }
+//=========================关卡类=======================//
+function Chapter(map,index){
+    this.map = map;
+    this.index = index;
+    this.scroe = 120;
+}
 //=========================用户控制=======================//
 (function(){
     //用户点击事件
