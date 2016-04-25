@@ -108,6 +108,18 @@ head.style.lineHeight = window.screen.height*0.05+'px';
             change.vd = (target.y-this.y)/Math.abs(target.y-this.y);
             y = target.y;
         }
+        //如果人物到了接近边缘的部分
+        if(this.x<=Map.perWidth){
+            x = 0;
+            change.whitch = 'x';
+            change.vd = -1;
+        }
+        if(this.y<=Map.perHeight){
+            y = 0;
+            change.whitch = 'y';
+            change.vd = -1;
+        }
+
         return {x:x,y:y,change:change};
     }
 //=======================图像绘制==========================//
