@@ -1,0 +1,17 @@
+*,body,html{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+body,html{
+    width:100%;
+    height:100%;
+}
+div::before,div::after{
+    content: '';
+    width: 0;
+    height:0;
+    display: table;
+}
