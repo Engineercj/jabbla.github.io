@@ -109,12 +109,12 @@ head.style.lineHeight = window.screen.height*0.05+'px';
             y = target.y;
         }
         //如果人物到了接近边缘的部分
-        if(this.x<=Map.perWidth&&this.x>0&&change.whitch!=='y'){
+        if(this.x<=Map.perWidth&&this.x>0&&change.whitch!=='y'&&change.vd<0){
             x = 0;
             change.whitch = 'x';
             change.vd = -1;
         }
-        if(this.y<=Map.perHeight&&this.y>0&&change.whitch!=='x'){
+        if(this.y<=Map.perHeight&&this.y>0&&change.whitch!=='x'&&change.vd<0){
             y = 0;
             change.whitch = 'y';
             change.vd = -1;
