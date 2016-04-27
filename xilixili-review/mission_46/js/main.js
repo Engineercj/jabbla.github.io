@@ -152,11 +152,13 @@ head.style.lineHeight = window.screen.height*0.05+'px';
         }
     }
 //=========================关卡类=======================//
-function Chapter(map,index){
-    this.map = map;
-    this.index = index;
+function Chapter(fn){
     this.scroe = 120;
+    this.barriers = [];
+    fn.call(this);
 }
+var chapter = new Chapter(createBarriers.chapter1);
+
 //=========================用户控制=======================//
 (function(){
     //用户点击事件
@@ -167,3 +169,4 @@ function Chapter(map,index){
     },false);
 
 })();
+console.log(chapter)
