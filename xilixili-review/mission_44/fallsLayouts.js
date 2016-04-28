@@ -22,27 +22,80 @@ var fallsLayout = function(){
         }
         dom.addChilds(LayoutStack);
     }
-    //根据用户传入数量生成套子
+    //根据用户传入数量生成套子,保持各列尽量长度接近
     function generateWraper(){
-        //循环生成套子
-        for(var i=0;i<num;i++){
-            var wraper = createDom('div'),      //创建套子，并赋予属性
-                index = i%colsBet;
-
-            //设置套子属性
-            updateStyles(wraper,{
-                width:'100%',height:arrH[index],backgroundColor:'#D8D8D8',lineHeight:arrH[index],textAlign:'center',
-                marginBottom:marginBet+'px',position:'relative'
-            });
-            wraper.innerHTML = i+1;
-            WraperStack.push(wraper);
+        //计算总长度
+        var sumLong = 0;
+        arrH.forEach(function(item){
+            sumLong += parseInt(item)
+        })
+        //构建总长度栈
+        var times = parseInt(num/colsBet);
+        var SumStack = [];
+        for(var j=0;j<times;j++){
+            SumStack = SumStack.concat(arrH);
         }
-        //将生成的套子依次插入到对应的布局中
-        var index1 = 0;
-        while(index1<WraperStack.length){
-            LayoutStack[index1%colsBet].addChilds(WraperStack[index1]);
-            index1++;
+        sumLong = times*sumLong;
+        for(var i=0;i<(num%colsBet);i++){
+            sumLong += parseInt(arrH[i]);
+            SumStack.push(arrH[i]);
         }
+        console.log(SumStack.length);
+        //平均值
+        var average = parseInt(sumLong/colsBet);
+        console.log(average);
+        //循环布局块
+        var counter = 1;
+        LayoutStack.forEach(function(item,index){
+            var sum = parseInt(SumStack[0]);
+            if(index!==(LayoutStack.length-1)){
+               while(sum<=average){
+                   var wraper = createDom('div');
+                   updateStyles(wraper,{
+                       width:'100%',height: SumStack[0],position:'relative',backgroundColor:'#D8D8D8',marginBottom:marginBet+'px',
+                       textAlign:'center',lineHeight:SumStack[0]
+                   })
+                    item.addChilds(wraper);
+                   WraperStack.push(wraper);
+                   SumStack.shift();
+                   sum +=parseInt(SumStack[0]);
+               }
+                sum -=parseInt(SumStack[0]);
+                var dis = average-sum;
+                console.log(dis);
+                //在剩余的块中寻找比dis小的
+                for(var t=0,it,max=0,maxIndex=0;it = parseInt(SumStack[t++]);){
+                    if(it<=dis){
+                        if(max<it){
+                            max = it;
+                            maxIndex = t-1;
+                        }
+                    }
+                }
+                //找到
+                if(max!==0){
+                    var wraper1 = createDom('div');
+                    updateStyles(wraper1,{
+                        width:'100%',height: max+'px',position:'relative',backgroundColor:'#D8D8D8',marginBottom:marginBet+'px',
+                        textAlign:'center',lineHeight:max+'px'
+                    })
+                    item.addChilds(wraper1);
+                    WraperStack.push(wraper1);
+                    SumStack.splice(maxIndex,1);
+                }
+                console.log(max+'max');
+            }else{
+                SumStack.forEach(function(item1){
+                    var wraper = createDom('div');
+                    updateStyles(wraper,{
+                        width:'100%',height: item1,position:'relative',backgroundColor:'#D8D8D8',marginBottom:marginBet+'px',
+                        textAlign:'center',lineHeight:item1
+                    });
+                    WraperStack.push(wraper);
+                    item.addChilds(wraper);
+                });
+            }
+        });
     }
     return {
         init:function(cols,margin,Blocknum){
