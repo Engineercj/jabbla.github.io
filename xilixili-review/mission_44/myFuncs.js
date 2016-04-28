@@ -87,15 +87,19 @@ console.log(document.body.scrollTop);
 /*图片代理函数*/
 Object.prototype.addImage = function(image,src){
     var me = this,
-        temp = createDom('div');
-    temp.innerHTML = '图片加载中.....';
-    updateStyles(temp,{
-        width:'100%',height:'100%',position:'absolute',top:0,left:0
-    });
-    this.appendChild(temp);
-    image.src = src;
-    image.onload = function(){
-        me.removeChild(temp);
-        me.appendChild(image);
+        temp = new Image();
+
+    image.src = 'loading.gif.';
+    updateStyles(image,{
+        width:'16px',height:'16px',left:'50%',top:'50%',transform:'translate(-50%,-50%)'
+    })
+    this.addChilds(image);
+
+    temp.src = src;
+    temp.onload = function(){
+        updateStyles(image,{
+            width:'100%',height:'100%'
+        })
+        image.src = src;
     }
 }
