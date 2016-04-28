@@ -81,7 +81,13 @@ function hasRoot(ele,root){
     return false
 }
 /*兼容火狐和chormebody的scrollTop写法*/
-
+Object.prototype.bodyScrollTop = function(){
+    if(document.body.scrollTop===0){
+        return document.documentElement.scrollTop
+    }else{
+        return document.body.scrollTop
+    }
+}
 console.log(document.body.scrollTop);
 
 /*图片代理函数*/
@@ -89,7 +95,7 @@ Object.prototype.addImage = function(image,src){
     var me = this,
         temp = new Image();
 
-    image.src = 'loading.gif.';
+    image.src = 'loading.gif';
     updateStyles(image,{
         width:'16px',height:'16px',left:'50%',top:'50%',transform:'translate(-50%,-50%)'
     })

@@ -6,8 +6,8 @@ var ImagesAgent = (function(){
     //判断是否在可视区,如在则加载
     function judgeLoad(){
         for(var i = ImageStack.length-1,item;item=ImageStack[i--];){
-            console.log(item.dom.offsetTop+' '+document.documentElement.clientHeight+' '+document.documentElement.scrollTop);
-            if(parseInt(item.dom.offsetTop)<=parseInt((document.documentElement.clientHeight+document.documentElement.scrollTop))){
+            console.log(item.dom.offsetTop+' '+document.documentElement.clientHeight+' '+document.bodyScrollTop());
+            if(parseInt(item.dom.offsetTop)<=parseInt((document.documentElement.clientHeight+document.bodyScrollTop()))){
                 item.dom.addImage(item.img,item.src);
                 ImageStack.splice(ImageStack.indexOf(item),1);
             }

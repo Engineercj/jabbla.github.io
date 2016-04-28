@@ -111,7 +111,7 @@ var fallsLayout = function(){
     }
     //点击事件处理函数
     function clickHandler(){
-        blackWraper.style.top = document.documentElement.scrollTop+'px';
+        blackWraper.style.top = document.bodyScrollTop()+'px';
         document.documentElement.style.overflow = 'hidden';
         blackWraper.style.display = 'block';
         moveTobig(this);
@@ -141,12 +141,12 @@ var fallsLayout = function(){
             Width = (DH-20)*scale;
         if(Width>=DW){
             updateStyles(item,{
-                position:'absolute',left:'50%',width:DW-80+'px',top:document.documentElement.scrollTop+(DH-((DW-80)/scale))/2+'px',height:(DW-80)/scale+'px',
+                position:'absolute',left:'50%',width:DW-80+'px',top:document.bodyScrollTop()+(DH-((DW-80)/scale))/2+'px',height:(DW-80)/scale+'px',
                 transform:'translateX(-50%)',zIndex:'101'
             });
         }else{
             updateStyles(item,{
-                position:'absolute',left:'50%',width:Width+'px',top:document.documentElement.scrollTop+10+'px',height:DH-20+'px',
+                position:'absolute',left:'50%',width:Width+'px',top:document.bodyScrollTop()+10+'px',height:DH-20+'px',
                 transform:'translateX(-50%)',zIndex:'101'
             });
         }
