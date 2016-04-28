@@ -76,13 +76,12 @@ Object.prototype.addImage = function(image,src){
         temp = createDom('div');
     temp.innerHTML = '图片加载中.....';
     updateStyles(temp,{
-        width:'100%',height:'100%',position:'absolute',top:0,left:0,display:'none'
+        width:'100%',height:'100%',position:'absolute',top:0,left:0
     });
     this.appendChild(temp);
     image.src = src;
     image.onload = function(){
         me.removeChild(temp);
         me.appendChild(image);
-        $(this).fadeIn();
     }
 }
