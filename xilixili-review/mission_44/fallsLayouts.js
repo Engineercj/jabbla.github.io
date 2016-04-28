@@ -40,10 +40,8 @@ var fallsLayout = function(){
             sumLong += parseInt(arrH[i]);
             SumStack.push(arrH[i]);
         }
-        console.log(SumStack.length);
         //平均值
         var average = parseInt(sumLong/colsBet);
-        console.log(average);
         //循环布局块
         var counter = 1;
         LayoutStack.forEach(function(item,index){
@@ -62,7 +60,6 @@ var fallsLayout = function(){
                }
                 sum -=parseInt(SumStack[0]);
                 var dis = average-sum;
-                console.log(dis);
                 //在剩余的块中寻找比dis小的
                 for(var t=0,it,max=0,maxIndex=0;it = parseInt(SumStack[t++]);){
                     if(it<=dis){
@@ -83,7 +80,6 @@ var fallsLayout = function(){
                     WraperStack.push(wraper1);
                     SumStack.splice(maxIndex,1);
                 }
-                console.log(max+'max');
             }else{
                 SumStack.forEach(function(item1){
                     var wraper = createDom('div');
@@ -118,7 +114,7 @@ var fallsLayout = function(){
                 updateStyles(img,{
                     width:'100%',height:'100%',position:'absolute',left:0,top:0
                 })
-                WraperStack[index].addImage(img,item);
+                ImagesAgent.addImage(WraperStack[index],img,item);
             });
         }
     }

@@ -84,5 +84,4 @@ Object.prototype.addImage = function(image,src){
         me.removeChild(temp);
         me.appendChild(image);
     }
-
 }
