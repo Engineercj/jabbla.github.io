@@ -26,24 +26,16 @@ var fallsLayout = function(){
     function generateWraper(){
         //循环生成套子
         for(var i=0;i<num;i++){
-            var index = i%4,
-                rIndex = randomNum(index,3),    //随机生成索引
-                wraper = createDom('div');      //创建套子，并赋予属性
+            var wraper = createDom('div'),      //创建套子，并赋予属性
+                index = i%colsBet;
 
             //设置套子属性
             updateStyles(wraper,{
-                width:'100%',height:arrH[rIndex],backgroundColor:'#D8D8D8',lineHeight:arrH[rIndex],textAlign:'center',
+                width:'100%',height:arrH[index],backgroundColor:'#D8D8D8',lineHeight:arrH[index],textAlign:'center',
                 marginBottom:marginBet+'px',position:'relative'
             });
             wraper.innerHTML = i+1;
             WraperStack.push(wraper);
-            //将选到的项交换到当前位置
-            if(rIndex!==index){
-                var temp = arrH[index];
-                arrH.splice(index,1,arrH[rIndex]);
-                arrH.splice(rIndex,1,temp);
-            }
-
         }
         //将生成的套子依次插入到对应的布局中
         var index1 = 0;
@@ -69,7 +61,11 @@ var fallsLayout = function(){
         add:function(imgs){
             //创建图像
             imgs.forEach(function(item,index){
-                WraperStack[index].addImage(new Image(),item);
+                var img = new Image();
+                updateStyles(img,{
+                    width:'100%',height:'100%',position:'absolute',left:0,top:0
+                })
+                WraperStack[index].addImage(img,item);
             });
         }
     }

@@ -11,7 +11,7 @@ var picVarious = function(){
             //设置图像属性
             updateStyles(img,{width:'100%',height:'100%',position:'absolute',top:'0',left:'0'});
             //将图像插入dom
-            dom.addChilds(img);
+            dom.addImage(img,imgs[0]);
         },
         2:function(imgs){
             //公共数据
@@ -54,8 +54,8 @@ var picVarious = function(){
                 top:-oDY+'px',left:oDX+'px'
             })
             //添加结构
-            div1.addChilds(img1);
-            div2.addChilds(img2);
+            div1.addImage(img1,imgs[0]);
+            div2.addImage(img2,imgs[1]);
             oDiv.addChilds(div1,div2);
             dom.addChilds(oDiv);
         },
@@ -96,9 +96,9 @@ var picVarious = function(){
                 {top:temp1.top+'px',left:temp1.left+'px'}]);
 
             //插入结构
-            divBig.addChilds(img1);
-            divUp.addChilds(img2);
-            divDown.addChilds(img3);
+            divBig.addImage(img1,imgs[0]);
+            divUp.addImage(img2,imgs[1]);
+            divDown.addImage(img3,imgs[2]);
             divNarrow.addChilds(divUp,divDown);
             dom.addChilds(divBig,divNarrow);
         },
@@ -139,10 +139,10 @@ var picVarious = function(){
             });
 
             //添加结构
-            divLup.addChilds(img1);
-            divLdown.addChilds(img2);
-            divRup.addChilds(img3);
-            divRdown.addChilds(img4);
+            divLup.addImage(img1,imgs[0]);
+            divLdown.addImage(img2,imgs[1]);
+            divRup.addImage(img3,imgs[2]);
+            divRdown.addImage(img4,imgs[3]);
             divLeft.addChilds(divLup,divLdown);
             divRight.addChilds(divRup,divRdown);
             dom.addChilds(divLeft);
@@ -203,11 +203,11 @@ var picVarious = function(){
                     {top:temp3.top+'px',left:temp3.left+'px'}]
             );
             //添加结构
-            leftTop.addChilds(img1);
-            leftdoubleBottom.addChilds(img2);
-            leftCenterBottom.addChilds(img3);
-            rightTop.addChilds(img4);
-            rightBottom.addChilds(img5);
+            leftTop.addImage(img1,imgs[0]);
+            leftdoubleBottom.addImage(img2,imgs[1]);
+            leftCenterBottom.addImage(img3,imgs[2]);
+            rightTop.addImage(img4,imgs[3]);
+            rightBottom.addImage(img5,imgs[4]);
 
             dom.addChilds(left,right);
             left.addChilds(leftTop,leftBottom);
