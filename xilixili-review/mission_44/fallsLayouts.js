@@ -19,7 +19,7 @@ var fallsLayout = function(){
     blackWraper.addEventListener('click',function(e){
         if(e.target===blackWraper){
             this.style.display= 'none';
-            document.body.style.overflow = 'auto';
+            document.documentElement.style.overflow = 'auto';
             updateStyles(onShow.dom,onShow.style);
             onShow = {};
         }
@@ -111,8 +111,8 @@ var fallsLayout = function(){
     }
     //点击事件处理函数
     function clickHandler(){
-        blackWraper.style.top = document.body.scrollTop+'px';
-        document.body.style.overflow = 'hidden';
+        blackWraper.style.top = document.documentElement.scrollTop+'px';
+        document.documentElement.style.overflow = 'hidden';
         blackWraper.style.display = 'block';
         moveTobig(this);
     }
@@ -141,23 +141,17 @@ var fallsLayout = function(){
             Width = (DH-20)*scale;
         if(Width>=DW){
             updateStyles(item,{
-                position:'absolute',left:'50%',width:DW-80+'px',top:document.body.scrollTop+(DH-((DW-80)/scale))/2+'px',height:(DW-80)/scale+'px',
+                position:'absolute',left:'50%',width:DW-80+'px',top:document.documentElement.scrollTop+(DH-((DW-80)/scale))/2+'px',height:(DW-80)/scale+'px',
                 transform:'translateX(-50%)',zIndex:'101'
             });
         }else{
             updateStyles(item,{
-                position:'absolute',left:'50%',width:Width+'px',top:document.body.scrollTop+10+'px',height:DH-20+'px',
+                position:'absolute',left:'50%',width:Width+'px',top:document.documentElement.scrollTop+10+'px',height:DH-20+'px',
                 transform:'translateX(-50%)',zIndex:'101'
             });
         }
 
     }
-    //初始化图片的属性
-   /* function backToOrigin(item){
-        updateStyles(item,{
-
-        })
-    }*/
     //给套子添加事件
     function addEvent(){
         WraperStack.forEach(function(item){

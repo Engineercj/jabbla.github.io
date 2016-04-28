@@ -80,6 +80,10 @@ function hasRoot(ele,root){
     }
     return false
 }
+/*兼容火狐和chormebody的scrollTop写法*/
+
+console.log(document.body.scrollTop);
+
 /*图片代理函数*/
 Object.prototype.addImage = function(image,src){
     var me = this,
