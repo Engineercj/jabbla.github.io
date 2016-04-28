@@ -1,7 +1,7 @@
 /**
  * Created by zxr on 2016/4/27.
  */
-var picVarious = function(){
+var piecesLayouts = function(){
     var dom = createDom('div');
     //不同布局的策略方法
     var Layouts = {
@@ -230,12 +230,12 @@ var picVarious = function(){
                 RightBottom = createDom('div');
 
             //对应图片
-            var img1 = new Image(),
-                img2 = new Image(),
-                img3 = new Image(),
-                img4 = new Image(),
-                img5 = new Image(),
-                img6 = new Image();
+            var img1 = createImage(imgs[0]),
+                img2 = createImage(imgs[1]),
+                img3 = createImage(imgs[2]),
+                img4 = createImage(imgs[3]),
+                img5 = createImage(imgs[4]),
+                img6 = createImage(imgs[5]);
 
             //布局
             var left = createDom('div'),
@@ -271,12 +271,12 @@ var picVarious = function(){
             left.addChilds(leftTop,leftBottom);
             right.addChilds(RightTop,RightCenter,RightBottom);
             leftBottom.addChilds(leftDoubleBottom,leftCenterBottom);
-            leftTop.addImage(img1,imgs[0]);
-            leftDoubleBottom.addImage(img2,imgs[1]);
-            leftCenterBottom.addImage(img3,imgs[2]);
-            RightTop.addImage(img4,imgs[3]);
-            RightCenter.addImage(img5,imgs[4]);
-            RightBottom.addImage(img6,imgs[5]);
+            leftTop.addChilds(img1);
+            leftDoubleBottom.addChilds(img2);
+            leftCenterBottom.addChilds(img3);
+            RightTop.addChilds(img4);
+            RightCenter.addChilds(img5);
+            RightBottom.addChilds(img6);
         }
     }
     return {
