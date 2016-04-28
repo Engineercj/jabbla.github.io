@@ -70,6 +70,16 @@ function randomNum(left,right){
     }
     return Math.floor(step2);
 }
+/*判断是否含有父元素*/
+function hasRoot(ele,root){
+    while(ele.parentNode!==undefined){
+        if(ele===root){
+            return true;
+        }
+        ele = ele.parentNode;
+    }
+    return false
+}
 /*图片代理函数*/
 Object.prototype.addImage = function(image,src){
     var me = this,
