@@ -100,7 +100,6 @@ function addImage(dom,image,src){
     updateStyles(image,{
         width:'16px',height:'16px',left:'50%',top:'50%',transform:'translate(-50%,-50%)',position:'absolute'
     })
-    updateStyles(dom,{width:'100%',height:'200px'})
     addChilds(dom,image);
     temp.src = src;
     temp.onload = function(){

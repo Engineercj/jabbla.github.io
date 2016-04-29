@@ -63,7 +63,7 @@ var fallsLayout = function(){
             wraper.className = 'falls-wraper';
             //设置套子和图片属性
             updateStyles(wraper,{
-                width:'100%',position:'relative',marginRight:self.marginBet+'px',
+                width:'100%',position:'relative',marginRight:self.marginBet+'px',height:'200px',
                 marginBottom:self.marginBet+'px'
             });
             updateStyles(img,{width:'100%'});

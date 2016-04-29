@@ -10,6 +10,7 @@ var ImagesAgent = (function(){
     //判断是否在可视区,如在则加载
     function judgeLoad(){
         for(var i = ImageStack.length-1,item;item=ImageStack[i--];){
+            console.log(item.dom.offsetTop+' '+(document.documentElement.clientHeight+bodyScrollTop()))
             if(parseInt(item.dom.offsetTop)<=parseInt((document.documentElement.clientHeight+bodyScrollTop()))){
                 addImage(item.dom,item.img,item.src);
                 ImageStack.splice(ImageStack.indexOf(item),1);
