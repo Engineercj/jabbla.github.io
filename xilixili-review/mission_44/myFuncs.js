@@ -2,15 +2,13 @@
  * Created by zxr on 2016/4/28.
  */
 /*批量添加子元素节点*/
-Object.prototype.addChilds = function(){
-    if(arguments[0] instanceof Array){
-        for(var j=0,item1;item1 = arguments[0][j++];){
-            this.appendChild(item1);
+ function addChilds(dom,arr){
+    if(arguments[1] instanceof Array){
+        for(var j=0,item1;item1 = arguments[1][j++];){
+            arguments[0].appendChild(item1);
         }
     }else{
-        for(var i=0,item;item = arguments[i++];){
-            this.appendChild(item);
-        }
+        arguments[0].appendChild(arguments[1]);
     }
 }
 /*创建节点的简化写法*/
@@ -82,7 +80,7 @@ function hasRoot(ele,root){
     return false
 }
 /*兼容火狐和chormebody的scrollTop写法*/
-Object.prototype.bodyScrollTop = function(){
+function bodyScrollTop(){
     if(document.body.scrollTop===0){
         return document.documentElement.scrollTop
     }else{
@@ -90,27 +88,61 @@ Object.prototype.bodyScrollTop = function(){
     }
 }
 /*将类数组元素中的每一项添加进数组*/
-Array.prototype.putInarray = function(arr){
+function putInarray(arr,arry){
     for(var i=0,item;item = arr[i++];){
-        this.push(item);
+        arry.push(item);
     }
 }
 /*图片代理函数*/
-Object.prototype.addImage = function(image,src){
-    var me = this,
-        temp = new Image();
-
+function addImage(dom,image,src){
+    var temp = new Image();
     image.src = 'loading.gif';
     updateStyles(image,{
         width:'16px',height:'16px',left:'50%',top:'50%',transform:'translate(-50%,-50%)'
     })
-    this.addChilds(image);
-
+    updateStyles(dom,{width:'100%',height:'200px'})
+    addChilds(dom,image);
     temp.src = src;
     temp.onload = function(){
-        updateStyles(image,{
-            width:'100%',height:'100%'
-        })
+        updateStyles(image,{width:'100%',transform:'',height:'100%'});
+        updateStyles(dom,{width:'100%',height:''});
         image.src = src;
     }
 }
+/*在数组中找出指定规则的最小值*/
+function findMin(arr,value){
+    var min = arr[0];
+    if(!value){
+        for(var i=1;i<arr.length;i++){
+            if(parseInt(min)>parseInt(arr[i])){
+                min = arr[i];
+            }
+        }
+    }else{
+        for(var j=1,item1;item1 = arr[j++];){
+            if(parseInt(min[value])>parseInt(item1[value])){
+                min = item1;
+            }
+        }
+    }
+    return min;
+}
+/*在数组中找出指定规则的最大值*/
+function findMax(arr,value){
+    var max = arr[0];
+    if(!value){
+        for(var i=1;i<arr.length;i++){
+            if(max<arr[i]){
+                max = arr[i];
+            }
+        }
+    }else{
+        for(var j=1,item1;item1 = arr[j++];){
+            if(max[value]>item1[value]){
+                max = item1;
+            }
+        }
+    }
+    return max;
+}
+

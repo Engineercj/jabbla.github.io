@@ -5,7 +5,6 @@ var fallsLayout = function(){
     var instance;
     function waterFalls(num,cols,margin){
         this.element = createDom('div');
-        this.arrH = ['200px','250px','120px','300px'];//4种高度
         this.marginBet = margin || 16;
         this.colsBet = cols || 4;
         this.num = num || 8;
@@ -20,15 +19,8 @@ var fallsLayout = function(){
         updateStyles(this.element,{paddingTop:this.marginBet+'px',paddingLeft: this.marginBet+'px'});
         //创建布局
         this.generateLayout();
-        //生成套子
-        this.generateWraper();
         //生成黑色遮罩
         this.generateBlack();
-        //添加点击事件
-        this.addEvent();
-
-
-
     }
     waterFalls.prototype.generateLayout = function(){
         var html = '';
@@ -41,88 +33,10 @@ var fallsLayout = function(){
         }
 
         this.element.innerHTML = html;
-        document.body.addChilds(this.element);
+        addChilds(document.body,this.element);
 
         var $cols = document.querySelectorAll('.falls-cols');
-        LayoutStack.putInarray($cols);
-    }
-    waterFalls.prototype.generateWraper = function(){
-        var LayoutStack = this.layouts;
-        var WraperStack = this.wrapers;
-        var colsBet = this.colsBet;
-        var marginBet = this.marginBet;
-        var num = this.num;
-        var arrH = this.arrH;
-
-        //计算总长度
-        var sumLong = 0;
-        arrH.forEach(function(item){
-            sumLong += parseInt(item)
-        })
-        //构建总长度栈
-        var times = parseInt(num/colsBet);
-        var SumStack = [];
-        for(var j=0;j<times;j++){
-            SumStack = SumStack.concat(arrH);
-        }
-        sumLong = times*sumLong;
-        for(var i=0;i<(num%colsBet);i++){
-            sumLong += parseInt(arrH[i]);
-            SumStack.push(arrH[i]);
-        }
-        //平均值
-        var average = parseInt(sumLong/colsBet);
-        //循环布局块
-        LayoutStack.forEach(function(item,index){
-            var sum = parseInt(SumStack[0]);
-            if(index!==(LayoutStack.length-1)){
-                while(sum<=average){
-                    var $wraper = createDom('div');
-                    $wraper.className = 'falls-wraper';
-                    updateStyles($wraper,{
-                        height: SumStack[0],marginBottom:marginBet+'px', lineHeight:SumStack[0]
-                    })
-                    item.addChilds($wraper);
-                    WraperStack.push($wraper);
-                    SumStack.shift();
-                    sum +=parseInt(SumStack[0]);
-                }
-                sum -=parseInt(SumStack[0]);
-                var dis = average-sum;
-                //在剩余的块中寻找比dis小的
-                for(var t=0,it,max=0,maxIndex=0;it = parseInt(SumStack[t++]);){
-                    if(it<=dis){
-                        if(max<it){
-                            max = it;
-                            maxIndex = t-1;
-                        }
-                    }
-                }
-                //找到
-                if(max!==0){
-                    var $wraper = createDom('div');
-                    $wraper.className = 'falls-wraper';
-                    updateStyles($wraper,{
-                        height: max+'px',marginBottom:marginBet+'px',
-                        lineHeight:max+'px',cursor:'pointer'
-                    })
-                    item.addChilds($wraper);
-                    WraperStack.push($wraper);
-                    SumStack.splice(maxIndex,1);
-                }
-            }else{
-                SumStack.forEach(function(item1){
-                    var $wraper = createDom('div');
-                    $wraper.className = 'falls-wraper';
-                    updateStyles($wraper,{
-                        height: item1,marginBottom:marginBet+'px',
-                        lineHeight:item1
-                    });
-                    WraperStack.push($wraper);
-                    item.addChilds($wraper);
-                });
-            }
-        });
+        putInarray($cols,LayoutStack);
     }
     waterFalls.prototype.generateBlack = function(){
         var $blackWraper = this.$blackWraper;
@@ -137,17 +51,26 @@ var fallsLayout = function(){
                 self.onShow.dom = null;
             }
         },false);
-        document.body.addChilds($blackWraper);
+        addChilds(document.body,$blackWraper);
     }
     waterFalls.prototype.addImage = function(imgs){
         var WraperStack = this.wrapers;
+        var self = this;
         //创建图像
         imgs.forEach(function(item,index){
             var img = new Image();
-            updateStyles(img,{
-                width:'100%',height:'100%',position:'absolute',left:0,top:0
-            })
-            ImagesAgent.addImage(WraperStack[index],img,item);
+            var wraper = createDom('div');
+            wraper.className = 'falls-wraper';
+            //设置套子和图片属性
+            updateStyles(wraper,{
+                width:'100%',position:'relative',marginRight:self.marginBet+'px',
+                marginBottom:self.marginBet+'px'
+            });
+            updateStyles(img,{width:'100%'});
+            WraperStack.push(wraper);
+            //寻找最短的列插入
+            addChilds(self.findShortest(),wraper);
+            ImagesAgent.addImage(wraper,img,item);
         });
     }
     waterFalls.prototype.addEvent = function(){
@@ -184,6 +107,9 @@ var fallsLayout = function(){
             onShow.dom = this;
         }
     }
+    waterFalls.prototype.findShortest = function(){
+        return findMin(this.layouts,'clientHeight');
+    }
     return {
         init:function(cols,margin,Blocknum){
             //改变
@@ -196,7 +122,11 @@ var fallsLayout = function(){
         },
         //添加图片
         add:function(imgs){
+            //添加图片，生成套子
             instance.addImage(imgs);
+            //添加事件
+            instance.addEvent();
+            //第一屏加载
             ImagesAgent.load();
         }
     }
