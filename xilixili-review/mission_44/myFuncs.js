@@ -98,13 +98,13 @@ function addImage(dom,image,src){
     var temp = new Image();
     image.src = 'loading.gif';
     updateStyles(image,{
-        width:'16px',height:'16px',left:'50%',top:'50%',transform:'translate(-50%,-50%)'
+        width:'16px',height:'16px',left:'50%',top:'50%',transform:'translate(-50%,-50%)',position:'absolute'
     })
     updateStyles(dom,{width:'100%',height:'200px'})
     addChilds(dom,image);
     temp.src = src;
     temp.onload = function(){
-        updateStyles(image,{width:'100%',transform:'',height:'100%'});
+        updateStyles(image,{width:'100%',transform:'',height:'100%',position:''});
         updateStyles(dom,{width:'100%',height:''});
         image.src = src;
     }
