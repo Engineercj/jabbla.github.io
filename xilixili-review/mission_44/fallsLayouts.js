@@ -66,7 +66,7 @@ var fallsLayout = function(){
                 width:'100%',position:'relative',marginRight:self.marginBet+'px',height:'200px',
                 marginBottom:self.marginBet+'px'
             });
-            updateStyles(img,{width:'100%'});
+            updateStyles(img,{width:'100%',display:'block'});
             WraperStack.push(wraper);
             //寻找最短的列插入
             addChilds(self.findShortest(),wraper);
