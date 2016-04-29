@@ -15,6 +15,7 @@ Object.prototype.addChilds = function(){
 }
 /*创建节点的简化写法*/
 function createDom(str){
+
     return document.createElement(str);
 }
 /*创建image元素,并赋src*/
@@ -88,8 +89,12 @@ Object.prototype.bodyScrollTop = function(){
         return document.body.scrollTop
     }
 }
-console.log(document.body.scrollTop);
-
+/*将类数组元素中的每一项添加进数组*/
+Array.prototype.putInarray = function(arr){
+    for(var i=0,item;item = arr[i++];){
+        this.push(item);
+    }
+}
 /*图片代理函数*/
 Object.prototype.addImage = function(image,src){
     var me = this,

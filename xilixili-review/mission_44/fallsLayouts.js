@@ -2,44 +2,58 @@
  * Created by zxr on 2016/4/28.
  */
 var fallsLayout = function(){
-    var dom = createDom('div'),
-        marginBet = 16,
-        colsBet = 4,
-        num = 8,
-        arrH = ['200px','250px','120px','300px'],//4种高度
-        LayoutStack = [],
-        WraperStack = [],
-        onShow = {},
-        blackWraper = createDom('div');//黑色遮罩
-
-        updateStyles(blackWraper,{
-            width:'100%',height:'100%',position:'absolute',
-            backgroundColor:'rgba(0,0,0,0.8)',zIndex:100,display:'none',transition:'all 0.5s ease-in-out'
-        });
-    blackWraper.addEventListener('click',function(e){
-        if(e.target===blackWraper){
-            this.style.display= 'none';
-            document.documentElement.style.overflow = 'auto';
-            updateStyles(onShow.dom,onShow.style);
-            onShow = {};
-        }
-    },false);
-    document.body.addChilds(blackWraper);
-    //生成布局
-    function generateLayout(){
-        //循环列数生成基本布局
-        for(var i=0;i<colsBet;i++){
-            var col = createDom('div');
-            col.oH = 0;
-            updateStyles(col,{
-                width:(1/colsBet)*100+'%',float:'left',paddingRight:marginBet+'px'
-            });
-            LayoutStack.push(col);
-        }
-        dom.addChilds(LayoutStack);
+    var instance;
+    function waterFalls(num,cols,margin){
+        this.element = createDom('div');
+        this.arrH = ['200px','250px','120px','300px'];//4种高度
+        this.marginBet = margin || 16;
+        this.colsBet = cols || 4;
+        this.num = num || 8;
+        this.layouts = [];
+        this.wrapers = [];
+        this.$blackWraper = createDom('div');//黑色遮罩
+        this.onShow = {dom:null,style:{position:'relative',top:0,left:0,zIndex:1,transform:''}};
     }
-    //根据用户传入数量生成套子,保持各列尽量长度接近
-    function generateWraper(){
+    waterFalls.prototype.init = function(){
+        //初始化最外层
+        this.element.className = 'falls';
+        updateStyles(this.element,{paddingTop:this.marginBet+'px',paddingLeft: this.marginBet+'px'});
+        //创建布局
+        this.generateLayout();
+        //生成套子
+        this.generateWraper();
+        //生成黑色遮罩
+        this.generateBlack();
+        //添加点击事件
+        this.addEvent();
+
+
+
+    }
+    waterFalls.prototype.generateLayout = function(){
+        var html = '';
+        var percent = (1/this.colsBet)*100;
+        var marginBet = this.marginBet;
+        var LayoutStack = this.layouts;
+
+        for(var i=0;i<this.colsBet;i++){
+            html += '<div class="falls-cols" style="width:'+percent+'%;float:left;padding-right:'+marginBet+'px;"></div>';
+        }
+
+        this.element.innerHTML = html;
+        document.body.addChilds(this.element);
+
+        var $cols = document.querySelectorAll('.falls-cols');
+        LayoutStack.putInarray($cols);
+    }
+    waterFalls.prototype.generateWraper = function(){
+        var LayoutStack = this.layouts;
+        var WraperStack = this.wrapers;
+        var colsBet = this.colsBet;
+        var marginBet = this.marginBet;
+        var num = this.num;
+        var arrH = this.arrH;
+
         //计算总长度
         var sumLong = 0;
         arrH.forEach(function(item){
@@ -59,21 +73,20 @@ var fallsLayout = function(){
         //平均值
         var average = parseInt(sumLong/colsBet);
         //循环布局块
-        var counter = 1;
         LayoutStack.forEach(function(item,index){
             var sum = parseInt(SumStack[0]);
             if(index!==(LayoutStack.length-1)){
-               while(sum<=average){
-                   var wraper = createDom('div');
-                   updateStyles(wraper,{
-                       width:'100%',height: SumStack[0],position:'relative',backgroundColor:'#D8D8D8',marginBottom:marginBet+'px',
-                       textAlign:'center',lineHeight:SumStack[0],cursor:'pointer'
-                   })
-                    item.addChilds(wraper);
-                   WraperStack.push(wraper);
-                   SumStack.shift();
-                   sum +=parseInt(SumStack[0]);
-               }
+                while(sum<=average){
+                    var $wraper = createDom('div');
+                    $wraper.className = 'falls-wraper';
+                    updateStyles($wraper,{
+                        height: SumStack[0],marginBottom:marginBet+'px', lineHeight:SumStack[0]
+                    })
+                    item.addChilds($wraper);
+                    WraperStack.push($wraper);
+                    SumStack.shift();
+                    sum +=parseInt(SumStack[0]);
+                }
                 sum -=parseInt(SumStack[0]);
                 var dis = average-sum;
                 //在剩余的块中寻找比dis小的
@@ -87,101 +100,101 @@ var fallsLayout = function(){
                 }
                 //找到
                 if(max!==0){
-                    var wraper1 = createDom('div');
-                    updateStyles(wraper1,{
-                        width:'100%',height: max+'px',position:'relative',backgroundColor:'#D8D8D8',marginBottom:marginBet+'px',
-                        textAlign:'center',lineHeight:max+'px',cursor:'pointer'
+                    var $wraper = createDom('div');
+                    $wraper.className = 'falls-wraper';
+                    updateStyles($wraper,{
+                        height: max+'px',marginBottom:marginBet+'px',
+                        lineHeight:max+'px',cursor:'pointer'
                     })
-                    item.addChilds(wraper1);
-                    WraperStack.push(wraper1);
+                    item.addChilds($wraper);
+                    WraperStack.push($wraper);
                     SumStack.splice(maxIndex,1);
                 }
             }else{
                 SumStack.forEach(function(item1){
-                    var wraper = createDom('div');
-                    updateStyles(wraper,{
-                        width:'100%',height: item1,position:'relative',backgroundColor:'#D8D8D8',marginBottom:marginBet+'px',
-                        textAlign:'center',lineHeight:item1,cursor:'pointer'
+                    var $wraper = createDom('div');
+                    $wraper.className = 'falls-wraper';
+                    updateStyles($wraper,{
+                        height: item1,marginBottom:marginBet+'px',
+                        lineHeight:item1
                     });
-                    WraperStack.push(wraper);
-                    item.addChilds(wraper);
+                    WraperStack.push($wraper);
+                    item.addChilds($wraper);
                 });
             }
         });
     }
-    //点击事件处理函数
-    function clickHandler(){
-        blackWraper.style.top = document.bodyScrollTop()+'px';
-        document.documentElement.style.overflow = 'hidden';
-        blackWraper.style.display = 'block';
-        moveTobig(this);
+    waterFalls.prototype.generateBlack = function(){
+        var $blackWraper = this.$blackWraper;
+        var self = this;
+        $blackWraper.className = 'falls-blackWraper';
+        $blackWraper.addEventListener('click',function(e){
+            if(e.target===$blackWraper){
+                updateStyles(this,{display:'none'});
+                updateStyles(document.body,{overflow:'auto'});
+                //元素状态重置
+                updateStyles(self.onShow.dom,self.onShow.style);
+                self.onShow.dom = null;
+            }
+        },false);
+        document.body.addChilds($blackWraper);
     }
-    //元素移动到屏幕中央，并放大
-    function moveTobig(item){
-        if(onShow.dom===item){
-            return;
-        }
-        //储存最初状态
-        onShow.dom = item;
-        onShow.style = {
-            width:item.offsetWidth+'px',
-            height:item.offsetHeight+'px',
-            position:'relative',
-            transform:'none',
-            top:0,
-            left:0,
-            zIndex:'0'
-        }
-        //供计算数据
-        var DW = blackWraper.offsetWidth,
-            DH = blackWraper.offsetHeight,
-            w = item.offsetWidth,
-            h = item.offsetHeight,
-            scale = w/h,
-            Width = (DH-20)*scale;
-        if(Width>=DW){
-            updateStyles(item,{
-                position:'absolute',left:'50%',width:DW-80+'px',top:document.bodyScrollTop()+(DH-((DW-80)/scale))/2+'px',height:(DW-80)/scale+'px',
-                transform:'translateX(-50%)',zIndex:'101'
-            });
-        }else{
-            updateStyles(item,{
-                position:'absolute',left:'50%',width:Width+'px',top:document.bodyScrollTop()+10+'px',height:DH-20+'px',
-                transform:'translateX(-50%)',zIndex:'101'
-            });
-        }
-
-    }
-    //给套子添加事件
-    function addEvent(){
-        WraperStack.forEach(function(item){
-            item.addEventListener('click',clickHandler,false);
+    waterFalls.prototype.addImage = function(imgs){
+        var WraperStack = this.wrapers;
+        //创建图像
+        imgs.forEach(function(item,index){
+            var img = new Image();
+            updateStyles(img,{
+                width:'100%',height:'100%',position:'absolute',left:0,top:0
+            })
+            ImagesAgent.addImage(WraperStack[index],img,item);
         });
+    }
+
+    waterFalls.prototype.addEvent = function(){
+        var WraperStack = this.wrapers;
+        var $blackWraper = this.$blackWraper;
+        var onShow = this.onShow;
+        //套子点击事件
+        WraperStack.forEach(function(item){
+            item.addEventListener('click',showIncenter,false);
+        });
+        function showIncenter(){
+            //黑色透明遮罩显示
+            updateStyles($blackWraper,{display:'block',position:'fixed'});
+            //计算合适尺寸需要数据
+            var itemScale = this.clientWidth/this.clientHeight;
+            var tempW = $blackWraper.clientWidth-300,tempH =$blackWraper.clientHeight-100;
+            var tempWc = tempW/itemScale,tempHc = tempH*itemScale;
+            var use;
+
+            //计算出合适尺寸
+            use = tempWc>tempH? {width:tempHc,height:tempH}:{width:tempW,height:tempWc};
+            //储存当前尺寸
+            onShow.style.width = this.clientWidth+'px';
+            onShow.style.height = this.clientHeight+'px';
+            //图片在中间显示，改变尺寸
+            updateStyles(this,{
+                position:'fixed',left:'50%',top:'50%',width:use.width+'px',height:use.height+'px',
+                transform:'translate(-50%,-50%)',zIndex:'100'
+            })
+            //设置当前DOM
+            onShow.dom = this;
+        }
     }
     return {
         init:function(cols,margin,Blocknum){
             //改变
-            marginBet = margin;
-            colsBet = cols;
-            num = Blocknum;
-            //设置最外层dom属性
-            dom.className = 'falls';
-            updateStyles(dom,{paddingTop:marginBet+'px',paddingLeft: marginBet+'px'});
-            generateLayout();
-            generateWraper();
-            addEvent();
-            return dom
+            if(instance){
+                return instance.element
+            }
+            instance = new waterFalls(Blocknum,cols,margin);
+            instance.init();
+            return instance.element;
         },
         //添加图片
         add:function(imgs){
-            //创建图像
-            imgs.forEach(function(item,index){
-                var img = new Image();
-                updateStyles(img,{
-                    width:'100%',height:'100%',position:'absolute',left:0,top:0
-                })
-                ImagesAgent.addImage(WraperStack[index],img,item);
-            });
+            instance.addImage(imgs);
         }
     }
 }
