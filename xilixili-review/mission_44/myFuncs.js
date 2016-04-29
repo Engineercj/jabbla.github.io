@@ -103,8 +103,9 @@ function addImage(dom,image,src){
     addChilds(dom,image);
     temp.src = src;
     temp.onload = function(){
-        updateStyles(image,{width:'100%',transform:'',height:'100%',position:''});
+        updateStyles(image,{width:'100%',transform:'',height:'100%',position:'',display:'none'});
         updateStyles(dom,{width:'100%',height:''});
+        $(image).fadeIn();
         image.src = src;
     }
 }
