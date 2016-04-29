@@ -150,7 +150,6 @@ var fallsLayout = function(){
             ImagesAgent.addImage(WraperStack[index],img,item);
         });
     }
-
     waterFalls.prototype.addEvent = function(){
         var WraperStack = this.wrapers;
         var $blackWraper = this.$blackWraper;
@@ -160,6 +159,9 @@ var fallsLayout = function(){
             item.addEventListener('click',showIncenter,false);
         });
         function showIncenter(){
+            if(onShow.dom===this){
+                return
+            }
             //黑色透明遮罩显示
             updateStyles($blackWraper,{display:'block',position:'fixed'});
             //计算合适尺寸需要数据
@@ -195,6 +197,7 @@ var fallsLayout = function(){
         //添加图片
         add:function(imgs){
             instance.addImage(imgs);
+            ImagesAgent.load();
         }
     }
 }

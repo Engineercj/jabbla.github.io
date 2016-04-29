@@ -3,6 +3,10 @@
  */
 var ImagesAgent = (function(){
     var ImageStack = [];
+    //添加窗口滚动事件
+    window.addEventListener('scroll',function(){
+        ImagesAgent.load();
+    },false);
     //判断是否在可视区,如在则加载
     function judgeLoad(){
         for(var i = ImageStack.length-1,item;item=ImageStack[i--];){

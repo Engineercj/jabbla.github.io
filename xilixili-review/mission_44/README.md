@@ -1,5 +1,5 @@
 # 使用说明
-滚动加载
+
 ### 文件结构
 falls.js,fallsLayouts.js,ImageAgent.js,myFuncs.js
 **入口文件**
