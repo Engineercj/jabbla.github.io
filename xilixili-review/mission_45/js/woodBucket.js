@@ -18,72 +18,74 @@ woodBucket.prototype.init = function(){
     return this.wraper
 }
 woodBucket.prototype.addImages = function(imgs){
-
-    var count = 0;
+    
     var imgLength = imgs.length;
     var averHeight = parseInt(document.documentElement.clientHeight/3);
     var DW = parseInt(this.wraper.offsetWidth);
-    var images = this.images;
     var self = this;
-    //加载全部图片
-    imgs.forEach(function(item){
-        var image = {dom:createImage(item),scale:0,src:item};
-        image.dom.addEventListener('load',function(){
-            count++;
-            image.scale = image.dom.width/image.dom.height;
-            images.push(image);
-            if(imgLength===count) AllLoad();
-        },false);
-    });
-    //全部加载后
-    function AllLoad(){
-        //以图片文件名排序
-        images.sort(function(v1,v2){
-            return parseInt(v2.src.slice(5))-parseInt(v1.src.slice(5));
-        });
-        var nowIndex = 0,nowW = 0,stack = [],i=0;
-        var scaleSum,height;
-        while(nowIndex<=imgLength-1){
-            var width = parseInt(averHeight*images[nowIndex].scale);
-            nowW += width;
-            i++;
-            stack.push(images[nowIndex]);
-            if(nowW>DW){
-                //调整高度以适应图片宽高比
-                if(i>6){
-                    stack.pop();
-                    nowIndex--;
-                }
-                scaleSum = 0;
-                stack.forEach(function(item){
-                    scaleSum += item.scale;
-                });
-                height = parseInt(DW/scaleSum);
-                //创建图片和row
-                creatImageInsert(stack,height);
-                nowW = 0;
-                stack = [];
-                i=0;
-            }else if(nowW===DW){
-                //整体添加进row,并且初始化nowIndex,nowW,和stack
-                creatImageInsert(stack,averHeight);
-                nowW = 0;
-                stack = [];
-                i=0;
-            }
-            nowIndex++;
-        }
-        creatImageInsert.call(this,stack,averHeight);
+    var current;
+
+    newRowInsert();
+    loadImage(0);
+
+    //创建新行并插入到wraper
+    function newRowInsert(){
+        current = {length:0,scale:0,height:averHeight,dom:createDom('div')};
+        updateStyles(current.dom,{height:averHeight+'px'});
+        self.wraper.appendChild(current.dom);
     }
-    //创建图片，批量添加到新的row中
-    function creatImageInsert(arr,height){
-        var row = createDom('div');
-        updateStyles(row,{height:height+'px'});
-        arr.forEach(function(item){
-            updateStyles(item.dom,{height:'100%'});
-            row.appendChild(item.dom);
-        })
-        self.wraper.appendChild(row);
+    //设置当前current应有的高度以适应宽度
+    function fitWidth(){
+        var height = parseInt(DW/current.scale);
+        console.log(height);
+        updateStyles(current.dom,{height:height+'px'});
+        current.height = height;
+    }
+    //从第一张图片开始加载
+    function loadImage(index){
+
+        if(index>=imgLength) return true;
+        var image = createImage(imgs[index]);
+        image.addEventListener('load',function(){
+
+            insertImage(this);
+            loadImage(index+1);
+        },false);
+
+    }
+    //添加图片算法
+    function insertImage(img){
+
+        var scale = img.width/img.height;
+        var width = parseInt(current.height*(current.scale+scale));
+        if(width>DW){
+            if(current.length<3){
+                //行插入当前img
+                current.length++;
+                current.scale += scale;
+                updateStyles(img,{height:'100%'});
+                fitWidth();
+                current.dom.appendChild(img);
+            }else{
+                //根据已有img的scale计算行高
+                fitWidth();
+                //以平均高度创建新行,将其插进新行
+                newRowInsert();
+                //当前行插入新的img
+                current.length++;
+                current.scale += scale;
+                updateStyles(img,{height:'100%'});
+                current.dom.appendChild(img);
+            }
+        }else{
+            //插进当前行
+                current.length++;
+                current.scale += scale;
+                updateStyles(img,{height:'100%'});
+                current.dom.appendChild(img);
+
+        }
+
     }
 
 }
