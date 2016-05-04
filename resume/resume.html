@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>朱潇然的简历</title>
+    <style>
+        body,html,* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            background-color: #262a30;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            padding-left: 282px;
+
+            width:1200px;
+            height:650px;
+            background-color: white;
+            border-radius: 4px;
+            color: #555;
+            font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif
+        }
+        .left-wraper {
+            float: left;
+            position: relative;
+            transform: translateX(-100%);
+            width:282px;
+            height:100%;
+        }
+        .left {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding-right: 40px;
+            padding-left: 40px;
+        }
+
+        .title {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .wraper {
+            width:200px;
+            height:200px;
+            overflow: hidden;
+            border: 2px solid #333;
+            border-radius: 4px;
+        }
+        .wraper img {
+            width:100%;
+        }
+        .info {
+            text-align: center;
+            line-height: 30px;
+            color:  rgb(34, 34, 34);
+        }
+        .right-wraper {
+            position: relative;
+            width:100%;
+            height: 100%;
+            padding-left:10px;
+            top:10px;
+
+        }
+        .right {
+            position: absolute;
+            width:calc(100% - 20px);
+            top: 50%;
+            transform: translateY(-50%);
+            padding-right: 20px;
+        }
+        .right p{
+            padding-left: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-size: 15px;
+            line-height:25px;
+        }
+        .right h3 {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 10px solid rgb(34, 34, 34);
+        }
+        .subtitle {
+            font-size: 12px;
+            font-weight: normal;
+        }
+        .product span{
+            display: inline-block;
+            background-color: grey;
+            color: white;
+            padding: 10px;
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-wraper">
+            <div class="left">
+                <h3 class="title">Zhu Xiao Ran</h3>
+                <div class="wraper">
+                    <img src="photo.jpg">
+                </div>
+                <p class="info">
+                    <lable>姓名: </lable><span>朱潇然</span><br>
+                    <span>吉林大学</span><br>
+                    <span>软件学院2013级</span><br>
+                </p>
+            </div>
+        </div>
+
+        <div class="right-wraper">
+            <div class="right">
+                <section>
+                    <h3>技术栈</h3>
+                    <p>
+                        <span>Javascript</span> <span>Jquery</span> <span>HTML</span><br>
+                        <span>CSS</span> <span>CSS3</span> <span>HTML5</span><br>
+                        <span>Nodejs</span> <span>Bootstrap</span>
+                    </p>
+                </section>
+                <section>
+                    <h3>小作品 <span class="subtitle">按照时间顺序</span></h3>
+                    <p class="product">
+                        <span>个人博客网站CMS 评论功能</span>
+                        <span>表单验证封装(仿jq实现)</span>
+                        <span>冒泡排序算法可视化</span>
+                        <span>树遍历可视化</span>
+                        <span>登录注册浮窗组件</span>
+                        <span>图片木桶布局,瀑布流布局，拼图布局</span>
+                    </p>
+                </section>
+                <section>
+                    <h3>兴趣,爱好</h3>
+                    <p>
+                        <span>学习</span> <span>篮球</span> <span>听歌</span>
+                    </p>
+                </section>
+                <section>
+                    <h3>前端经历</h3>
+                    <p>
+                        2015年底接触前端,前期是一片混乱,虽然做出一些东西: 头像集,散列画廊,淘宝图片预览.不够系统,看到什么做什么<br>
+                        2016年3月份,百度前端学院,一个人完成33个任务,HTML，CSS,JS的知识框架逐渐清晰<br>
+                        第一阶段,布局,样式，结构<br>
+                        第二阶段,JS,Dom操作,逻辑组合，排序算法,遍历算法,面向对象,寻路算法,说实话第二阶段收获挺多,期间补了一些设计模式的东西<br>
+                        第三阶段,拼图，瀑布流，木桶布局,熟悉了 图片加载,图片代理,木桶布局还是有疑惑,核心点就是如何优化等待时间<br>
+                        期间还用 node+express+mongodb,搭了个人博客网站,实现CMS,和评论树,nodeJs还算是入门水平<br>
+                        希望到对前端比较重视的公司实习,和牛人公事.
+                    </p>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
