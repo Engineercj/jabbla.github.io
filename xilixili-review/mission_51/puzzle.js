@@ -1,13 +1,15 @@
 /**
  * Created by zxr on 2016/4/27.
  */
-var picVarious = function(){
+var puzzle = function(){
     var dom = createDom('div');
-    //根据宽高比计算裁剪位置
-    function cutImage(img,dom){
+    var imgStack = [];
+    //裁剪图片，生成套子,并将套子插入定位元素
+    function cutImage(img,domr){
         //公共数据
-        var domWidth = parseInt(dom.style.width),
-            domHeight= parseInt(dom.style.height);
+        console.log('aa'+'px'+img);
+        var domWidth = parseInt(domr.Wraper.style.width || dom.style.width),
+            domHeight= parseInt(domr.Wraper.style.height || dom.style.height);
         //获取宽高比
         var scale = img.width/img.height;
         var scaleDom = domWidth/domHeight;
@@ -20,9 +22,12 @@ var picVarious = function(){
             move = ((domHeight*scale)-domWidth)/2;
             updateStyles(img,{height:'100%',position:'absolute',left:-move+'px'});
         }
-        updateStyles(dom,{overflow:'hidden'});
+        updateStyles(domr,{overflow:'hidden',width:'100%',height:'100%',position:'relative'});
         //将图像插入dom
-        dom.addChilds(img);
+        addChilds(domr,img);
+        //套子插入定位元素
+        addChilds(domr.Wraper,domr);
+
     }
     //不同布局的策略方法
     var Layouts = {
@@ -31,11 +36,24 @@ var picVarious = function(){
             var domWidth = parseInt(dom.style.width),
                 domHeight= parseInt(dom.style.height);
             //创建图像
-            var img = createImage(imgs[0]);
-            img.addEventListener('load',function(){
-                console.log('1');
-                cutImage(this,dom);
-            },false);
+            var oImg = createDom('div'),oImgWraper = createDom('div');
+
+            dom.innerHTML = '';
+            imgStack = [];
+            imgStack.push(oImg);
+            imgStack.forEach(function(item){
+                item.className = 'img-wraper';
+                item.classList.add('right');
+                item.classList.add('bottom');
+            });
+            //图片
+            imgs.forEach(function(item,index,array){
+                var img = createImage(item);
+                img.addEventListener('load',function(){
+                    cutImage(this,imgStack[index],oImgWraper);
+                },false)
+            });
+            addChilds(dom,oImgWraper);
 
         },
         2:function(imgs){
@@ -50,6 +68,16 @@ var picVarious = function(){
             //img
             var img1 = createImage(imgs[0]),oImg1 = createDom('div'),
                 img2 = createImage(imgs[1]),oImg2 = createDom('div');
+
+            dom.innerHTML = '';
+            imgStack = [];
+            imgStack.push(oImg1);
+            imgStack.push(oImg2);
+            imgStack.forEach(function(item){
+                item.className = 'img-wraper';
+                item.classList.add('right');
+                item.classList.add('bottom');
+            });
 
             //计算出的数据
             var cosDeg = Math.cos(Math.atan(domWidth/(3*domHeight)));
@@ -81,12 +109,12 @@ var picVarious = function(){
             },[{left:-domWidth/4+'px'},{right:-domWidth/4+'px'}]);
 
             //添加结构
-            oImg1.addChilds(img1);
-            oImg2.addChilds(img2);
-            div1.addChilds(oImg1);
-            div2.addChilds(oImg2);
-            oDiv.addChilds(div1,div2);
-            dom.addChilds(oDiv);
+            addChilds(oImg1,img1);
+            addChilds(oImg2,img2);
+            addChilds(div1,oImg1);
+            addChilds(div2,oImg2);
+            addChilds(oDiv,[div1,div2]);
+            addChilds(dom,oDiv);
         },
         3:function(imgs){
             //公共数据
@@ -99,21 +127,39 @@ var picVarious = function(){
                 divUp = createDom('div'),
                 divDown = createDom('div');
 
-            var div = [];
-            div.push(divBig);
-            div.push(divUp);
-            div.push(divDown);
+            divBig.Wraper = createDom('div');
+            divNarrow.Wraper = createDom('div');
+            divUp.Wraper = createDom('div');
+            divDown.Wraper = createDom('div');
+
+            imgStack = [];
+            imgStack.push(divBig);
+            imgStack.push(divUp);
+            imgStack.push(divDown);
+
+
+
+
+            dom.innerHTML = '';
+            imgStack.forEach(function(item){
+                item.className = 'img-wraper';
+            });
+
+            //设置定位套子的位置信息
+            divUp.Wraper.className ='right top';
+            divDown.Wraper.className ='right bottom';
+            divBig.Wraper.className ='bottom left top';
 
             //属性设置
-            updateStyles(divBig,{
+            updateStyles(divBig.Wraper,{
                 width:(domWidth-domHeight*0.5)+'px',height:domHeight+'px',float:'left',position:'relative',
                 overflow:'hidden'
             });
-            updateStyles(divNarrow,{
+            updateStyles(divNarrow.Wraper,{
                 width:0.33*domWidth+'px',height:'100%',float:'left'
             });
-            updateSameProperties([divUp,divDown],{
-                width:domHeight*0.5+'px',height:domHeight*0.5+'px',backgroundColor:'yellow',
+            updateSameProperties([divUp.Wraper,divDown.Wraper],{
+                width:domHeight*0.5+'px',height:domHeight*0.5+'px',
                 overflow:'hidden',position:'relative'
             });
 
@@ -121,13 +167,12 @@ var picVarious = function(){
             imgs.forEach(function(item,index,array){
                 var img = createImage(item);
                 img.addEventListener('load',function(){
-                    console.log('3');
-                    cutImage(this,div[index]);
+                    cutImage(this,imgStack[index]);
                 },false)
             });
-
-            divNarrow.addChilds(divUp,divDown);
-            dom.addChilds(divBig,divNarrow);
+            addChilds(divBig.Wraper,divBig);
+            addChilds(divNarrow.Wraper,[divUp.Wraper,divDown.Wraper]);
+            addChilds(dom,[divBig.Wraper,divNarrow.Wraper]);
         },
         4:function(imgs){
 
@@ -146,18 +191,35 @@ var picVarious = function(){
                 divRup = createDom('div'),
                 divRdown = createDom('div');
 
-            var div = [];
-            div.push(divLup);
-            div.push(divLdown);
-            div.push(divRup);
-            div.push(divRdown);
+
+                divLup.Wraper = createDom('div');
+                divLdown.Wraper = createDom('div');
+                divRup.Wraper = createDom('div');
+                divRdown.Wraper = createDom('div');
+
+            imgStack = [];
+            imgStack.push(divLup);
+            imgStack.push(divLdown);
+            imgStack.push(divRup);
+            imgStack.push(divRdown);
+
+
+            dom.innerHTML = '';
+            imgStack.forEach(function(item){
+                item.className = 'img-wraper';
+            });
+
+            divRup.Wraper.className = 'right top'
+            divRdown.Wraper.className = 'right bottom'
+            divLdown.Wraper.className = 'left bottom'
+            divLup.Wraper.className = 'left top'
 
 
             //属性设置
             updateSameProperties([divLeft,divRight],{
                 width:domWidth*0.5+'px',height:domHeight+'px',float:'left'
             });
-            updateSameProperties([divLup,divLdown,divRup,divRdown],{
+            updateSameProperties([divLup.Wraper,divLdown.Wraper,divRup.Wraper,divRdown.Wraper],{
                 width:domWidth*0.5+'px',height:0.5*domHeight+'px',overflow:'hidden',position:'relative'
             });
 
@@ -165,15 +227,15 @@ var picVarious = function(){
             imgs.forEach(function(item,index,array){
                 var img = createImage(item);
                 img.addEventListener('load',function(){
-                    cutImage(this,div[index]);
+                    cutImage(this,imgStack[index]);
                 },false)
             });
 
             //添加结构
-            divLeft.addChilds(divLup,divLdown);
-            divRight.addChilds(divRup,divRdown);
-            dom.addChilds(divLeft);
-            dom.addChilds(divRight);
+            addChilds(divLeft,[divLup.Wraper,divLdown.Wraper]);
+            addChilds(divRight,[divRup.Wraper,divRdown.Wraper]);
+            addChilds(dom,divLeft);
+            addChilds(dom,divRight);
         },
         5:function(imgs){
             //公共数据
@@ -190,12 +252,33 @@ var picVarious = function(){
                 leftBottom = createDom('div'),
                 right = createDom('div');
 
-            var div = [];
-            div.push(leftTop);
-            div.push(leftdoubleBottom);
-            div.push(leftCenterBottom);
-            div.push(rightTop);
-            div.push(rightBottom);
+
+            leftTop.Wraper = createDom('div');
+            leftdoubleBottom.Wraper = createDom('div');
+            leftCenterBottom.Wraper = createDom('div');
+            rightTop.Wraper = createDom('div');
+            rightBottom.Wraper = createDom('div');
+
+            imgStack = [];
+            imgStack.push(leftTop);
+            imgStack.push(leftdoubleBottom);
+            imgStack.push(leftCenterBottom);
+            imgStack.push(rightTop);
+            imgStack.push(rightBottom);
+
+
+            dom.innerHTML = '';
+
+            imgStack.forEach(function(item){
+                item.className = 'img-wraper';
+            });
+
+            leftTop.Wraper.className = 'left top';
+            leftdoubleBottom.Wraper.className = 'left bottom';
+            leftCenterBottom.Wraper.className = 'bottom';
+            rightTop.Wraper.className = 'right top';
+            rightBottom.Wraper.className = 'right bottom';
+
 
             //属性设置
             updateStyles(left,{
@@ -207,31 +290,33 @@ var picVarious = function(){
             updateStyles(leftBottom,{
                 width:0.67*domWidth+'px',height:0.33*domHeight+'px'
             });
-            updateStyles(leftTop,{
+            updateStyles(leftTop.Wraper,{
                 width:0.67*domWidth+'px',height:0.67*domHeight+'px',overflow:'hidden',position:'relative'
             });
-            updateSameProperties([leftdoubleBottom,leftCenterBottom],{
+            updateSameProperties([leftdoubleBottom.Wraper,leftCenterBottom.Wraper],{
                 width:0.5*0.67*domWidth+'px',height:0.33*domHeight+'px',float:'left',overflow:'hidden',position:'relative'
             });
-            updateStyles(rightTop,{
+            updateStyles(rightTop.Wraper,{
                 width:0.33*domWidth+'px',height:domWidth*0.33+'px',overflow:'hidden',position:'relative'
             });
-            updateStyles(rightBottom,{
+            updateStyles(rightBottom.Wraper,{
                 width:0.33*domWidth+'px',height:domHeight-(domWidth*0.33)+'px',overflow:'hidden',position:'relative'
             });
             //图片属性
+
             imgs.forEach(function(item,index,array){
                 var img = createImage(item);
+
                 img.addEventListener('load',function(){
-                    cutImage(this,div[index]);
+                    cutImage(this,imgStack[index]);
                 },false)
             });
 
             //添加结构
-            dom.addChilds(left,right);
-            left.addChilds(leftTop,leftBottom);
-            right.addChilds(rightTop,rightBottom);
-            leftBottom.addChilds(leftdoubleBottom,leftCenterBottom);
+            addChilds(dom,[left,right]);
+            addChilds(left,[leftTop.Wraper,leftBottom]);
+            addChilds(right,[rightTop.Wraper,rightBottom.Wraper]);
+            addChilds(leftBottom,[leftdoubleBottom.Wraper,leftCenterBottom.Wraper]);
 
         },
         6:function(imgs){
@@ -246,19 +331,41 @@ var picVarious = function(){
                 RightCenter = createDom('div'),
                 RightBottom = createDom('div');
 
+            leftTop.Wraper = createDom('div');
+            leftDoubleBottom.Wraper = createDom('div');
+            leftCenterBottom.Wraper = createDom('div');
+            RightTop.Wraper = createDom('div');
+            RightCenter.Wraper = createDom('div');
+            RightBottom.Wraper = createDom('div');
+
 
             //布局
             var left = createDom('div'),
                 right = createDom('div'),
                 leftBottom = createDom('div');
 
-            var div = [];
-            div.push(leftTop);
-            div.push(leftDoubleBottom);
-            div.push(leftCenterBottom);
-            div.push(RightTop);
-            div.push(RightCenter);
-            div.push(RightBottom);
+            imgStack = [];
+            imgStack.push(leftTop);
+            imgStack.push(leftDoubleBottom);
+            imgStack.push(leftCenterBottom);
+            imgStack.push(RightTop);
+            imgStack.push(RightCenter);
+            imgStack.push(RightBottom);
+
+
+
+            dom.innerHTML = '';
+            imgStack.forEach(function(item){
+                item.className = 'img-wraper';
+            });
+
+            leftTop.Wraper.className = 'left top';
+            leftDoubleBottom.Wraper.className = 'left bottom';
+            leftCenterBottom.Wraper.className = 'bottom';
+            RightTop.Wraper.className = 'right top';
+            RightCenter.Wraper.className = 'right';
+            RightBottom.Wraper.className = 'right bottom';
+
 
             updateStyles(left,{
                 width:0.67*domWidth+'px',height:domHeight+'px',float:'left'
@@ -270,13 +377,13 @@ var picVarious = function(){
                 width:0.67*domWidth+'px',height:0.333*domHeight+'px'
             });
 
-            updateStyles(leftTop,{
+            updateStyles(leftTop.Wraper,{
                 width:0.67*domWidth+'px',height:0.67*domHeight+'px',position:'relative',overflow:'hidden'
             });
-            updateSameProperties([leftDoubleBottom,leftCenterBottom],{
+            updateSameProperties([leftDoubleBottom.Wraper,leftCenterBottom.Wraper],{
                 width:0.5*0.67*domWidth+'px',height:0.333*domHeight+'px',position:'relative',overflow:'hidden',float:'left'
             });
-            updateSameProperties([RightTop,RightCenter,RightBottom],{
+            updateSameProperties([RightTop.Wraper,RightCenter.Wraper,RightBottom.Wraper],{
                 width:0.333*domWidth+'px',height:0.333*domHeight+'px',position:'relative',overflow:'hidden'
             });
 
@@ -284,23 +391,48 @@ var picVarious = function(){
             imgs.forEach(function(item,index,array){
                 var img = createImage(item);
                 img.addEventListener('load',function(){
-                    cutImage(this,div[index]);
+                    console.log('aaa'+' '+index);
+                    cutImage(this,imgStack[index]);
                 },false)
             });
 
             //创建结构
-            dom.addChilds(left,right);
-            left.addChilds(leftTop,leftBottom);
-            right.addChilds(RightTop,RightCenter,RightBottom);
-            leftBottom.addChilds(leftDoubleBottom,leftCenterBottom);
+            addChilds(dom,[left,right]);
+            addChilds(left,[leftTop.Wraper,leftBottom]);
+            addChilds(right,[RightTop.Wraper,RightCenter.Wraper,RightBottom.Wraper]);
+            addChilds(leftBottom,[leftDoubleBottom.Wraper,leftCenterBottom.Wraper]);
         }
     }
     return {
-        create:function(obj){
-            //设置容器宽高
-            updateStyles(dom,{width:obj.WH[0],height:obj.WH[1],position:'relative'});
-            Layouts[obj.imgs.length](obj.imgs);
+        init:function(width,height){
+            updateStyles(dom,{width:width,height:height,position:'relative'});
+            dom.addEventListener('click',function(e){
+                if(e.target.tagName==='IMG') allScreen.pop(e.target);
+            },false)
             return dom;
+        },
+        setImage:function(obj){
+            Layouts[obj.length](obj);
+            return dom;
+        },
+        getImageDomElements:function(){
+            return imgStack;
+        },
+        getDom:function(){
+            return dom;
+        },
+        setGutter:function(x,y){
+            var X = x/2 || 0;
+            var Y = y/2 || x/2 || 0;
+            if(imgStack.length!==2){
+                imgStack.forEach(function(item){
+                item.Wraper.style.paddingLeft = (item.Wraper.classList.contains('left'))? 0:X+'px';
+                item.Wraper.style.paddingRight = (item.Wraper.classList.contains('right'))? 0:X+'px';
+                item.Wraper.style.paddingTop = (item.Wraper.classList.contains('top'))? 0:Y+'px';
+                item.Wraper.style.paddingBottom = (item.Wraper.classList.contains('bottom'))? 0:Y+'px';
+                });    
+            }
+            
         }
     }
 }

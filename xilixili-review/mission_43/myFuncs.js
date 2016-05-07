@@ -71,10 +71,10 @@ function randomNum(left,right){
     return Math.floor(step2);
 }
 /*图片代理函数*/
+/*
 Object.prototype.addImage = function(image,src){
     var me = this,
         temp = createDom('div');
-    temp.innerHTML = '图片加载中.....';
     updateStyles(temp,{
         width:'100%',height:'100%',position:'absolute',top:0,left:0
     });
@@ -84,4 +84,4 @@ Object.prototype.addImage = function(image,src){
         me.removeChild(temp);
         me.appendChild(image);
     }
-}
+}*/

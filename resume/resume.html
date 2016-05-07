@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>朱潇然的简历</title>
+    <link rel="stylesheet" href="Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css">
+    <style>
+        body,html,* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #262a30;
+            font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+            color: white;
+        }
+        .container {
+            width:1000px;
+            margin: 0 auto;
+            background-color: white;
+            height:900px;
+            overflow: hidden;
+        }
+        .container::after {
+            content: '';
+            width: 0;
+            height: 0;
+            display: block;
+            clear: both;
+        }
+        .info {
+            width:400px;
+            height:100%;
+            float: left;
+            background-color: #389cff;
+        }
+        .head {
+            margin-top: 20px;
+            margin-left: 10px;
+        }
+        .head::after {
+            content: '';
+            width: 0;
+            height: 0;
+            display: block;
+            clear: both;
+        }
+        .photo {
+            float: left;
+            border: 4px solid white;
+            width: 150px;
+            height:200px;
+            overflow: hidden;
+            background-image: url(photo.jpg);
+            background-position: -20px -10px;
+            border-radius: 10px;
+        }
+        .basic {
+            font-size:15px;
+            padding-left: 5px;
+            letter-spacing: 2px;
+            line-height: 23px;
+            float: left;
+        }
+        .skill {
+            margin-top: 20px;
+        }
+        .skill h3 {
+            background-color: #1b1918;
+            text-align: center;
+        }
+        .skill_content {
+            padding-top: 5px;
+            padding-left: 10px;
+            background-color: #3c3836;
+            color: white;
+            height: 700px;
+        }
+        .title-head {
+            font-size: 20px;
+            color: red;
+            margin-bottom: 2px;
+        }
+        .intro {
+            display: block;
+            padding:0;
+            margin-bottom: 2px;
+        }
+        .content {
+            float: left;
+            width:calc(100% - 400px);
+            height:100%;
+            background-color: #F2F5F6;
+            color: rgb(85, 85, 85);
+            padding-left: 10px;
+        }
+        .tag {
+            display: block;
+            padding: 10px;
+        }
+        .title {
+            padding:10px;
+            border-bottom: 10px solid #3c3836;
+        }
+        .adress {
+            color: rgb(85,85,85);
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+        .header {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="info">
+            <div class="head">
+                <div class="photo"></div>
+                <p class="basic">
+                    姓名:<span>朱潇然</span><br>
+                    学校:<span>吉林大学</span><br>
+                    专业:<span>软件工程</span><br>
+                    年级:<span>2013级</span><br>
+                    出生:<span>1993.10.11</span><br>
+                    职位:<span>前端开发实习</span><br>
+                    实习时间:<span>2016.7</span>起<br>
+                    邮箱:<span>387857274@qq.com</span><br>
+                    微信:<span>cm1825</span><br>
+
+                </p><br>
+
+            </div>
+            <div class="adress">
+                <span class="header">GitHub:</span>&nbsp;&nbsp;<span>https://github.com/jabbla</span><br>
+                <span class="header">MyBlog:</span> <span>http://jabbla.github.io/test</span>
+            </div>
+            <div class="skill">
+                <h3>技术储备</h3>
+                <p class="skill_content">
+                    <span class="title-head">HTML</span><br><span class="intro">熟悉HTML和HTML5标签,标签语意化,崇尚简单，清晰的网页结构</span><br>
+                    <span class="title-head">CSS / CSS3</span><br>
+                    <span class="intro">
+                    可实现较为复杂的布局和动画，CSS编写模化，熟悉常用的CSS3属性
+                    </span><br>
+                    <span class="title-head">EcmaScript 5 / 6</span><br>
+                    <span class="intro">
+                    熟悉ecmascript5,充分理解闭包和其常用的使用场景,了解大部分JS设计模式的实现,
+                    算法和数据结构有一定的基础.了解ECMA6的部分新出特性
+                    </span><br>
+                    <span class="title-head">Jquery / Bootstrap / Node.Js</span><br>
+                    <span class="intro">
+                    熟悉Jquery的常见操作,Bootstrp组件的使用,能使用node/express/mongodb搭建简单服务器+数据库
+                    </span><br>
+                </p>
+            </div>
+        </section>
+        <section class="content">
+            <div class="project">
+                <h3 class="title">简单的小实现</h3>
+                <p class="project_cotent">
+                    <span class="icon-ok-circle tag">头像集(提供选择,悬停效果,类似图片轮播)</span>
+                    <span class="icon-ok-circle tag">散列画廊(类似照片墙,每取一次照片后都随机放置,实现3D翻转效果)</span>
+                    <span class="icon-ok-circle tag">淘宝大图预览(类似淘宝实现)</span>
+                    <span class="icon-ok-circle tag">冒泡排序可视化,多叉树三种遍历算法可视化(展示过程动画)</span>
+                    <span class="icon-ok-circle tag">文件管理树形结构(添加,删除,查找)</span>
+                    <span class="icon-ok-circle tag">行星与飞船(面向对象编程)</span>
+                    <span class="icon-ok-circle tag">听指令的小方块(面向对象编程,寻路算法,墙随机生成算法)</span>
+                </p>
+            </div>
+            <div class="project">
+                <h3 class="title">封装组件</h3>
+                <p class="project_cotent">
+                    <span class="icon-ok-circle tag">登录,注册浮窗组件(提供弹出,关闭,设置视口,弹出动画,关闭动画接口)</span>
+                    <span class="icon-ok-circle tag">表单验证组件(仿jq实现,提供规则,ajax,错误提示,成功提示,检测接口)</span>
+                    <span class="icon-ok-circle tag">相册拼图布局,瀑布布局,木桶布局(图片间隙,布局大小,输入图片,等接口)</span>
+                </p>
+            </div>
+            <div class="project">
+                <h3 class="title">个人项目</h3>
+                <p class="project_cotent">
+                    <span class="icon-star tag">校园二手交易市场(前端负责,UI组件,UI交互,AJAX后台交互)</span>
+                    <span class="icon-star tag">2016春季百度前端学院.独自完成33个任务,并按时提交,正在最后一阶段学习</span>
+                    <span class="icon-star tag">个人博客网站,实现CMS+评论树功能</span>
+                </p>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

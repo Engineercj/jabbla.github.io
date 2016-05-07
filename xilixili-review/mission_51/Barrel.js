@@ -3,11 +3,11 @@
  */
 var Barrel = (function(){
     var instance;
-    
     //木桶类
     function Barrel(obj){
         this.rows = [];
         this.images = [];
+        this.undoRows = [];
         this.width = obj.width;
     }
     Barrel.prototype.init = function(){
@@ -99,6 +99,7 @@ var Barrel = (function(){
         },
         addImages:function(imgs){
             instance.addImages(imgs);
+            
         }
     }
 })()
