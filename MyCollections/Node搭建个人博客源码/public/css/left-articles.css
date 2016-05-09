@@ -1,0 +1,56 @@
+#show-articles{
+    padding-left:10px;
+    padding-right:10px;;
+}
+#show-articles .wraper{
+    margin-bottom: 25px;
+}
+#show-articles .meta{
+    height:35px;
+}
+#show-articles .context{
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+}
+#show-articles .page-header h1{
+    font-family: "黑体";
+    margin-bottom: 5px;
+    font-size:20px;
+}
+#show-articles .label{
+    font-size: 15px;
+}
+#show-articles p{
+    font-size: 16px;
+    font-weight: 400;
+    color:#3A4145;
+    padding-left:40px;
+    -webkit-font-smoothing:antialiased;
+}
+#show-articles .context .mybtn{
+    float: right;
+}
+
+#show-articles .meta img{
+    border-radius: 50%;
+}
+#show-articles span,#show-articles a{
+    display: inline-block;
+    margin-right: 10px;
+}
+#show-articles .wraper {
+    /*border: 1px solid #d3e0e9;*/
+}
+#show-articles .meta .author{
+    color:#18BC9C;
+    margin-left:10px;
+}
+#show-articles .label{
+    line-height:30px;
+    display: inline-block;
+    margin-right:10px;
+}
+#show-articles .context .btn-group{
+    float: right;
+}

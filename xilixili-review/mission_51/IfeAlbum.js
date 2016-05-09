@@ -142,7 +142,7 @@
      * 允许点击图片时全屏浏览图片
      */
     IfeAlbum.prototype.enableFullscreen = function () {
-
+        this.layout.enableFullscreen();
     };
 
 
@@ -151,7 +151,7 @@
      * 禁止点击图片时全屏浏览图片
      */
     IfeAlbum.prototype.disableFullscreen = function () {
-
+        this.layout.disableFullscreen();
     };
 
 
@@ -161,44 +161,26 @@
      * @return {boolean} 是否允许全屏浏览
      */
     IfeAlbum.prototype.isFullscreenEnabled = function () {
-
+        return this.layout.isFullscreenEnabled();
     };
 
     /**
-     * 获取拼图模式的宽度和高度
+     * 设置各个布局的基本信息
      * @param {string}  width  宽度
      * @param {string}  height  高度
+     * @param {object}  options  其它对应参数
      * @return {object} 拼图的dom
      */
-    IfeAlbum.prototype.setPuzzleSize = function (width,height) {
-        if(this.layout.name!=='PUZZLE') return;
-        return this.layout.init(width,height);
+    IfeAlbum.prototype.init = function (width,height,options) {
+        return this.layout.init(width,height,options);
     };
-
-    /**
-     * 设置木桶模式每行图片数的上下限
-     * @param {number} min 最少图片数（含）
-     * @param {number} max 最多图片数（含）
-     */
-    IfeAlbum.prototype.setBarrelBin = function (min, max) {
-
-        // 注意异常情况的处理，做一个健壮的库
-        if (min === undefined || max === undefined || min > max) {
-            console.error('...');
-            return;
-        }
-
-        // 你的实现
-
-    };
-
-
-
     /**
      * 获取木桶模式每行图片数的上限
      * @return {number} 最多图片数（含）
      */
     IfeAlbum.prototype.getBarrelBinMax = function () {
+        if(!this.layout.name==='BARREL') return;
+        return this.layout.getBarrelBinMax();
 
     };
 
@@ -209,7 +191,8 @@
      * @return {number} 最少图片数（含）
      */
     IfeAlbum.prototype.getBarrelBinMin = function () {
-
+        if(!this.layout.name==='BARREL') return;
+        return this.layout.getBarrelBinMin();
     };
 
 
@@ -262,8 +245,9 @@
 }(window));
 
 ifeAlbum.setLayout(1);
-ifeAlbum.setPuzzleSize('600px','400px');
-ifeAlbum.setImage(['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg']);
-ifeAlbum.setGutter(10,10);
+ifeAlbum.init('800px','400px');
+ifeAlbum.setImage(['1.jpg','2.jpg']);
+ifeAlbum.enableFullscreen();
 document.body.appendChild(ifeAlbum.dom);
 var test = document.querySelectorAll('.img-wraper');
+console.log();

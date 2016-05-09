@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>听指令的小方块</title>
+    <style>
+        *,ul{
+            margin: 0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        .opop {
+            width:300px;
+            position: fixed;
+            right:0;
+            top: 0;
+        }
+        .opop span {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<p class="opop">
+    在输入框中允许输入如下指令，按下按钮后，使得正方形做相应动作<br>
+    <span>GO</span>：向蓝色边所面向的方向前进一格（一格等同于正方形的边长）<br>
+    <span>TUN LEF</span>：向左转（逆时针旋转90度）<br>
+    <span>TUN RIG</span>：向右转（顺时针旋转90度）<br>
+    <span>TUN BAC</span>：向右转（旋转180度）<br>
+    <span>TRA LEF</span>：向屏幕的左侧移动一格，方向不变<br>
+    <span>TRA TOP</span>：向屏幕的上面移动一格，方向不变<br>
+    <span>TRA RIG</span>：向屏幕的右侧移动一格，方向不变<br>
+    <span>TRA BOT</span>：向屏幕的下面移动一格，方向不变<br>
+    <span>MOV LEF</span>：方向转向屏幕左侧，并向屏幕的左侧移动一格<br>
+    <span>MOV TOP</span>：方向转向屏幕上面，向屏幕的上面移动一格<br>
+    <span>MOV RIG</span>：方向转向屏幕右侧，向屏幕的右侧移动一格<br>
+    <span>MOV BOT</span>：方向转向屏幕下面，向屏幕的下面移动一格<br>
+    <span>GO 3</span>：向当前方向前进三格<br>
+    <span>TRA TOP 2</span>：向屏幕上方平移两格<br>
+    <span>MOV RIG 4</span>：方向转向屏幕右侧，向屏幕的右侧移动四格<br>
+    <span>MOV TO x, y</span>，会使得方块从当前位置移动到坐标为x，y的地方
+</p>
+<script src="Code.js"></script>
+<script src="task.js"></script>
+</body>
+</html>

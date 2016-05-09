@@ -1,0 +1,61 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+#glo-select{
+    width:100%;
+    height:30px;
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 20px;
+}
+#glo-select .wraper::after{
+    content: '';
+    display: block;
+    width:0;
+    height:0;
+    clear: both;
+}
+#glo-select span{
+    display: block;
+}
+#glo-select .select-list{
+    width:100px;
+    float: left;
+    position: relative;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    transition: height 0.2s ease-in-out;
+}
+#glo-select .select-list.school{
+    width:170px;
+    float:right;
+}
+#glo-select .select-list > li{
+    width:100%;
+    height:30px;
+    padding-left: 20px;
+    line-height: 30px;
+    font-size: 12px;
+    transition: background-color 0.5s ease-in-out;
+    cursor: pointer;
+}
+#glo-select .select-list.fold{
+    height:30px;
+    overflow: hidden;
+}
+#glo-select .select-list.unfold{
+    height:200px;
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+#glo-select span{
+    position: relative;
+    float: left;
+    height:100%;
+    line-height: 40px;
+    margin-right: 10px;
+}

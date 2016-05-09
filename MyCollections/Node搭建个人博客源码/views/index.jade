@@ -1,0 +1,124 @@
+//
+   Created by zxr on 2016/3/31.
+
+extends layouts/layout
+block content
+    link(rel='stylesheet', href='./css/left-articles.css')
+    link(rel='stylesheet', href='./css/recent-mark.css')
+    body
+        nav#nav.nav-bar
+            a.logo-img(href="/")
+                img.logo(src="./imgs/logo.png")
+            ul.nav
+                li.active
+                    a(href='/') 首页
+                li
+                    a(href='#') 全部文章
+                li
+                    a(href='#') 一起玩游戏
+                li
+                    a(href='#') 相册
+                li
+                    a(href='/login') 管理
+                li.github
+                    a.icon-github(href='https://github.com/jabbla')   My Github
+        #banner.jumbotron
+            .container
+                h1 出发了,就别问路在哪
+        #content.container
+            #show-articles.col-md-9
+                each item,index in articles
+                    .wraper
+                        article
+                            .page-header
+                                h1
+                                    a(href="/readAll?title=#{item.title}") #{item.title}
+                            .context
+                                .meta
+                                    img(src='./imgs/#{item.head}')
+                                    a.author(href='#') #{item.author}
+                                    span.time #{item.time}
+                                p.snap
+                                   | #{item.snap}
+                                each item1,index1 in item.category
+                                    span.label.label-success #{item1}
+                                .btn-group
+                                    button.btn.btn-default(type='button') 分享
+                                    button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+                                        span.caret
+                                        span.sr-only 切换下拉菜单
+                                    ul.dropdown-menu(role='menu')
+                                        li
+                                            a(href='#') 微信朋友圈
+                                        li
+                                            a(href='#') 新浪微博
+                                        li
+                                            a(href='#') QQ空间
+                                a.btn.btn-primary.mybtn(href="/readAll?title=#{item.title}",class="readAll") 阅读全文
+            #recent.col-md-3
+                #recent-article
+                    .list-group
+                        h4 最近mark的文章
+                        each item,index in links
+                            a.list-group-item(href='#{item.link_adr}') #{item.title}
+                #recent-mark
+                    .wraper
+                        .page-header
+                            h4 文章分类
+                        ul.nav.nav-pills.nav-stacked
+                            li.dropdown
+                                a.dropdown-toggle
+                                    | javascript
+                                    span.badge #{javascript.length}
+                                ul.dropdown-menu
+                                    each item2,index2 in javascript
+                                        li
+                                            a(href='/readAll?title=#{item2.title}') #{item2.title}
+                            li.dropdown
+                                a.dropdown-toggle
+                                    | nodeJs
+                                    span.badge #{nodejs.length}
+                                ul.dropdown-menu
+                                    each item3,index3 in nodejs
+                                        li
+                                            a(href='/readAll?title=#{item3.title}') #{item3.title}
+
+                            li.dropdown
+                                a.dropdown-toggle
+                                    | jQuery
+                                    span.badge #{jquery.length}
+                                ul.dropdown-menu
+                                    each item3,index3 in jquery
+                                        li
+                                            a(href='/readAll?title=#{item3.title}') #{item3.title}
+
+                            li.dropdown
+                                a.dropdown-toggle
+                                    | CSS3
+                                    span.badge #{css3.length}
+                                ul.dropdown-menu
+                                    each item3,index3 in css3
+                                        li
+                                            a(href='/readAll?title=#{item3.title}') #{item3.title}
+
+                            li.dropdown
+                                a.dropdown-toggle
+                                    | CSS
+                                    span.badge #{css.length}
+                                ul.dropdown-menu
+                                    each item3,index3 in css
+                                        li
+                                            a(href='/readAll?title=#{item3.title}') #{item3.title}
+
+                            li.dropdown
+                                a.dropdown-toggle
+                                    | HTML5
+                                    span.badge #{html5.length}
+                                ul.dropdown-menu
+                                    each item3,index3 in html5
+                                        li
+                                            a(href='/readAll?title=#{item3.title}') #{item3.title}
+
+        script(src="./js/readAll.js")
+        script(src="./js/headroom.min.js")
+        script(src="./js/recent-mark.js")

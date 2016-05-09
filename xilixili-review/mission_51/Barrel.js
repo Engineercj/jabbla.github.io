@@ -1,18 +1,19 @@
 /**
  * Created by zxr on 2016/4/30.
  */
-var Barrel = (function(){
+var Barrel = function(){
     var instance;
+    var EnallScreen,flag;
     //木桶类
-    function Barrel(obj){
+    function Barrel(){
         this.rows = [];
         this.images = [];
-        this.undoRows = [];
-        this.width = obj.width;
-    }
-    Barrel.prototype.init = function(){
         this.wraper = createDom('div');
-        updateStyles(this.wraper,{width:this.width});
+    }
+    Barrel.prototype.init = function(width,height,options){
+        this.BinMin = options.BinMin;
+        this.BinMax = options.BinMax;
+        updateStyles(this.wraper,{width:width,height:height});
         this.wraper.className = 'Barrel';
         document.body.appendChild(this.wraper);
         return this.wraper
@@ -31,13 +32,13 @@ var Barrel = (function(){
         //创建新行并插入到wraper
         function newRowInsert(){
             current = {length:0,scale:0,height:averHeight,dom:createDom('div')};
+            current.dom.className = 'barrel-row';
             updateStyles(current.dom,{height:averHeight+'px'});
             self.wraper.appendChild(current.dom);
         }
         //设置当前current应有的高度以适应宽度
         function fitWidth(){
             var height = parseInt(DW/current.scale);
-            console.log(height);
             updateStyles(current.dom,{height:height+'px'});
             current.height = height;
         }
@@ -46,8 +47,11 @@ var Barrel = (function(){
 
             if(index>=imgLength) return true;
             var image = createImage(imgs[index]);
+            image.className = 'Barrel-img';
             image.addEventListener('load',function(){
-
+                this.addEventListener('click',function(){
+                    EnallScreen.pop(this);
+                },false);
                 insertImage(this);
                 loadImage(index+1);
             },false);
@@ -59,7 +63,7 @@ var Barrel = (function(){
             var scale = img.width/img.height;
             var width = parseInt(current.height*(current.scale+scale));
             if(width>DW){
-                if(current.length<3){
+                if(current.length<self.BinMin){
                     //行插入当前img
                     current.length++;
                     current.scale += scale;
@@ -91,16 +95,40 @@ var Barrel = (function(){
     }
 
     return {
-        init:function(obj){
-            if(instance) return instance.wraper;
-            instance = new Barrel(obj);
-            instance.init();
+        init:function(width,height,options){
+        
+            
+            instance.init(width,height,options);
             return instance.wraper;
         },
-        addImages:function(imgs){
+        setImage:function(imgs){
+
             instance.addImages(imgs);
             
+        },
+        getDom:function(){
+
+            instance = new Barrel();
+            return instance.wraper;
+
+        },
+        enableFullscreen:function(){
+            EnallScreen = allScreen();
+            flag = true;
+        },
+        disableFullscreen:function(){
+            EnallScreen.disable();
+            flag = false;
+        },
+        isFullscreenEnabled:function(){
+            return flag;
+        },
+        getBarrelBinMax:function(){
+            return instance.BinMax;
+        },
+        getBarrelBinMin:function(){
+            return instance.BinMin;
         }
     }
-})()
+}
 

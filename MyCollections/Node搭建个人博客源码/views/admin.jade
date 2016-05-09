@@ -1,0 +1,165 @@
+//
+   Created by zxr on 2016/4/1.
+
+extends layouts/layout
+block content
+    link(rel='stylesheet', href='./css/admin.css')
+    body
+        nav#nav.nav-bar
+            a.logo-img(href="/")
+                img.logo(src="./imgs/logo.png")
+            ul.nav
+                li
+                    a(href='/') 首页
+                li
+                    a(href='#') 全部文章
+                li
+                    a(href='#') 一起玩游戏
+                li
+                    a(href='#') 相册
+                li.active
+                    a(href='/login') 管理
+                li.github
+                    a.icon-github(href='https://github.com/jabbla')   My Github
+        #banner.jumbotron
+            .container
+                h1 出发了,就别问路在哪
+        #sub-area
+            #files
+                #ad-content.container
+                    .col-md-6.put-in
+                        .wraper
+                            .panel.panel-primary
+                                .panel-heading
+                                    h3.panel-title 文章录入面板
+                                .panel-body
+                                    form.bs-example.bs-example-form(role='form',method="post",action="/admin/myArticle")
+                                        input(name="id",id="hide-id",value="")
+                                        .input-group
+                                            span.input-group-addon 文章标题
+                                            input.form-control(type='text',id="title", placeholder='在这输入你的文章标题',name="title")
+                                        .panel.panel-default
+                                            .panel-heading
+                                                h3.panel-title
+                                                    label(for='snap') 文章摘要
+                                            .panel-body
+                                                textarea.form-control(name='snap',id="snap", rows='3')
+                                        .checkbox
+                                            label
+                                                input(type='checkbox', value='javascript',name="category",class="category")
+                                                | javascript
+                                        .checkbox
+                                            label
+                                                input(type='checkbox', value='nodejs',name="category",class="category")
+                                                | nodejs
+                                        .checkbox
+                                            label
+                                                input(type='checkbox', value='css',name="category",class="category")
+                                                | css
+                                        .checkbox
+                                            label
+                                                input(type='checkbox', value='css3',name="category",class="category")
+                                                | css3
+                                        .checkbox
+                                            label
+                                                input(type='checkbox', value='jquery',name="category",class="category")
+                                                | jquery
+                                        .checkbox
+                                            label
+                                                input(type='checkbox', value='html5',name="category",class="category")
+                                                | html5
+                                        br
+                                        .panel.panel-default
+                                            .panel-heading
+                                                h3.panel-title
+                                                    label(for='content') 文章内容
+                                            .panel-body
+                                                textarea.form-control(name='content',id="form-content", placeholder='支持markdown语法', rows='10')
+                                            input(name="flag",value="",id="flag")
+                                        button.btn.btn-info(type='submit',id="post-btn") 提交到数据库
+                                        button.btn.btn-info.fr(type='submit',id="update-btn") 更新到数据库
+                    .col-md-6.list-out
+                        .wraper
+                            .panel.panel-default
+                                .panel-heading
+                                    h3.panel-title 文章列表
+                                .panel-body
+                                    table.table.table-hover(id="list")
+                                        caption 删除文章或者更新文章
+                                        thead
+                                            tr
+                                                th 文章
+                                                th 作者
+                                                th 操作
+                                        tbody
+                                            each item,index in articles
+                                                tr
+                                                    td #{item.title}
+                                                    td #{item.author}
+                                                    td
+                                                        button.btn.btn-warning(type='button',name="update") 更新
+                                                        button.btn.btn-danger(type='button',name="delete") 删除
+            .link-admin.container(id="links")
+                .col-md-6.add
+                    .panel.panel-default
+                        .panel-heading
+                            h3.panel-title 添加分享文章
+                        .panel-body
+                            form.bs-example.bs-example-form(role='form',action="/admin/links",method="get")
+                                .input-group
+                                    span.input-group-addon 标题
+                                    input.form-control(type='text', placeholder='文章标题',name="title",id="link_title")
+                                br
+                                .input-group
+                                    span.input-group-addon @
+                                    input.form-control(type='text', placeholder='文章链接',name="link_adr",id="link_adr")
+                                .checkbox
+                                    label
+                                        input(type='checkbox', value='javascript',name="category",class="category")
+                                        | javascript
+                                .checkbox
+                                    label
+                                        input(type='checkbox', value='nodejs',name="category",class="category")
+                                        | nodejs
+                                .checkbox
+                                    label
+                                        input(type='checkbox', value='css',name="category",class="category")
+                                        | css
+                                .checkbox
+                                    label
+                                        input(type='checkbox', value='css3',name="category",class="category")
+                                        | css3
+                                .checkbox
+                                    label
+                                        input(type='checkbox', value='jquery',name="category",class="category")
+                                        | jquery
+                                .checkbox
+                                    label
+                                        input(type='checkbox', value='html5',name="category",class="category")
+                                        | html5
+                                button.btn.btn-primary.btn-lg.btn-block(type='button',id="link-btn")
+                                    | 提交吧，兄弟
+
+                .col-md-6.list
+                    .panel.panel-default
+                        .panel-heading
+                            h3.panel-title mark文章管理列表
+                        table.table.list-table
+                            th 标题
+                            th 操作
+                            each item,index in links
+                                tr
+                                    td #{item.title}
+                                    td
+                                        button.btn.btn-link(type='button') 删除
+
+
+            nav.btn-sets
+                ul.pager
+                    li
+                        a(id="files-admin") 文章管理
+                    li
+                        a(id="links-admin") 链接管理
+    script(src="./js/admin.js")
+    script(src="./js/headroom.min.js")
+    script(src="./js/XMLasynchronous.js")

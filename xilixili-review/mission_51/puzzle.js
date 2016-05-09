@@ -4,6 +4,8 @@
 var puzzle = function(){
     var dom = createDom('div');
     var imgStack = [];
+    var EnallScreen;
+    var flag;
     //裁剪图片，生成套子,并将套子插入定位元素
     function cutImage(img,domr){
         //公共数据
@@ -407,7 +409,7 @@ var puzzle = function(){
         init:function(width,height){
             updateStyles(dom,{width:width,height:height,position:'relative'});
             dom.addEventListener('click',function(e){
-                if(e.target.tagName==='IMG') allScreen.pop(e.target);
+                if(e.target.tagName==='IMG') EnallScreen.pop(e.target);
             },false)
             return dom;
         },
@@ -433,6 +435,17 @@ var puzzle = function(){
                 });    
             }
             
+        },
+        enableFullscreen:function(){
+            EnallScreen = allScreen();
+            flag = true;
+        },
+        disableFullscreen:function(){
+            EnallScreen.disable();
+            flag = false;
+        },
+        isFullscreenEnabled:function(){
+            return flag;
         }
     }
 }

@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>头像集</title>
+<script type="text/javascript" src="move.js"></script>
+<script>
+function getByClass(oClass){
+	var aObj=document.getElementsByTagName("*");
+	var revar;
+	for(var i=0;i<aObj.length;i++){
+		if(aObj[i].getAttribute("class")==oClass){
+			return aObj[i];
+		}
+		else{}
+	}
+}
+window.onload=function(){
+	var oMleft=getByClass('mark_left');
+	var oPev=getByClass('pev');
+	oPev.alpha=0;
+	var oMright=getByClass('mark_right');
+	var oNext=getByClass('next');
+	oNext.alpha=0;
+	var aImg=getByClass('show').getElementsByTagName("img");
+	var aImgsmall=getByClass('list').getElementsByTagName("img");
+	var oList=getByClass('list');
+	oList.timer=null;
+	var nPic=12	;
+	var oCurrentpic=aImg[nPic];
+	var oCurrentspic=aImgsmall[nPic];
+	oCurrentspic.style.opacity=1;
+	var curIndex=10;
+	var curLeft=0;
+	oCurrentpic.style.zIndex=curIndex;
+	oMleft.style.zIndex=oCurrentpic.style.zIndex+1;
+	oMright.style.zIndex=oCurrentpic.style.zIndex+1;
+	function noCrackMove(){
+		if(nPic>22){
+			oList.style.left=-1000+'px';
+			nPic=13;
+			startMove(oList,'Left',(12-nPic)*100-1000);
+			smallChangeT();
+		}
+		else if(nPic<3){
+			oList.style.left=-1100+'px';
+			nPic=12;
+			startMove(oList,'Left',(12-nPic)*100-1000);
+			smallChangeT();
+		}
+		else{
+	    	startMove(oList,'Left',(12-nPic)*100-1000);
+		}
+	}
+	function bigScoll(){
+		for(var i=0;i<aImg.length;i++){
+			aImg[i].style.opacity=0;
+			aImg[i].alpha=0;
+			aImg[i].speed=0;
+		}
+		oCurrentpic=aImg[nPic];
+		oCurrentpic.style.zIndex=curIndex+1;
+		startMove(oCurrentpic,'alpha',100);
+		curIndex=curIndex+1;
+	}
+	function smallChangeT(){
+		for(var i=0;i<aImgsmall.length;i++){
+			aImgsmall[i].style.opacity=0.3;
+			aImgsmall[i].alpha=30;
+			aImgsmall[i].speed=0;
+		}
+		oCurrentspic=aImgsmall[nPic];
+		startMove(oCurrentspic,'alpha',100);
+	}
+	for(var i=0;i<aImgsmall.length;i++){
+		aImgsmall[i].index=i;
+		if(i!=nPic){
+			aImgsmall[i].alpha=30;
+		}
+		else{
+			aImgsmall[i].alpha=100;
+		}
+		aImgsmall[i].onmouseover=function(){
+			if(this.index!=nPic){
+				startMove(this,'alpha',100);
+			}
+		}
+		aImgsmall[i].onmouseout=function(){
+			if(this.index!=nPic){
+				startMove(this,'alpha',30);
+			}
+		}
+		aImgsmall[i].onclick=function(){
+			if(nPic!=this.index){
+				nPic=this.index;
+				bigScoll();
+				smallChangeT();
+			    noCrackMove();
+		}
+			
+		}
+	}
+	oPev.onclick=function(){
+		nPic=nPic-1;
+		bigScoll();
+		smallChangeT();
+		noCrackMove();
+	 }
+	 oPev.onmouseover=oMleft.onmouseover=function(){
+		oPev.speed=0;
+		startMove(oPev,'alpha',100);
+	}
+	oPev.onmouseout=oMleft.onmouseout=function(){
+		oPev.speed=0;
+		startMove(oPev,'alpha',0);
+	}
+		
+	
+	oNext.onclick=function(){
+		nPic=nPic+1;
+		bigScoll();
+		smallChangeT();
+		noCrackMove();
+	}
+	
+	oNext.onmouseover=oMright.onmouseover=function(){
+		oNext.speed=0;
+		startMove(oNext,'alpha',100);
+	}
+	oNext.onmouseout=oMright.onmouseout=function(){
+		oNext.speed=0;
+		startMove(oNext,'alpha',0);
+	}
+}
+</script>
+</head>
+<style>
+div,ul,li{margin:0px 0px;padding:0px 0px;}
+body{background:#999;}
+.frame{width:600px;height:620px;background:#CCC;margin:auto auto;border:2px #000000 solid;border-radius:1em;overflow:hidden;position:absolute;left:364.5px;}
+ul{list-style:none;}
+.list{width:3000px;height:100px;position:absolute;overflow:hidden;padding-left:0px;left:-1000px;}
+.list img{width:80px;height:80px;border:2px #000000 solid;border-radius:1em;opacity:0.3;}
+.list li{float:left;margin:8px;}
+.show{width:500px;height:500px;margin:10px auto;position:relative;}
+.show img{position:absolute;width:100%;height:100%;border:2px #000000 solid;z-index:auto;}
+.mark_left,.mark_right{width:300px;height:520px;position:absolute;z-index:auto;}
+.mark_left{top:0px;left:0px;}
+.mark_right{top:0px;right:0px;}
+.pev,.next{width:46px;height:46px;position:absolute;top:227px;opacity:0;}.next{right:0px;}.pev img{width:100%;height:100%;}.next img{width:100%;height:100%;}
+</style>
+<body>
+  <div class="frame">
+    <div class="show">
+    	<img src="images/1.jpg" alt="1.jpg"/>
+        <img src="images/2.jpg" alt="2.jpg"/>
+        <img src="images/3.jpg" alt="3.jpg"/>
+        <img src="images/4.jpg" alt="4.jpg"/>
+        <img src="images/5.jpg" alt="5.jpg"/>
+        <img src="images/6.jpg" alt="1.jpg"/>
+        <img src="images/7.jpg" alt="2.jpg"/>
+        <img src="images/8.jpg" alt="3.jpg"/>
+        <img src="images/9.jpg" alt="4.jpg"/>
+        <img src="images/10.jpg" alt="5.jpg"/>
+        <img src="images/1.jpg" alt="1.jpg"/>
+        <img src="images/2.jpg" alt="2.jpg"/>
+        <img src="images/3.jpg" alt="3.jpg"/>
+        <img src="images/4.jpg" alt="4.jpg"/>
+        <img src="images/5.jpg" alt="5.jpg"/>
+        <img src="images/6.jpg" alt="1.jpg"/>
+        <img src="images/7.jpg" alt="2.jpg"/>
+        <img src="images/8.jpg" alt="3.jpg"/>
+        <img src="images/9.jpg" alt="4.jpg"/>
+        <img src="images/10.jpg" alt="5.jpg"/>
+        <img src="images/1.jpg" alt="1.jpg"/>
+        <img src="images/2.jpg" alt="2.jpg"/>
+        <img src="images/3.jpg" alt="3.jpg"/>
+        <img src="images/4.jpg" alt="4.jpg"/>
+        <img src="images/5.jpg" alt="5.jpg"/>
+        <img src="images/6.jpg" alt="1.jpg"/>
+        <img src="images/7.jpg" alt="2.jpg"/>
+        <img src="images/8.jpg" alt="3.jpg"/>
+        <img src="images/9.jpg" alt="4.jpg"/>
+        <img src="images/10.jpg" alt="5.jpg"/>
+    </div>
+    <div class="mark_left">
+    	<div class="pev"><img src="images/left.png" alt="left.png"/></div>
+    </div>
+    <div class="mark_right">
+    	<div class="next"><img src="images/right.png" alt="right.png"/></div>
+    </div>
+    <ul class="list">
+    	<li><img src="images/1.jpg" alt="1.jpg"/></li>
+        <li><img src="images/2.jpg" alt="2.jpg"/></li>
+        <li><img src="images/3.jpg" alt="3.jpg"/></li>
+        <li><img src="images/4.jpg" alt="4.jpg"/></li>
+        <li><img src="images/5.jpg" alt="5.jpg"/></li>
+        <li><img src="images/6.jpg" alt="1.jpg"/></li>
+        <li><img src="images/7.jpg" alt="2.jpg"/></li>
+        <li><img src="images/8.jpg" alt="3.jpg"/></li>
+        <li><img src="images/9.jpg" alt="4.jpg"/></li>
+        <li><img src="images/10.jpg" alt="5.jpg"/></li>
+        <li><img src="images/1.jpg" alt="1.jpg"/></li>
+        <li><img src="images/2.jpg" alt="2.jpg"/></li>
+        <li><img src="images/3.jpg" alt="3.jpg"/></li>
+        <li><img src="images/4.jpg" alt="4.jpg"/></li>
+        <li><img src="images/5.jpg" alt="5.jpg"/></li>
+        <li><img src="images/6.jpg" alt="1.jpg"/></li>
+        <li><img src="images/7.jpg" alt="2.jpg"/></li>
+        <li><img src="images/8.jpg" alt="3.jpg"/></li>
+        <li><img src="images/9.jpg" alt="4.jpg"/></li>
+        <li><img src="images/10.jpg" alt="5.jpg"/></li>
+        <li><img src="images/1.jpg" alt="1.jpg"/></li>
+        <li><img src="images/2.jpg" alt="2.jpg"/></li>
+        <li><img src="images/3.jpg" alt="3.jpg"/></li>
+        <li><img src="images/4.jpg" alt="4.jpg"/></li>
+        <li><img src="images/5.jpg" alt="5.jpg"/></li>
+        <li><img src="images/6.jpg" alt="1.jpg"/></li>
+        <li><img src="images/7.jpg" alt="2.jpg"/></li>
+        <li><img src="images/8.jpg" alt="3.jpg"/></li>
+        <li><img src="images/9.jpg" alt="4.jpg"/></li>
+        <li><img src="images/10.jpg" alt="5.jpg"/></li>
+    </ul>
+  </div>
+</body>
+</html>

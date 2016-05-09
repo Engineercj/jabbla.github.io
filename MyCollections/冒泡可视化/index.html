@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡可视化</title>
+    <style>
+        ul{
+            position: relative;
+            height:500px;
+            list-style: none;
+            overflow: hidden;
+        }
+
+        #queue li{
+            position:absolute;
+            bottom:-500px;
+            width:20px;
+            height:100%;
+            background-color: red;
+            text-align: center;
+            line-height: 50px;
+            transition: left 0.5s ease-in-out;
+        }
+        #queue::after{
+            content: '';
+            width:0;
+            height:0;
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="num-area">
+    <button id="left-in">左侧导入</button>
+    <button id="right-in">右侧导入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+    <button id="sort">冒泡排序可视化</button>
+        <ul id="queue"></ul>
+<script src="task.js"></script>
+</body>
+</html>

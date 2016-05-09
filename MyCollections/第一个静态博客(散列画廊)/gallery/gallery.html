@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>gallery</title>
+  <meta charset="utf-8">
+  <style>
+  *{padding:0;margin: 0;}
+  ul{list-style:none;}
+  #album{perspective: 800;overflow: hidden;-webkit-perspective:800;width:1000px;height:500px;position:absolute;left:50%;margin-left:-500px;top:50%;margin-top:100px;background-color:grey;box-sizing:border-box;border:4px solid black;position:relative;}
+  #album .photo{
+    cursor: pointer;
+    position:absolute;
+    left:0;
+    top:0;
+    transition: all 1s;
+  }
+  #album .photo_wrap{
+    width:200px;
+    height:200px;
+    box-sizing:border-box;
+    border:10px solid white;
+    background-color:black;
+    position:absolute;
+    transform-style: preserve-3d;
+    -webkit-transform-style:preserve-3d;
+      transition:all 0.8s;
+
+  }
+  #album .center{
+    position:absolute;
+    left:400px;
+    top:150px;
+    transform:rotate(0deg);
+    z-index: 100;
+  }
+  #album .front_photo{
+    transform: rotateY(0deg);
+  }
+  #album .back_photo{
+    transform: rotateY(180deg);
+  }
+  #album .photo_wrap img{width:100%;height:100%;}
+  #album .photo_wrap .side{
+    width:100%;
+    height:100%;
+    position:absolute;
+
+  }
+  #album .photo_wrap .front_side{
+    width:100%;
+    height:100%;
+    position:absolute;
+  }
+  #album .photo_wrap .back_side{
+    width:100%;
+    height:100%;
+    background-color:#FE434C;
+    color:white;
+    position:absolute;
+    left: 0;
+    top:0;
+    transform: rotateY(180deg);
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+  }
+  #con_btn{perspective:800;position:absolute;left:50%;top:20px;height:20px;margin-left:-200px;}
+  #con_btn li{transform-style:preserve-3d;;float:left;width:20px;height:20px;background-color:red;border-radius:10px;transform:scale(0.6);cursor:pointer;transition:all 0.5s;}
+  #con_btn li:hover{transform:scale(1);}
+  #con_btn .active{transform:scale(1);}
+
+  </style>
+</head>
+<body>
+<div id="album">
+  <div class="photo" id="photo_{{index}}" onclick="turn(this)">
+    <div class="photo_wrap  front_photo">
+      <div class="side front_side">
+        <img src="{{img}}"/>
+      </div>
+      <div class="side back_side">
+        <p class="caption">{{caption}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+    <!--数据输入-->
+    <script type="text/javascript" src="img_data.js"></script>
+    <script>
+      var data=img_data();
+
+      function addImg(){
+        var template=document.getElementById('album').innerHTML;
+        var html=[];
+        for(var i=0;i<data.length;i++){
+          var con=template.replace('{{index}}',data[i].index)
+                          .replace('{{img}}',data[i].img)
+                          .replace('{{caption}}',data[i].caption);
+          html.push(con);
+        }
+        document.getElementById('album').innerHTML=html.join('');
+      }
+      addImg();
+
+    </script>
+    <!--排序海报-->
+    <script>
+      function random(range){
+        var max=Math.max(range[0],range[1]);
+        var min=Math.min(range[0],range[1]);
+        var differ=max-min;
+        var num=(Math.random()*differ+min)<2? 1:Math.ceil(Math.random()*differ+min);
+        return num;
+      }
+      /*中间图片选取*/
+      function rsort(n){
+        var aPhoto=document.getElementsByClassName('photo');
+        for(var j=0;j<aPhoto.length;j++){
+
+          if(/center/.test(aPhoto[j].className)){
+
+            aPhoto[j].className=aPhoto[j].className.replace('center','');
+          }
+
+        }
+        var con=document.getElementById('photo_'+n).className;
+        con=con+' center';
+        document.getElementById('photo_'+n).className=con;
+      }
+      rsort(random([1,img_data().length]));
+    </script>
+    <!--图片随机放置-->
+    <script>
+      function random_put(){
+        var aPhoto=document.getElementsByClassName('photo');
+        var oPhotos=[];
+        for(var j=0;j<aPhoto.length;j++){
+
+          if(/center/.test(aPhoto[j].className)==0){
+
+            oPhotos.push(aPhoto[j]);
+          }
+
+        }
+        var Right_ps=oPhotos.splice(0,Math.ceil(oPhotos.length/2));
+        var Left_ps=oPhotos;
+        var oAlbum=document.getElementById('album');
+        var Awidth=oAlbum.offsetWidth;
+        var Aheight=oAlbum.offsetHeight;
+        var Pwidth=200;
+        var Pheight=200;
+        var midW=((Awidth-Pwidth)/2)-Pwidth;
+        for(var n=0;n<Right_ps.length;n++){
+          Right_ps[n].style.left=random([Pwidth+(Awidth-Pwidth)/2,Awidth])+'px';
+          Right_ps[n].style.top=random([-Pheight+4,Aheight-4])+'px';
+          Right_ps[n].angle=random([-150,150]);
+          Right_ps[n].style['-webkit-transform']=' rotate('+Right_ps[n].angle+'deg)';
+
+        }
+        for(var i=0;i<Left_ps.length;i++){
+          Left_ps[i].style.left=random([-Pwidth,midW])+'px';
+          Left_ps[i].style.top=random([-Pheight+4,Aheight-4])+'px';
+          Left_ps[i].angle=random([-150,150]);
+          Left_ps[i].style['-webkit-transform']=' rotate('+Left_ps[i].angle+'deg)';
+
+        }
+
+      }
+      random_put();
+    </script>
+    <!--3d翻转控制--->
+    <script>
+      function turn(elem){
+        var oPw=elem.getElementsByClassName('photo_wrap');
+        var cls=oPw[0].className;
+        if(/front_photo/.test(cls)){
+            oPw[0].className=cls.replace('front_photo','back_photo');
+        }
+        else{
+          oPw[0].className=cls.replace('back_photo','front_photo');
+        }
+
+      }
+    </script>
+<div id="con_btn">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+<script>
+
+  function con_btn(){
+
+    var oCon_btn=document.getElementById('con_btn');
+    var aLi=oCon_btn.getElementsByTagName('li');
+    var aPhotos=document.getElementsByClassName('photo');
+    for(var n2=0;n2<aLi.length;n2++){
+      aLi[n2].isclick=0;
+      aLi[n2].index=n2;
+      if(/center/.test(aPhotos[n2].className)){
+        aLi[n2].className=aLi[n2].className+'active';
+        aLi[n2].isclick=1;
+      }
+    }
+    for(var i=0;i<aLi.length;i++){
+      aLi[i].onclick=function(){
+        for(var sum=0;sum<aLi.length;sum++){
+          if(sum!=this.index){aLi[sum].isclick=0;}
+          else{this.isclick++;}
+        }
+        if(this.isclick==1){
+          var cls=aPhotos[this.index].className;
+
+          for(var j=0;j<aPhotos.length;j++){
+            if(/center/.test(aPhotos[j].className)){
+              aPhotos[j].className=aPhotos[j].className.replace('center','');
+              aLi[j].className=aLi[j].className.replace('active','');
+              random_put();
+              break;
+            }
+            else{continue;}
+          }
+          this.className=this.className+' active';
+          aPhotos[this.index].className=cls+' center';
+          aPhotos[this.index].style.left=400+'px';
+          aPhotos[this.index].style.top=150+'px';
+          aPhotos[this.index].style.transform='rotate(0deg)';
+          /*aPhotos[this.index].style.z-index=10;
+          alert(aPhotos[this.index].className);*/
+
+        }
+        else{
+          turn(aPhotos[this.index]);
+        }
+      }
+
+    }
+  }
+  con_btn();
+</script>
+</body>
+</html>
